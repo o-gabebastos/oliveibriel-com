@@ -423,29 +423,43 @@ export const cases: Record<string, CaseStudy> = {
 
   "garmin-coach": {
     slug: "garmin-coach",
-    role: "Solo · OSS",
-    team: "Me + a few contributors",
-    duration: "Active since 2025",
+    role: "Sole author — design + build",
+    team: "Solo",
+    duration: "Weekend build, ongoing since 2025",
     yearRange: "2025 →",
-    stack: ["TypeScript CLI", "Next.js (web)", "Supabase (token refresh)", "Garmin Connect IQ API", "OpenAI/Anthropic"],
+    stack: ["Python 3.12", "FastAPI", "Pydantic v2", "Supabase (token refresh)", "Vercel", "Garmin Connect API (unofficial)", "Claude / GPT"],
     contextOneLiner:
-      "Garmin Coach is a side project that turns LLM-generated training plans into structured workouts pushed straight into Garmin Connect — no manual entry, no copy-paste.",
+      "A bridge between an LLM and a Garmin watch: paste a training plan, get structured workouts on your wrist. No manual re-entry.",
     highlights: [
-      { label: "Workouts pushed", value: "1k+" },
-      { label: "Token refresh uptime", value: "99.x%" },
-      { label: "Open source", value: "MIT" },
+      { label: "Lines of code", value: "~2k" },
+      { label: "Token refresh", value: "Automated" },
+      { label: "License", value: "MIT" },
     ],
     challenge:
-      "I wanted Claude to write me a running plan and have it show up as workouts on my Garmin. The existing path: LLM gives you prose, you manually re-enter every interval into the Garmin app. Tedious. Brittle. The data shape isn't even hard — it's just nobody bridged it.\n\nGarmin's API surfaces the workout schema, but the auth dance is non-trivial and tokens expire. The interesting work was the bridge — and making the JSON contract ergonomic enough that an LLM could fill it without hallucinating fields.",
+      "I plan my running weeks with Claude in a separate chat. The output is plain text, and the path from there to my Garmin was manual: read the prose, open the app, tap through every interval by hand. I did it often enough that it stopped being a quirk and started being annoying.\n\nThe data shape isn't hard — Garmin's internal API exposes a workout format. The gap was that nobody built the bridge, and getting an LLM to fill that JSON without inventing field names meant the schema itself had to be the first thing I got right.",
     approach:
-      "Designed a strict but ergonomic JSON workout schema, then a system prompt that turns natural-language plans into valid documents. CLI for dev/power-user use, web app for everyone else. Token refresh runs as a Supabase scheduled function so users don't re-auth weekly.\n\nThe schema is the product. Once the JSON contract was right, swapping LLMs (Claude, GPT, local models) became a config change.",
+      "I started with the JSON contract: warmup, interval, recovery, cooldown, repeat, each with a typed duration and target. Strict, but short enough to paste into the prompt. Once the schema was stable the CLI followed — it parses the JSON with Pydantic and calls the API. The web app came next, mobile-first on FastAPI, so I can push a plan from my phone.\n\nThe last real piece was token refresh. Garmin's OAuth tokens expire in minutes, so I keep one row in Supabase that refreshes itself. The app just works when I pick up my phone mid-run-prep.",
     outcome:
-      "Live in production at a Vercel-hosted web app, plus the CLI on npm. Token refresh is automated and stable. 1000+ workouts pushed across users.\n\nMost importantly: I now use it weekly. Claude writes my training week, the CLI pushes it, my watch buzzes for the right intervals. The whole pipeline lives in ~2k lines of code.",
-    links: [
-      { label: "GitHub", href: "https://github.com/usevoa/garmin-coach", external: true },
+      "Live as a Vercel-hosted web app, with the CLI running locally. The whole pipeline — plan in Claude, JSON out, push to a Forerunner 165 — is about 2k lines. I'm not training as much as I was in early 2026, but the infrastructure is stable and I reach for it whenever I'm back to structured runs.",
+    sections: [
+      {
+        heading: "Who I designed for",
+        body:
+          "Myself, and no one else. I run with a Garmin, I plan with Claude, and I didn't want to re-enter intervals by hand.\n\nBuilding a tool you're the only user of is a different discipline. No research phase, no personas, and the feedback loop is ten minutes long. If the schema is annoying to prompt against, I feel it right away. That compression is the whole point of a side project.",
+      },
+      {
+        heading: "The key decision: schema first",
+        body:
+          "The temptation was to start with the API or the UI. I started with the JSON schema, and that was the right call.\n\nAn LLM has to fill the schema without a field-by-field explanation every time, so the shape had to be obvious: predictable keys, typed targets, no ambiguous nesting. I iterated it in a single markdown file, pasting it into Claude and refining until the output came back valid with no correction needed. After that the rest was plumbing. The parser is just Pydantic validation, and swapping the model is a config change.",
+      },
+      {
+        heading: "What didn't go well",
+        body:
+          "The serverless deploy fought me. The Garmin client library depends on curl_cffi, which doesn't compile on Vercel, so I run two paths: the full library on the CLI, and direct requests with an exported token on the web. It works, but it's inelegant.\n\nThe auth is also a bit of a house of cards. It leans on an unofficial endpoint Garmin can change without notice — when the library I started on broke after Garmin added Cloudflare fingerprinting, I had to migrate mid-project. The calendar view on the web is still incomplete because the listing endpoint returns 404 there. It's a tool I use, not a product I'd hand to a stranger.",
+      },
     ],
     reflection:
-      "The unfair advantage of side projects is they let you ship the API/schema *you* want to consume, not the one that survived a committee. Garmin Coach is small, opinionated, and exactly the shape I needed.",
+      "Side projects let you ship the API you want to consume, not the one that survived a committee. The schema is exactly the shape I needed, the auth is exactly the amount I was willing to maintain, and the UI is as minimal as a tool I use alone can be.",
   },
 
   techcolab: {
@@ -576,5 +590,87 @@ export const cases: Record<string, CaseStudy> = {
       "Iterated on the gravity-shift mechanic with a paper prototype before any 3D. Once the loop was solid, level design followed in a week.",
     outcome:
       "Shipped as a portfolio/learning piece. The gravity prototype is the part I'm still proud of.",
+  },
+
+  norius: {
+    slug: "norius",
+    role: "Lead designer · design system, UI, prototype",
+    team: "With NDB (NETZSCH do Brasil): Leandro Starke, Nicolas (dev), Arthur Zinke",
+    duration: "2 months · 2026",
+    yearRange: "2026",
+    stack: ["Figma", "React 19 · Vite · TypeScript", "Tailwind CSS 4", "Storybook 10", "Thingsboard Cloud"],
+    contextOneLiner:
+      "Norius is NETZSCH do Brasil's IoT monitoring platform: sensors, reservoirs, pumps, alarms, remote operation, hosted on Thingsboard. I redesigned two tenants from scratch with a structured discovery, a design system, and a navigable prototype for client validation.",
+    highlights: [
+      { label: "Components in Storybook", value: "30" },
+      { label: "Color tokens", value: "81" },
+      { label: "Heuristics mapped", value: "15" },
+    ],
+    challenge:
+      "Two tenants (Pomerwasser and Capixaba Energia) ran on twelve divergent screens, each solving the same thing a different way. Pressure, tank level, and alarm severity showed up in different places with incompatible patterns. There was no design system and nothing reusable. The starting point was raw Thingsboard: functionally correct, visually dated, and short on the accessibility and consistency an industrial environment needs.\n\nThe client needed an interface a field operator could use on a tablet over weak 4G, with no per-tenant retraining.",
+    approach:
+      "I started with a structured discovery: inventoried all twelve screens by hand, catalogued 42 atomic components already in the UI, and documented 15 heuristic violations by priority. That fed the decisions: collapse twelve screens into six templates, use Atomic Design, and handle multi-tenant through tokens and feature flags instead of duplicating screen by screen.\n\nInstead of only drawing in Figma, I built the design system in code at the same time. Storybook with React and Tailwind 4, a story per component, MDX docs with do/don't guidance. By the end of the design phase, 30 components had real implementations, 155 stories, and 115 passing tests. I also built a separate navigable prototype so the client could click through the flow before a line of production code.",
+    outcome:
+      "The client has a working design system with a hosted Storybook, 51 Figma pages mirroring the components, and a navigable prototype for validation. Handoff to the dev starts from documented, tested components instead of a pile of questions.\n\nThree principles run through all of it: alarm severity reads by shape and color, not color alone; time-series charts use straight segments, not smoothed curves; destructive actions like stopping a pump require a typed reason.",
+    sections: [
+      {
+        heading: "Who I designed for",
+        body:
+          "Three people with different relationships to the same data.\n\nThe field operator works from a tablet, sometimes on weak 4G, and needs to confirm whether a pump is running or which alarm fired. No time to explore, so the answer has to be visible.\n\nThe operations supervisor reads the whole site through the map before drilling into one point. The maintenance engineer needs hour-meters, start history, and threshold config for diagnosis, a depth that shouldn't sit in the operator's way.\n\nMulti-tenant complicates it: Pomerwasser monitors reservoirs and water chemistry, Capixaba monitors pump pressure and power. Different data, shared interface.",
+      },
+      {
+        heading: "The key decision: one system, not two products",
+        body:
+          "The tempting path was two products, one per tenant. I chose one design system with the differences controlled by tokens and feature flags.\n\nPomerwasser doesn't need a pressure gauge; Capixaba doesn't need fluoride indicators. But both need the alarm card, device header, sidebar, map, and KPI card to behave identically. Splitting the products would double the maintenance for no user benefit. So the components on every screen of both tenants became the non-negotiable base, and tenant-specific pieces slot in through flags without touching the rest.",
+      },
+      {
+        heading: "What didn't go well",
+        body:
+          "Discovery showed me that some of the original platform's odd UX was actually rational once you understood the operational context. I redesigned two interaction patterns before realizing the problem wasn't the pattern, it was the missing visual context that made it confusing. That cost a few days.\n\nThe prototype also outgrew its brief. It started as five screens for the client to click through and became eight routes with an interactive map, sensor drawer, and filtered alarm table. Worth it (the client gave specific feedback instead of approving static frames) but the scope crept past what the contract covered.",
+      },
+    ],
+    reflection:
+      "Building the design system in code alongside Figma is the decision I'd make again without hesitating. Writing the MDX docs forced answers to questions Figma never asks, like when a component should not be used, or what its error behavior is. Those answers are exactly what the dev handoff needs.",
+  },
+
+  mosey: {
+    slug: "mosey",
+    role: "Solo · design, product, iOS dev",
+    team: "Solo",
+    duration: "April 2026 → ongoing",
+    yearRange: "2026",
+    stack: ["SwiftUI (iOS 26)", "SwiftData", "Apple Foundation Models (on-device)", "MapKit", "HealthKit", "Open-Meteo", "Wikipedia API"],
+    contextOneLiner:
+      "A travel app built for one trip: 27 days across Denmark and Norway. Native iOS, anti-itinerary, with contextual suggestions and a daily plan generated by on-device AI.",
+    highlights: [
+      { label: "Places curated", value: "60" },
+      { label: "Events bundled", value: "42" },
+      { label: "AI inference cost", value: "$0" },
+    ],
+    challenge:
+      "I have a 27-day trip to Denmark and Norway coming in July, and I didn't want a rigid itinerary app. I wanted something that works with how I actually travel: show up somewhere, figure it out, document it later.\n\nEvery travel app I tried was either a planning tool (calendar-first, top-down) or a discovery tool (a map with reviews). None answered the question I actually ask each morning: what do I feel like doing right now, given the weather, where I am, and what I haven't done yet.",
+    approach:
+      "Built for one user and one trip. That constraint cut most of the decisions: no social layer, no login, no multi-trip support, everything local with SwiftData. The Today tab leads with intent, not a calendar; a Plan tab covers the days I want structure; a Journal logs visits after the fact.\n\nThe AI was meant to run on Claude's API, until one auto-plan run burned through my quota in a single session. I moved the whole inference stack to Apple's on-device Foundation Models on iOS 26: no API key, no cost, works offline. For a personal app that was the right call anyway.",
+    outcome:
+      "The app builds clean and runs on iOS 26. The auto-plan generates an eight-day, eleven-stop itinerary entirely on-device. 60 curated places across Copenhagen, Herlev, Billund, and Oslo; 42 events bundled for the trip window.\n\nIt's not on the App Store. It runs on free provisioning until I decide whether the developer fee is worth it. The trip starts in July, and that's the real test.",
+    sections: [
+      {
+        heading: "Who I designed for",
+        body:
+          "One user: me. That sounds like a cop-out until you notice most travel apps fail precisely because they're built for everyone.\n\nMy pattern: I don't pre-book much, I move by bike and transit, I eat where I end up, and I document the day afterward. I wanted the app to support that, not fight it. The anti-itinerary framing isn't a tagline, it's why the Today tab opens with \"what do you feel like doing today?\" instead of a schedule. The Plan tab exists for the days I do want structure, but it's opt-in.",
+      },
+      {
+        heading: "The key decision: on-device AI",
+        body:
+          "The original plan used Claude's API for both the concierge chat and the structured auto-plan. That lasted until the first real auto-plan run exhausted my monthly quota in one session.\n\nI moved everything to Apple Foundation Models. It meant raising the iOS target from 18 to 26, which is a real cost: anyone on older iOS can't install it. For a personal app, fine. Guided generation produces the day-by-day plan on-device, streaming, with no network call and no bill. The model is good enough for the job. I'm not asking it to replace a travel agent, just to turn a list of places into a sensible daily order.",
+      },
+      {
+        heading: "Where it is now",
+        body:
+          "Build is clean, the core works, the trip hasn't happened yet, and I'm honest about that being the unfinished part.\n\nThree things I know are rough: a handful of force-unwraps that could crash on a day I'm not near a laptop; an auto-plan that sometimes repeats day titles; and about fifty hardcoded colors that should be tokens. I did the audit and noted everything but haven't applied the fixes. The widget and Live Activity are built but disabled for now. CloudKit sync waits on the developer-account decision, which I need to make before July so the person travelling with me can get a TestFlight build.",
+      },
+    ],
+    reflection:
+      "Building an app for a specific trip you're about to take is a strange kind of pressure: a hard deadline, a real user, and the stakes are exactly one vacation. The things I skipped (social, purchases, multi-trip) stay skipped, because there's no version of this where I regret them.",
   },
 };

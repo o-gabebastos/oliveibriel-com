@@ -44,7 +44,7 @@ export const projects: Project[] = [
     type: "Design System",
     summary:
       "Built and governed DASDS — the design system for NETZSCH's Digital and Automation Systems. Figma + React/Storybook, adopted across squads.",
-    image: "/projects/dasds/01__dasds-foundations.png",
+    image: "/projects/dasds/00__dasds-cover.png",
     featured: true,
     metric: { label: "Product teams", value: "8+" },
     size: "normal",

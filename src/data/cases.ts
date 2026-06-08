@@ -188,55 +188,56 @@ export const cases: Record<string, CaseStudy> = {
         heading: "Who I designed for",
         body:
           "Two audiences with very different needs.\n\nFrontend engineers in the squads — the people who actually consume the system. They wanted boring things: a Storybook page that loads fast, prop names that match what they expect, and components that don't fight their existing build. Anything fancy lost to anything dependable.\n\nProduct designers in the squads — usually one per product line, sometimes none. They wanted Figma variables that mirror code variables, so they don't have to redo work the engineers already did. The 1:1 token mapping wasn't aesthetic. It was the contract that lets a designer hand off without translating.",
+        layout: "split",
+        imageSide: "right",
+        image: {
+          src: "/projects/dasds/03__dasds-buttons.png",
+          alt: "DASDS button components — primary, secondary, destructive, disabled",
+          caption: "Buttons · the components squads actually consume",
+        },
       },
       {
         heading: "The key decision: a single source of truth for tokens",
         body:
           "Most DS projects fail at the same place: the design tokens in Figma drift from the CSS variables in code, and within six months everyone is back to copying hex codes by hand. I refused to ship anything until the pipeline was airtight.\n\nFigma variables export to a JSON Style Dictionary spec. Style Dictionary builds the same tokens into CSS custom properties, Tailwind config, and a TypeScript types file. One source, three outputs, all generated. A designer renaming a color in Figma triggers a PR. An engineer adjusting a contrast ratio updates Figma at the same time.\n\nThe whole rest of the system — typography scale, spacing, radii, shadows, motion — sits on top of that pipeline. Without it, the DS is just a pile of components that look right today and wrong in two months.",
+        layout: "split",
+        imageSide: "left",
+        image: {
+          src: "/projects/dasds/01__dasds-foundations.png",
+          alt: "DASDS foundations — color tokens and typography",
+          caption: "Foundations · tokens map 1:1 from Figma to code",
+        },
       },
       {
         heading: "What didn't go well",
         body:
           "The hard part wasn't building the system — it was getting squads with working legacy code to adopt it. Solid components and clean docs weren't enough. Teams pushed back when a new pattern meant refactoring something that already shipped, and the first six months were mostly demos, pairing with squad leads, and rewriting docs to answer the same five questions.\n\nThe \"light governance\" model also showed its limits. Letting anyone propose components meant the queue filled up with single-use specials. I had to start saying no, which is uncomfortable when you're pitching the system as community-owned. Any DS needs an opinionated owner, and I was that owner whether the org chart said so or not.",
+        layout: "split",
+        imageSide: "right",
+        image: {
+          src: "/projects/dasds/06__dasds-status-widgets.png",
+          alt: "DASDS status widgets — machine state components",
+          caption: "Status widgets · shared across product lines",
+        },
       },
     ],
     reflection:
       "A DS lives or dies by adoption, not aesthetics. The wins came from the boring parts — token pipeline, accessibility floor, contribution flow — done before anyone got excited about the visual language.",
     gallery: [
       {
-        src: "/projects/dasds/01__dasds-foundations.png",
-        alt: "DASDS foundations — color tokens and typography scale",
-        caption: "Foundations · color tokens + Roboto type",
-        aspect: "wide",
-      },
-      {
         src: "/projects/dasds/02__dasds-header.png",
         alt: "DASDS app header component with NETZSCH branding",
         caption: "App Header · navigation chrome",
-        aspect: "wide",
-      },
-      {
-        src: "/projects/dasds/03__dasds-buttons.png",
-        alt: "DASDS button variants — primary, secondary, destructive, disabled",
-        caption: "Buttons · variants & states",
       },
       {
         src: "/projects/dasds/04__dasds-chips.png",
         alt: "DASDS status and filter chips",
         caption: "Chips · status & filters",
-        aspect: "wide",
       },
       {
         src: "/projects/dasds/05__dasds-alerts.png",
         alt: "DASDS inline alert components — success, info, warning, error",
         caption: "Alerts · inline feedback",
-        aspect: "wide",
-      },
-      {
-        src: "/projects/dasds/06__dasds-status-widgets.png",
-        alt: "DASDS machine status widgets — running, alarm, maintenance, no-data",
-        caption: "Status Widgets · machine state",
-        aspect: "wide",
       },
       {
         src: "/projects/dasds/07__dasds-forms.png",
@@ -247,7 +248,6 @@ export const cases: Record<string, CaseStudy> = {
         src: "/projects/dasds/08__dasds-pickers.png",
         alt: "DASDS date picker and multi-select dropdowns",
         caption: "Pickers · date & dropdowns",
-        aspect: "wide",
       },
     ],
   },

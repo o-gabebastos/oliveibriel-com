@@ -678,5 +678,12 @@ export const cases: Record<string, CaseStudy> = {
     ],
     reflection:
       "Building an app for a specific trip you're about to take is a strange kind of pressure: a hard deadline, a real user, and the stakes are exactly one vacation. The things I skipped (social, purchases, multi-trip) stay skipped, because there's no version of this where I regret them.",
+    gallery: [
+      { src: "/projects/mosey/01__mosey-today.png", alt: "Mosey Today screen — contextual suggestions", caption: "Today · what do you feel like doing?", aspect: "wide" },
+      { src: "/projects/mosey/02__mosey-weather.png", alt: "Mosey weather-aware suggestions", caption: "Weather-aware · reads the sky", aspect: "wide" },
+      { src: "/projects/mosey/03__mosey-concierge.png", alt: "Mosey Concierge — on-device AI chat", caption: "Concierge · on-device AI", aspect: "wide" },
+      { src: "/projects/mosey/04__mosey-journal.png", alt: "Mosey Journal — trip day by day", caption: "Journal · your trip, day by day", aspect: "wide" },
+      { src: "/projects/mosey/05__mosey-saved.png", alt: "Mosey Saved places", caption: "Saved · places worth returning to", aspect: "wide" },
+    ],
   },
 };

@@ -2,6 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { projects } from "../../data/projects";
 import { cases } from "../../data/cases";
+import Typewriter from "../../components/Typewriter.tsx";
 
 export async function getStaticPaths() {
   return projects.map((project) => ({
@@ -108,6 +109,14 @@ const toc = study
           <p class="text-lg md:text-xl text-[var(--color-fg-muted)] leading-relaxed max-w-2xl">
             {study?.contextOneLiner ?? project.summary}
           </p>
+
+          {study?.typewriter && (
+            <Typewriter
+              client:visible
+              prefix={study.typewriter.prefix}
+              words={study.typewriter.words}
+            />
+          )}
         </div>
 
         {study && (

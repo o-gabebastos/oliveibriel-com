@@ -134,7 +134,7 @@ export const projects: Project[] = [
     year: "2024",
     type: "Landing · AI workflow",
     summary: "Designer-owned full stack. Concept to live URL with Figma Make + vibe coding.",
-    image: `${CDN}/Techco.lab%20Landing%20Page/tcl_thumb.png`,
+    image: "/projects/techcolab/01__tcl-hero.png",
     featured: true,
     ai: true,
     size: "wide",

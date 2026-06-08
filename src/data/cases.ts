@@ -48,6 +48,8 @@ export type CaseStudy = {
   gallery?: GalleryItem[];
   links?: CaseLink[];
   reflection?: string;
+  // Optional typewriter line shown under the hero (e.g. TechCo.lab "We build …")
+  typewriter?: { prefix: string; words: string[] };
 };
 
 const CDN = "https://storage.googleapis.com/2026portfolio/Projects";
@@ -464,25 +466,53 @@ export const cases: Record<string, CaseStudy> = {
 
   techcolab: {
     slug: "techcolab",
-    role: "Designer-owned full stack",
-    duration: "3 weeks",
-    yearRange: "2024",
-    stack: ["Figma Make", "Vercel", "Custom HTML/CSS"],
+    role: "Designer-owned full stack — design, motion, build, deploy",
+    team: "Solo, with Figma Make and Claude as build partners",
+    duration: "2024 → iterated since",
+    yearRange: "2024 →",
+    stack: ["Figma", "Figma Make", "Hand-written HTML/CSS", "GSAP", "Vercel"],
     contextOneLiner:
-      "Concept-to-live URL landing page for TechCo.lab — a small AI consultancy. Designer-owned end-to-end with Figma Make and vibe coding, no engineering hand-off.",
+      "The public site for TechCo.lab — NETZSCH's internal innovation hub. I designed and shipped it end-to-end, no engineering hand-off: concept in Figma, sections in Figma Make, production in clean hand-written code.",
+    typewriter: {
+      prefix: "We build",
+      words: ["connected platforms.", "industrial AI.", "digital experiences.", "real impact."],
+    },
     highlights: [
-      { label: "Concept → live", value: "3 weeks" },
+      { label: "Owned", value: "Design → deploy" },
       { label: "Engineering hand-offs", value: "0" },
-      { label: "Lighthouse perf", value: "98" },
+      { label: "Lighthouse", value: "98" },
     ],
     challenge:
-      "The brief was a one-page narrative for a new AI consultancy. Tight timeline, no engineering capacity, but the client wanted production-quality polish — not a Webflow template.",
+      "TechCo.lab is NETZSCH's innovation hub, and it needed a public site that did two jobs at once: explain what the hub builds — connected platforms, industrial AI, digital interfaces — to the rest of the company, and attract the kind of people who'd want to work there.\n\nThe constraint was real: no engineering capacity allocated and a tight window, but the bar was production-quality, not a template. It had to look like the work the hub actually ships.",
     approach:
-      "Designed in Figma, prototyped sections with Figma Make, then ported to clean handwritten HTML/CSS for the production deploy. Used the Figma → Make → Code workflow to compress what would normally be a designer-to-engineer hand-off into a single owner.\n\nNo CMS, no framework overhead. Just typography, motion, and a clear narrative arc — hero, problem, three services, proof, contact.",
+      "I owned the whole stack. Designed in Figma, prototyped the motion-heavy sections in Figma Make, then ported everything to clean hand-written HTML/CSS for the production deploy on Vercel. No CMS, no framework overhead.\n\nThe hero leans on a typewriter line, \"We build…\" cycling through what the hub does, which sets the tone before a single scroll. The rest is a clear arc: capabilities, proof, the physical space, and the numbers (500+ users, 35+ countries, 80+ projects).",
     outcome:
-      "Live in three weeks at production polish. 98 Lighthouse performance, AA contrast across all sections, and a measurable bump in qualified inbound for the consultancy.\n\nReference case for designer-owned full-stack on small-but-real-stakes projects.",
+      "Live at ntechcolab.com at production polish: 98 Lighthouse, AA contrast, motion that holds up on a phone. It's the reference I point to for designer-owned full-stack, the kind of small-but-real-stakes project where a hand-off would have cost more than it was worth.",
+    sections: [
+      {
+        heading: "Who I designed for",
+        body:
+          "Two audiences on one page. Inside NETZSCH, leadership and other units who need to understand what the hub does and why it matters. Outside, the engineers, designers, and data people the hub wants to hire.\n\nThose pull in different directions: one wants credibility and proof, the other wants culture and ambition. The site resolves it by leading with the work and the numbers, then closing with the place and the people.",
+      },
+      {
+        heading: "The key decision: own the whole stack",
+        body:
+          "The usual path is design in Figma, hand off to an engineer, review, repeat. With no engineering capacity and a tight window, I collapsed that into a single owner: Figma for design, Figma Make to prototype the motion, hand-written code for production.\n\nThe typewriter hero and the scroll motion were built directly in code, not faked in a mockup. Owning the deploy meant I could tune performance and contrast myself instead of writing a spec and hoping.",
+      },
+      {
+        heading: "What didn't go well",
+        body:
+          "Figma Make is great for exploring a section fast, but the code it generates is throwaway. I rewrote most of it by hand for the production build, and treating Make as a prototyping tool rather than a code source was a lesson I learned mid-project.\n\nKeeping the motion smooth on mobile took more passes than I expected. The typewriter and scroll effects that felt effortless on a laptop needed real tuning to not jank on a phone.",
+      },
+    ],
     reflection:
-      "AI-assisted tooling lets a designer take a project from sketch to ship without a hand-off cliff. The job becomes less about \"document what to build\" and more about \"build it, and use the document for review\".",
+      "AI-assisted tooling lets a designer take a project from sketch to ship without a hand-off cliff. The job shifts from \"document what to build\" to \"build it, and use the document for review.\"",
+    links: [{ label: "Live · ntechcolab.com", href: "https://ntechcolab.com", external: true }],
+    gallery: [
+      { src: "/projects/techcolab/01__tcl-hero.png", alt: "TechCo.lab hero — We build intelligent technologies", caption: "Hero · the typewriter line", aspect: "wide" },
+      { src: "/projects/techcolab/02__tcl-capabilities.png", alt: "TechCo.lab capabilities — industrial AI, connected platforms, digital interfaces", caption: "Capabilities", aspect: "wide" },
+      { src: "/projects/techcolab/03__tcl-lab.png", alt: "TechCo.lab space and impact numbers", caption: "The lab · 500+ users · 35+ countries · 80+ projects", aspect: "wide" },
+    ],
   },
 
   // Archive — shorter cases

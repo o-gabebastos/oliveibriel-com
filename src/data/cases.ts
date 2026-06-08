@@ -171,7 +171,7 @@ export const cases: Record<string, CaseStudy> = {
     yearRange: "2023 →",
     stack: ["Figma (variables + tokens)", "React", "Storybook", "CSS variables", "Style Dictionary"],
     contextOneLiner:
-      "A Figma-to-code design system for NETZSCH's internal and customer-facing software. Built so eight product squads can ship consistent UI without paying a coordination tax every sprint.",
+      "DASDS — the design system for NETZSCH's Digital and Automation Systems. A Figma-to-code pipeline built so eight product squads ship consistent UI without paying a coordination tax every sprint.",
     highlights: [
       { label: "Product squads using DS", value: "8+" },
       { label: "Figma variables", value: "1.2k" },
@@ -197,11 +197,59 @@ export const cases: Record<string, CaseStudy> = {
       {
         heading: "What didn't go well",
         body:
-          "Adoption was a sales job, not a design job. I assumed solid components plus clean documentation would be enough. They weren't. Squads with their own legacy systems pushed back hard, especially when the new patterns asked them to refactor working code. I spent the first six months running demos, pairing with squad leads, and rewriting docs to answer the same five questions over and over.\n\nThe \"light governance\" model also showed its limits. Letting anyone propose components meant the queue filled up with single-use specials. I had to start saying no, which is uncomfortable when you're pitching the system as community-owned. The honest version is that any DS needs an opinionated owner, and I was that owner whether the org chart said so or not.",
+          "The hard part wasn't building the system — it was getting squads with working legacy code to adopt it. Solid components and clean docs weren't enough. Teams pushed back when a new pattern meant refactoring something that already shipped, and the first six months were mostly demos, pairing with squad leads, and rewriting docs to answer the same five questions.\n\nThe \"light governance\" model also showed its limits. Letting anyone propose components meant the queue filled up with single-use specials. I had to start saying no, which is uncomfortable when you're pitching the system as community-owned. Any DS needs an opinionated owner, and I was that owner whether the org chart said so or not.",
       },
     ],
     reflection:
       "A DS lives or dies by adoption, not aesthetics. The wins came from the boring parts — token pipeline, accessibility floor, contribution flow — done before anyone got excited about the visual language.",
+    gallery: [
+      {
+        src: "/projects/dasds/01__dasds-foundations.png",
+        alt: "DASDS foundations — color tokens and typography scale",
+        caption: "Foundations · color tokens + Roboto type",
+        aspect: "wide",
+      },
+      {
+        src: "/projects/dasds/02__dasds-header.png",
+        alt: "DASDS app header component with NETZSCH branding",
+        caption: "App Header · navigation chrome",
+        aspect: "wide",
+      },
+      {
+        src: "/projects/dasds/03__dasds-buttons.png",
+        alt: "DASDS button variants — primary, secondary, destructive, disabled",
+        caption: "Buttons · variants & states",
+      },
+      {
+        src: "/projects/dasds/04__dasds-chips.png",
+        alt: "DASDS status and filter chips",
+        caption: "Chips · status & filters",
+        aspect: "wide",
+      },
+      {
+        src: "/projects/dasds/05__dasds-alerts.png",
+        alt: "DASDS inline alert components — success, info, warning, error",
+        caption: "Alerts · inline feedback",
+        aspect: "wide",
+      },
+      {
+        src: "/projects/dasds/06__dasds-status-widgets.png",
+        alt: "DASDS machine status widgets — running, alarm, maintenance, no-data",
+        caption: "Status Widgets · machine state",
+        aspect: "wide",
+      },
+      {
+        src: "/projects/dasds/07__dasds-forms.png",
+        alt: "DASDS form controls — text fields, checkboxes, radios, toggles",
+        caption: "Forms · inputs & controls",
+      },
+      {
+        src: "/projects/dasds/08__dasds-pickers.png",
+        alt: "DASDS date picker and multi-select dropdowns",
+        caption: "Pickers · date & dropdowns",
+        aspect: "wide",
+      },
+    ],
   },
 
   "myct-connecticut": {

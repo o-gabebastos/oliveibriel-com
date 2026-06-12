@@ -522,7 +522,7 @@ export const cases: Record<string, CaseStudy> = {
           "Production coordinators in chemical, pharma, food, and mineral plants, reviewing batch logs to answer one question fast: did this batch run clean, and if not, where did the time go.\n\nTheir managers read the same data at wall distance. That's where the color decision came from: a daily timeline in the Evocon style, one row per day, hour-by-hour status blocks in saturated green, red, blue, and amber. The design system's pastel tokens are fine for badges at laptop distance and useless at five meters. I kept the pastels for chrome and hardcoded the saturated set for status, and flagged the gap as a DS token request.",
         layout: "split",
         imageSide: "right",
-        image: { src: "/projects/digital-reports/06__dr-figma-timeline.png", alt: "Daily production timeline hi-fi in Figma — hour-by-hour status blocks per day with saturated status colors", caption: "Daily timeline · the hi-fi that fixed the washed-out colors", aspect: "tall", fit: "contain" },
+        image: { src: "/projects/digital-reports/01__dr-operations.png", alt: "Dashboard operations — rankings and in-operation batch cards with saturated status colors", caption: "Operations · status that reads at wall distance", aspect: "wide" },
       },
       {
         heading: "The key decision: prototype in code, not slides",
@@ -541,11 +541,12 @@ export const cases: Record<string, CaseStudy> = {
     reflection:
       "The WCAG audit made visible what design reviews kept missing: the primary teal fails contrast on white, and the fix is a token decision, not a cosmetic one. A 68/100 is a forcing function. Numbers are harder to postpone than design opinions.",
     gallery: [
-      { src: "/projects/digital-reports/01__dr-operations.png", alt: "Dashboard rankings and in-operation batch cards with live progress", caption: "Operations · rankings and batches in operation", aspect: "wide" },
       { src: "/projects/digital-reports/05__dr-planning.png", alt: "Availability planning — working schedule applied over a period, heatmap calendar with holidays", caption: "Availability planning · heatmap calendar", aspect: "wide" },
+      { src: "/projects/digital-reports/07__dr-batch-remarks.png", alt: "Remarks tab — multi-sensor chart with numbered note markers and click-to-annotate", caption: "Remarks · click a chart point to annotate", aspect: "wide" },
+      { src: "/projects/digital-reports/06__dr-analysis.png", alt: "Analysis — ten-month production trend, output by recipe, specific energy by machine", caption: "Analysis · ten months of production", aspect: "wide" },
+      { src: "/projects/digital-reports/08__dr-inop-modal.png", alt: "Live batch detail modal — operator, mass, energy, recent events", caption: "Live batch · mid-run detail", aspect: "wide" },
       { src: "/projects/digital-reports/04__dr-batch-resume.png", alt: "Batch Resume — status, details, machine info with floating section navigation", caption: "Batch Resume · floating section nav", aspect: "wide" },
       { src: "/projects/digital-reports/03__dr-registry.png", alt: "Registry — searchable batch log with status badges", caption: "Registry · the core batch log", aspect: "wide" },
-      { src: "/projects/digital-reports/07__dr-figma-dashboard.png", alt: "Dashboard hi-fi frame in the production Figma file with DS chrome", caption: "Figma · production file, DS chrome transplanted", aspect: "tall", fit: "contain" },
     ],
   },
 

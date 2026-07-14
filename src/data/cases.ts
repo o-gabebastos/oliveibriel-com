@@ -759,6 +759,26 @@ export const cases: Record<string, CaseStudy> = {
       "Tight scope: one mechanic per chapter, narrative beats baked into encounter design. Lots of cuts to keep the build shippable.",
     outcome:
       "Playable build, well-received within the small indie community we showed it to. Taught me everything I know about cutting scope.",
+    gallery: [
+      {
+        src: "/projects/eye/10__eye-character.png",
+        alt: "EYE — playable robot character, real-time 3D model",
+        caption: "Playable character · real-time 3D",
+        aspect: "tall",
+      },
+      {
+        src: "/projects/eye/11__eye-environment.png",
+        alt: "EYE — in-engine sci-fi environment built in Unity",
+        caption: "In-engine environment · Unity",
+        aspect: "wide",
+      },
+      {
+        src: "/projects/eye/12__eye-storyboard.png",
+        alt: "EYE — storyboard for a narrative-led encounter",
+        caption: "Storyboard · narrative-led encounters",
+        aspect: "wide",
+      },
+    ],
   },
 
   "gan-dath": {
@@ -774,6 +794,14 @@ export const cases: Record<string, CaseStudy> = {
       "Iterated on the gravity-shift mechanic with a paper prototype before any 3D. Once the loop was solid, level design followed in a week.",
     outcome:
       "Shipped as a portfolio/learning piece. The gravity prototype is the part I'm still proud of.",
+    gallery: [
+      {
+        src: "/projects/gan-dath/10__gan-dath-key-art.png",
+        alt: "Gan Dath — title key art, a 3D game about collecting colors to bring life back to a dying universe",
+        caption: "Gan Dath · collect all colors to bring back life",
+        aspect: "wide",
+      },
+    ],
   },
 
   norius: {

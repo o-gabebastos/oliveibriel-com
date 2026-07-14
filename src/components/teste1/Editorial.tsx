@@ -507,9 +507,8 @@ function AboutSection() {
             <p>
               Lately I've been building products end-to-end with{" "}
               <span style={{ color: ACCENT }}>Claude Code</span> as a partner —
-              a multi-tenant clinical SaaS, a CLI that pushes LLM-generated
-              training plans into Garmin, and the internal OS that runs my own
-              agency. AI hasn't replaced taste; it's amplified what one
+              a multi-tenant clinical SaaS and the internal tools that run my own
+              work. AI hasn't replaced taste; it's amplified what one
               designer can ship.
             </p>
           </motion.div>
@@ -532,7 +531,7 @@ function AboutSection() {
               Figma · React · TypeScript · Tailwind · Claude Code · Astro
             </Aside>
             <Aside label="Off the clock">
-              Cinema, distance running, four French Bulldogs.
+              Cinema, distance running, three French Bulldogs.
             </Aside>
           </motion.aside>
         </div>

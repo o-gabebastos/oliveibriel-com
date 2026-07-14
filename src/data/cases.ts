@@ -32,6 +32,13 @@ export type CaseLink = {
   external?: boolean;
 };
 
+export type CaseVideo = {
+  src: string; // path to an mp4 in /public
+  poster?: string; // poster image shown before play
+  label?: string; // small tag, e.g. "Teaser" / "Gameplay"
+  caption?: string;
+};
+
 export type CaseStudy = {
   slug: string;
   role: string;
@@ -45,6 +52,7 @@ export type CaseStudy = {
   approach: string; // 1-3 paragraphs
   outcome: string; // 1-3 paragraphs
   sections?: CaseSection[]; // optional extra blocks
+  videos?: CaseVideo[]; // optional video section (teaser, gameplay, walkthroughs)
   gallery?: GalleryItem[];
   links?: CaseLink[];
   reflection?: string;
@@ -812,6 +820,20 @@ export const cases: Record<string, CaseStudy> = {
       "Iterated on the gravity-shift mechanic with a paper prototype before any 3D. Once the loop was solid, level design followed in a week.",
     outcome:
       "Shipped as a portfolio/learning piece. The gravity prototype is the part I'm still proud of.",
+    videos: [
+      {
+        src: "/projects/gan-dath/gan-dath-teaser.mp4",
+        poster: "/projects/gan-dath/gan-dath-teaser-poster.jpg",
+        label: "Teaser",
+        caption: "Teaser · the world, the mechanic, the hook",
+      },
+      {
+        src: "/projects/gan-dath/gan-dath-gameplay.mp4",
+        poster: "/projects/gan-dath/gan-dath-gameplay-poster.jpg",
+        label: "Gameplay",
+        caption: "Gameplay · gravity-driven traversal and color puzzles",
+      },
+    ],
     gallery: [
       {
         src: "/projects/gan-dath/10__gan-dath-key-art.png",

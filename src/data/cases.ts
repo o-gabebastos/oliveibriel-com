@@ -691,16 +691,30 @@ export const cases: Record<string, CaseStudy> = {
   superdigital: {
     slug: "superdigital",
     role: "Product designer",
-    yearRange: "2019",
-    stack: ["iOS", "Android", "Internal banking infra"],
+    yearRange: "2021",
+    stack: ["Android", "Figma", "Pix (BR instant payments)"],
     contextOneLiner:
-      "Mobile banking experience for SuperDigital, Santander's prepaid digital account targeting the underbanked across Latin America.",
+      "SuperDigital was Santander's prepaid digital account for the underbanked in Latin America. I designed the Pix MVP — bringing Brazil's instant-payment rails into the app: registering keys, paying, and receiving money in seconds.",
     challenge:
-      "Designing for first-time digital banking users across multiple LATAM markets, each with different regulatory and cultural baselines. The app had to onboard users with no banking history, in markets where trust in fintech was still being built.",
+      "Pix was new, mandated, and about to become the default way Brazilians move money. For SuperDigital's audience — many of them new to formal banking — it had to feel obvious the first time: no jargon, no fear of sending to the wrong person, and clear confirmation at every step.",
     approach:
-      "Onboarding was the product. Worked closely with risk and compliance to compress KYC into something that didn't punish users for being new to banking. Emphasis on confidence-building feedback at every state.",
+      "I designed the core Pix loop for Android: manage your keys (CPF, email, phone, random), pay by key, QR, or copy-and-paste, and receive with a shareable static QR. The home keeps balance and the Pix entry point up front; every transfer screen leads with who you're paying and how much — keypad-first, balance always in view so nobody overshoots.",
     outcome:
-      "SuperDigital reached millions of users across LATAM. The flows I worked on (onboarding, transfers, top-ups) carried into later iterations of the app.",
+      "Shipped as SuperDigital's Pix MVP — key registration, pay, receive, and QR flows — inside an app already serving millions across the region.",
+    gallery: [
+      {
+        src: "/projects/superdigital/10__superdigital-home-keys.png",
+        alt: "SuperDigital Pix — account home with balance and Pix entry, and the Pix key manager",
+        caption: "Home & keys · balance up front, Pix keys managed in one place",
+        aspect: "wide",
+      },
+      {
+        src: "/projects/superdigital/11__superdigital-pay-receive.png",
+        alt: "SuperDigital Pix — paying by key with amount and keypad, and receiving with a static QR code",
+        caption: "Pay & receive · keypad-first payment, shareable QR to get paid",
+        aspect: "wide",
+      },
+    ],
   },
 
   "dell-expert-network": {

@@ -279,11 +279,25 @@ export const cases: Record<string, CaseStudy> = {
         heading: "Who I designed for",
         body:
           "Three citizens stayed pinned above my monitor for nine months.\n\nA single mom on a bus with a cracked-screen Android, trying to renew her license between stops. She needs the answer in three taps and large enough type to read in motion.\n\nA retiree at a public library kiosk with a mouse he doesn't fully trust. He needs the page to make sense without him having to learn a new interaction model.\n\nA recent immigrant whose English is functional but not native. He needs plain language that explains the thing without burying the action.\n\nIf any of those three couldn't finish the task, the design failed. Everything else was negotiable.",
+        layout: "split",
+        imageSide: "right",
+        image: {
+          src: "/projects/myct-connecticut/20__myct-desktop-screener-intro.png",
+          alt: "MyCT eligibility screener intro — plain-language welcome, 'Am I eligible for benefits?', under 10 minutes",
+          caption: "Screener intro · plain language, one clear action",
+        },
       },
       {
         heading: "The key decision: tasks instead of agencies",
         body:
           "The legacy IA was organized by which state agency owned the workflow. Tax stuff lives under Department of Revenue Services. License stuff under DMV. Benefits under Social Services. That's how the government is structured internally and it had nothing to do with how citizens think.\n\nWe rebuilt the entire homepage and primary navigation around verbs the citizen would actually search for. \"Renew\". \"Check\". \"Apply\". \"Pay\". The agency surfaces are still there as a secondary path, but the front door is task-shaped.\n\nThis was the call that took the longest to defend. Agency stakeholders push back when they lose top-level real estate. The win came from analytics: the legacy nav had a 60%+ bounce rate from the homepage, and the citizen panels couldn't find common tasks without help. Once the data was on the table, the verb-first IA stopped being a design opinion and became the obvious move.",
+        layout: "split",
+        imageSide: "left",
+        image: {
+          src: "/projects/myct-connecticut/24__myct-desktop-programs.png",
+          alt: "MyCT benefit programs organized by citizen task — Food & Nutrition, Health, Income, Utilities, Children",
+          caption: "Benefit Programs · organized by task, not by agency",
+        },
       },
       {
         heading: "What didn't go well",
@@ -293,6 +307,44 @@ export const cases: Record<string, CaseStudy> = {
     ],
     reflection:
       "Public-sector design is the most honest UX work I've done. No growth metric, no funnel optimization. Just whether someone can do the thing they came to do. The bar is don't be in the way.",
+    gallery: [
+      {
+        src: "/projects/myct-connecticut/21__myct-desktop-screener-step1.png",
+        alt: "MyCT eligibility screener — Step 1 of 5, plain-language questions about the applicant",
+        caption: "Screener · Step 1 of 5 · one question set at a time",
+        aspect: "wide",
+      },
+      {
+        src: "/projects/myct-connecticut/22__myct-desktop-results.png",
+        alt: "MyCT benefit prescreener results — programs the citizen may be eligible for",
+        caption: "Prescreener results · what you may qualify for",
+        aspect: "wide",
+      },
+      {
+        src: "/projects/myct-connecticut/23__myct-desktop-dashboard.png",
+        alt: "MyCT dashboard — link benefits, prescreener results, manage everything in one place",
+        caption: "Dashboard · the citizen's home base",
+        aspect: "wide",
+      },
+      {
+        src: "/projects/myct-connecticut/10__myct-mobile-flow.png",
+        alt: "MyCT mobile — eligibility intro and the first two steps of the screener",
+        caption: "Mobile-first · the eligibility flow on a phone",
+        aspect: "wide",
+      },
+      {
+        src: "/projects/myct-connecticut/11__myct-mobile-results-dashboard.png",
+        alt: "MyCT mobile — prescreener results and the personal dashboard",
+        caption: "Mobile · results and dashboard",
+        aspect: "wide",
+      },
+      {
+        src: "/projects/myct-connecticut/12__myct-mobile-manage-browse.png",
+        alt: "MyCT mobile — managing linked benefits and browsing programs by task",
+        caption: "Mobile · manage benefits, browse programs",
+        aspect: "wide",
+      },
+    ],
   },
 
   nerida: {

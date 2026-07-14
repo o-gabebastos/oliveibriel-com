@@ -706,7 +706,7 @@ export const cases: Record<string, CaseStudy> = {
     challenge:
       "Pix was new, mandated, and about to become the default way Brazilians move money. For SuperDigital's audience — many of them new to formal banking — it had to feel obvious the first time: no jargon, no fear of sending to the wrong person, and clear confirmation at every step.",
     approach:
-      "I designed the core Pix loop for Android: manage your keys (CPF, email, phone, random), pay by key, QR, or copy-and-paste, and receive with a shareable static QR. The home keeps balance and the Pix entry point up front; every transfer screen leads with who you're paying and how much — keypad-first, balance always in view so nobody overshoots.",
+      "I designed the full Pix surface for Android around one hub: manage your keys (CPF, email, phone, random), pay by key, QR scan, or copy-and-paste, receive with a shareable static QR, schedule Pix for a future date, and track limits. Every transfer screen leads with who you're paying and how much — keypad-first, balance always in view so nobody overshoots — and the schedule history shows per-payment status (paid, scheduled, processing, failed) at a glance.",
     outcome:
       "Shipped as SuperDigital's Pix MVP — key registration, pay, receive, and QR flows — inside an app already serving millions across the region.",
     gallery: [
@@ -720,6 +720,18 @@ export const cases: Record<string, CaseStudy> = {
         src: "/projects/superdigital/11__superdigital-pay-receive.png",
         alt: "SuperDigital Pix — paying by key with amount and keypad, and receiving with a static QR code",
         caption: "Pay & receive · keypad-first payment, shareable QR to get paid",
+        aspect: "wide",
+      },
+      {
+        src: "/projects/superdigital/12__superdigital-hub-scan.png",
+        alt: "SuperDigital Pix — the Pix hub with every action, and the QR-code scanner to pay",
+        caption: "Pix hub & scan · every action in one place, scan-to-pay",
+        aspect: "wide",
+      },
+      {
+        src: "/projects/superdigital/13__superdigital-schedule-history.png",
+        alt: "SuperDigital Pix — scheduling a Pix for a future date, and the schedule history with per-payment status",
+        caption: "Schedule & history · future-dated Pix, status at a glance",
         aspect: "wide",
       },
     ],

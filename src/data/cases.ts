@@ -74,7 +74,7 @@ export const cases: Record<string, CaseStudy> = {
     approach:
       "I started on the floor. Operators wear gloves, lighting shifts through the day, the panel is at chest height with attention split between the screen and a running machine. None of that is on a spec sheet.\n\nPicked InView as the reference and designed it end to end against real users. Then extracted the patterns into the shared system and rolled it out product by product: Confectionery, Epsilon, Mixers, ZetaRS, Inside.",
     outcome:
-      "Six product lines now ship on the same design language. An operator trained on one machine can sit down at any other and find the dashboard, recipes, alarms, settings in the same place, behaving the same way.\n\nNew product onboarding went from months of bespoke design to weeks of configuration. Three years in, every new machine NETZSCH G&D ships internationally lands on this system.",
+      "Six product lines now ship on the same design language. An operator trained on one machine can sit down at any other and find the dashboard, recipes, alarms, settings in the same place, behaving the same way.\n\nNew product onboarding went from months of bespoke design to weeks of configuration. Every new machine NETZSCH G&D ships internationally now lands on this system.",
     sections: [
       {
         heading: "Who I designed for",
@@ -107,7 +107,7 @@ export const cases: Record<string, CaseStudy> = {
       },
     ],
     reflection:
-      "The work that survives a 12-hour shift in PPE under bad lighting is different from the work that survives a 12-minute design review. Three years on this platform taught me the second one is easy and the first one is the actual job.",
+      "The work that survives a 12-hour shift in PPE under bad lighting is different from the work that survives a 12-minute design review. Years on this platform taught me the second one is easy and the first one is the actual job.",
     gallery: [
       {
         src: "/projects/iris-v3/01__inview-dashboard.png",

@@ -28,7 +28,7 @@ export const projects: Project[] = [
     year: "2023→",
     type: "Industrial HMI Platform",
     summary:
-      "Sole designer on NETZSCH's global HMI platform. Six product lines, one design system — designed and built end-to-end.",
+      "Sole designer on NETZSCH's global HMI platform. Six product lines, one design system, in three languages across 36 countries.",
     image: `${CDN}/IRIS/IRIS_Cover.png`,
     featured: true,
     metric: { label: "Product lines unified", value: "6" },

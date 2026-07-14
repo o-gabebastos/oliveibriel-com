@@ -804,6 +804,12 @@ export const cases: Record<string, CaseStudy> = {
         label: "Teaser",
         caption: "Teaser · the world and tone of EYE",
       },
+      {
+        src: "/projects/eye/eye-trailer-full.mp4",
+        poster: "/projects/eye/eye-trailer-full-poster.jpg",
+        label: "Trailer",
+        caption: "Trailer · a longer look at the world of EYE",
+      },
     ],
     gallery: [
       {

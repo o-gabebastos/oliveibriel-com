@@ -722,15 +722,29 @@ export const cases: Record<string, CaseStudy> = {
     slug: "dell-expert-network",
     role: "Product designer",
     yearRange: "2018",
-    stack: ["Web", "Salesforce-backed certification flows"],
+    stack: ["Web · Responsive", "Figma", "Dell brand system"],
     contextOneLiner:
-      "Certification platform for Dell's enterprise partners — engineers, consultants, integrators — to validate competencies and stay current on Dell's technology stack.",
+      "Dell Expert Network (DEN) is Dell's program for independent IT consultants and managed-service providers. I designed the member-facing portal — the front door to account support, exclusive pricing, and rewards on the hardware they spec for their clients.",
     challenge:
-      "B2B education platforms tend to be neglected internal tools. The audience here was technical and time-poor; the platform had to respect that.",
+      "Dell's core storefront is built for people buying for themselves. IT consultants buy on behalf of clients, repeatedly, and need a different relationship: a named contact, faster support, and a reason to keep routing purchases through Dell. DEN was that relationship — but it needed a home that explained the value fast and got members to the benefit without a sales call.",
     approach:
-      "Designed around the user's job: \"prove I can do X, get back to billable work.\" Streamlined exam flows, clear progress and recertification cues, no marketing overlay.",
+      "I designed the portal around the member's actual loop: understand the benefits, join, make qualified purchases, collect the rewards. The home leads with who it's for — \"Empowering IT Consultants\" — and the concrete benefits: dedicated account team, service shortcuts, exclusive pricing. A plain \"How it works\" walks the six steps from becoming a member to redeeming rewards on Dell.com, with referral and a companion app as secondary paths. Responsive throughout, in Dell's brand system.",
     outcome:
-      "Shipped and adopted across Dell's partner network as the canonical certification surface.",
+      "Shipped as the UK front door for the Dell Expert Network — a benefit-first portal that turns a partner program into something a busy consultant can understand and act on in about a minute.",
+    gallery: [
+      {
+        src: "/projects/dell-expert-network/10__dell-hero.png",
+        alt: "Dell Expert Network portal home — who it's for and the core member benefits",
+        caption: "DEN home · benefit-first, who it's for up top",
+        aspect: "wide",
+      },
+      {
+        src: "/projects/dell-expert-network/11__dell-how-it-works.png",
+        alt: "Dell Expert Network — six-step 'How it works' from becoming a member to redeeming rewards, plus referral",
+        caption: "How it works · six steps from member to reward",
+        aspect: "wide",
+      },
+    ],
   },
 
   eye: {

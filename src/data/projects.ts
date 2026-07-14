@@ -183,18 +183,6 @@ export const projects: Project[] = [
     metric: { label: "Component families", value: "29" },
   },
   {
-    id: "05",
-    slug: "ortolink",
-    number: "05",
-    title: "Ortolink",
-    client: "Rotary Club",
-    year: "2021",
-    type: "Mobile App · pro-bono",
-    summary: "Solo design for medical equipment lending.",
-    image: `${CDN}/Ortolink/orto_cover.png`,
-    featured: false,
-  },
-  {
     id: "04",
     slug: "superdigital",
     number: "04",

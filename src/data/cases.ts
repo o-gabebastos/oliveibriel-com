@@ -688,21 +688,6 @@ export const cases: Record<string, CaseStudy> = {
     ],
   },
 
-  ortolink: {
-    slug: "ortolink",
-    role: "Solo designer (pro-bono)",
-    yearRange: "2021",
-    stack: ["Figma", "Mobile-first", "Plain language"],
-    contextOneLiner:
-      "Solo design work for a Rotary Club app that lends out medical equipment (wheelchairs, walkers, hospital beds) to families in need.",
-    challenge:
-      "Small NGO, zero design budget, real-world impact on families managing acute care at home. Whatever shipped had to be usable by volunteers and beneficiaries with low digital literacy.",
-    approach:
-      "Stripped to the essentials — what's available, how to request, where to pick up, how to return. Big buttons, clear status, no cleverness.",
-    outcome:
-      "App handed off to Rotary's local volunteer dev team. Now in active use across the chapter.",
-  },
-
   superdigital: {
     slug: "superdigital",
     role: "Product designer",

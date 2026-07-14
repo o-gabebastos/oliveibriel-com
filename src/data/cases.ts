@@ -738,9 +738,27 @@ export const cases: Record<string, CaseStudy> = {
         aspect: "wide",
       },
       {
+        src: "/projects/dell-expert-network/13__dell-benefits.png",
+        alt: "Dell Expert Network — programme benefits: dedicated account team, online shopping experience, rewards",
+        caption: "Programme benefits · the reasons to join, up front",
+        aspect: "wide",
+      },
+      {
         src: "/projects/dell-expert-network/11__dell-how-it-works.png",
         alt: "Dell Expert Network — six-step 'How it works' from becoming a member to redeeming rewards, plus referral",
         caption: "How it works · six steps from member to reward",
+        aspect: "wide",
+      },
+      {
+        src: "/projects/dell-expert-network/14__dell-app.png",
+        alt: "Dell Expert Network — the companion app section with App Store and Google Play links",
+        caption: "The companion app · score, releases, and offers on the go",
+        aspect: "wide",
+      },
+      {
+        src: "/projects/dell-expert-network/15__dell-highlights.png",
+        alt: "Dell Expert Network — highlights row of programme campaigns and content",
+        caption: "Highlights · campaigns and content for members",
         aspect: "wide",
       },
     ],

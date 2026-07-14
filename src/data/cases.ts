@@ -300,7 +300,7 @@ export const cases: Record<string, CaseStudy> = {
     role: "Solo founder · design, product, frontend, backend, ops",
     team: "Just me, paired with Claude Code as build partner",
     duration: "April 2026 → ongoing",
-    yearRange: "2025 →",
+    yearRange: "2026 →",
     stack: ["Next.js 16", "React 19", "Supabase (Postgres + RLS)", "Tailwind 4", "Asaas (Pix)", "Resend", "Upstash Redis", "Vercel"],
     contextOneLiner:
       "Nerida is a modular platform for solo health professionals in Brazil. Psychology is in production, nutrition in beta. Agenda, structured records, native Pix, a financial module that handles Carnê Leão, and meal plans with a public patient link. All of it designed, built, and operated by one person.",

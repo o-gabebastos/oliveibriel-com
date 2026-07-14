@@ -28,7 +28,7 @@ export const projects: Project[] = [
     year: "2023→",
     type: "Industrial HMI Platform",
     summary:
-      "Sole UX designer on NETZSCH's global HMI platform. 6 product lines, one design system, 35 months and counting.",
+      "Sole designer on NETZSCH's global HMI platform. Six product lines, one design system — designed and built end-to-end.",
     image: `${CDN}/IRIS/IRIS_Cover.png`,
     featured: true,
     metric: { label: "Product lines unified", value: "6" },
@@ -68,7 +68,7 @@ export const projects: Project[] = [
     number: "11",
     title: "Nerida",
     client: "Solo founder",
-    year: "2025→",
+    year: "2026→",
     type: "Modular health SaaS · AI-built",
     summary:
       "Modular platform for solo health professionals in Brazil. Psychologists in production, nutritionists in beta. Designed, built, and operated solo.",

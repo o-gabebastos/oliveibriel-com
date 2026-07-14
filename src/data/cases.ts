@@ -785,6 +785,14 @@ export const cases: Record<string, CaseStudy> = {
       "Tight scope: one mechanic per chapter, narrative beats baked into encounter design. Lots of cuts to keep the build shippable.",
     outcome:
       "Playable build, well-received within the small indie community we showed it to. Taught me everything I know about cutting scope.",
+    videos: [
+      {
+        src: "/projects/eye/eye-trailer.mp4",
+        poster: "/projects/eye/eye-trailer-poster.jpg",
+        label: "Teaser",
+        caption: "Teaser · the world and tone of EYE",
+      },
+    ],
     gallery: [
       {
         src: "/projects/eye/10__eye-character.png",

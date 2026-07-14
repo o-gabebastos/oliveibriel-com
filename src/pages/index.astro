@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ProjectCard from "../components/ProjectCard.astro";
 import ContactForm from "../components/ContactForm.astro";
+import Testimonials from "../components/Testimonials.astro";
 import HeroVideoScroll from "../components/HeroVideoScroll.tsx";
 import { featured, personal, projects } from "../data/projects";
 
@@ -214,6 +215,9 @@ const fullName = "Gabriel Oliveira";
       ))}
     </div>
   </section>
+
+  <!-- Testimonials -->
+  <Testimonials limit={3} />
 
   <!-- Get in touch — form -->
   <section id="contact" class="max-w-[var(--container-wide)] mx-auto px-6 md:px-10 py-20 md:py-28 border-t border-[var(--color-border)]">

@@ -16,6 +16,20 @@ const {
 const items = typeof limit === "number" ? all.slice(0, limit) : all;
 const total = items.length;
 const pad = (n: number) => String(n).padStart(2, "0");
+
+// Server-render the initial coverflow positions (active = 0) so there's no
+// flash of stacked cards before the client script runs, and it degrades
+// gracefully if JS never loads.
+const half = Math.floor(total / 2);
+const initClass = (i: number) => {
+  let d = i;
+  if (d > half) d -= total;
+  if (d < -half) d += total;
+  if (d === 0) return "is-center";
+  if (d === -1) return "is-left";
+  if (d === 1) return "is-right";
+  return d < 0 ? "is-far-left" : "is-far-right";
+};
 ---
 
 <section class="max-w-[var(--container-wide)] mx-auto px-6 md:px-10 py-16 md:py-20 border-t border-[var(--color-border)]">
@@ -35,10 +49,10 @@ const pad = (n: number) => String(n).padStart(2, "0");
 
   {total <= 1 ? (
     items.map((t) => (
-      <figure class="rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg-elevated)] p-7 md:p-10 max-w-3xl">
-        <blockquote class="text-lg md:text-2xl leading-relaxed text-[var(--color-fg)]">{t.quote}</blockquote>
-        <figcaption class="mt-6 pt-5 border-t border-[var(--color-border)]">
-          <div class="font-semibold text-[var(--color-fg)]">{t.name}</div>
+      <figure class="rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg-elevated)] p-6 md:p-8 max-w-xl mx-auto">
+        <blockquote class="text-[15px] md:text-base leading-relaxed text-[var(--color-fg)]">{t.quote}</blockquote>
+        <figcaption class="mt-5 pt-4 border-t border-[var(--color-border)]">
+          <div class="font-semibold text-[var(--color-fg)] text-[15px]">{t.name}</div>
           <div class="font-mono text-[11px] uppercase tracking-wider text-[var(--color-fg-subtle)] mt-1">
             {t.role}{t.relation ? ` · ${t.relation}` : ""}
           </div>
@@ -54,43 +68,42 @@ const pad = (n: number) => String(n).padStart(2, "0");
       aria-label="Testimonials"
       data-reveal
     >
-      <div data-viewport class="overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg-elevated)] touch-pan-y">
-        <div data-track class="flex transition-transform duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none">
-          {items.map((t, i) => (
-            <figure
-              data-slide
-              class="min-w-full w-full shrink-0 p-7 md:p-12"
-              role="group"
-              aria-roledescription="slide"
-              aria-label={`${i + 1} of ${total}`}
-              aria-hidden={i === 0 ? "false" : "true"}
-            >
-              <div class="max-w-3xl mx-auto flex flex-col">
-                <svg class="size-8 text-[var(--color-accent)] opacity-30 mb-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M9.5 6C6.5 6 4 8.5 4 11.5V18h6v-6H7c0-1.7 1.1-3 2.5-3V6Zm10 0c-3 0-5.5 2.5-5.5 5.5V18h6v-6h-3c0-1.7 1.1-3 2.5-3V6Z" />
-                </svg>
-                <blockquote class="text-lg md:text-2xl lg:text-[28px] leading-[1.45] text-[var(--color-fg)] font-medium tracking-[-0.01em]">
-                  {t.quote}
-                </blockquote>
-                <figcaption class="mt-7 pt-5 border-t border-[var(--color-border)]">
-                  <div class="font-semibold text-[var(--color-fg)] text-[15px] md:text-base">{t.name}</div>
-                  <div class="font-mono text-[11px] uppercase tracking-wider text-[var(--color-fg-subtle)] mt-1">
-                    {t.role}{t.relation ? ` · ${t.relation}` : ""}
-                  </div>
-                  {t.translated && (
-                    <div class="font-mono text-[10px] text-[var(--color-fg-subtle)] opacity-70 mt-1.5">
-                      Translated from Portuguese
-                    </div>
-                  )}
-                </figcaption>
+      <div class="tglow" aria-hidden="true"></div>
+
+      <div data-viewport class="tviewport relative z-10 overflow-hidden" style="--card-w: min(88vw, 30rem);">
+        {items.map((t, i) => (
+          <figure
+            data-slide
+            data-index={i}
+            class={`tcard ${initClass(i)}`}
+            role="group"
+            aria-roledescription="slide"
+            aria-label={`${i + 1} of ${total}`}
+            aria-hidden={i === 0 ? "false" : "true"}
+          >
+            <svg class="size-6 text-[var(--color-accent)] opacity-40 mb-3" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M9.5 6C6.5 6 4 8.5 4 11.5V18h6v-6H7c0-1.7 1.1-3 2.5-3V6Zm10 0c-3 0-5.5 2.5-5.5 5.5V18h6v-6h-3c0-1.7 1.1-3 2.5-3V6Z" />
+            </svg>
+            <blockquote class="text-[15px] md:text-base leading-relaxed text-[var(--color-fg)]">
+              {t.quote}
+            </blockquote>
+            <figcaption class="mt-5 pt-4 border-t border-[var(--color-border)]">
+              <div class="font-semibold text-[var(--color-fg)] text-[15px]">{t.name}</div>
+              <div class="font-mono text-[11px] uppercase tracking-wider text-[var(--color-fg-subtle)] mt-1">
+                {t.role}{t.relation ? ` · ${t.relation}` : ""}
               </div>
-            </figure>
-          ))}
-        </div>
+              {t.translated && (
+                <div class="font-mono text-[10px] text-[var(--color-fg-subtle)] opacity-70 mt-1.5">
+                  Translated from Portuguese
+                </div>
+              )}
+            </figcaption>
+          </figure>
+        ))}
       </div>
 
       <!-- Controls -->
-      <div class="mt-6 flex items-center justify-between gap-6">
+      <div class="relative z-10 mt-6 flex items-center justify-between gap-6">
         <div class="flex items-center gap-2">
           <button
             data-prev
@@ -132,22 +145,115 @@ const pad = (n: number) => String(n).padStart(2, "0");
   )}
 </section>
 
+<style>
+  .tviewport {
+    min-height: 22rem;
+  }
+
+  .tglow {
+    position: absolute;
+    inset: 6% 14%;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(58% 58% at 30% 42%, color-mix(in oklab, var(--color-accent) 20%, transparent), transparent 70%),
+      radial-gradient(46% 46% at 74% 60%, color-mix(in oklab, var(--color-accent) 14%, transparent), transparent 70%);
+    filter: blur(44px);
+    opacity: 0.55;
+  }
+
+  .tcard {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: var(--card-w);
+    padding: 1.5rem;
+    border-radius: 1.5rem;
+    /* Apple-style liquid glass: translucent fill, frosted backdrop, specular edge. */
+    background: linear-gradient(
+      155deg,
+      color-mix(in oklab, white 80%, transparent),
+      color-mix(in oklab, white 46%, transparent)
+    );
+    border: 1px solid color-mix(in oklab, white 72%, transparent);
+    box-shadow:
+      0 12px 36px -10px rgba(9, 9, 11, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.78);
+    -webkit-backdrop-filter: blur(18px) saturate(1.4);
+    backdrop-filter: blur(18px) saturate(1.4);
+    transform: translate(-50%, -50%);
+    transform-origin: center;
+    will-change: transform, opacity, filter;
+    transition:
+      transform 600ms cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 600ms cubic-bezier(0.16, 1, 0.3, 1),
+      filter 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @media (min-width: 768px) {
+    .tcard { padding: 2rem; }
+  }
+
+  .tcard.is-center {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    z-index: 30;
+    filter: none;
+  }
+  .tcard.is-left {
+    transform: translate(calc(-50% - 72%), -50%) scale(0.8);
+    opacity: 0.55;
+    z-index: 20;
+    filter: blur(3px);
+    cursor: pointer;
+  }
+  .tcard.is-right {
+    transform: translate(calc(-50% + 72%), -50%) scale(0.8);
+    opacity: 0.55;
+    z-index: 20;
+    filter: blur(3px);
+    cursor: pointer;
+  }
+  .tcard.is-far-left {
+    transform: translate(calc(-50% - 128%), -50%) scale(0.68);
+    opacity: 0;
+    z-index: 10;
+    filter: blur(6px);
+    pointer-events: none;
+  }
+  .tcard.is-far-right {
+    transform: translate(calc(-50% + 128%), -50%) scale(0.68);
+    opacity: 0;
+    z-index: 10;
+    filter: blur(6px);
+    pointer-events: none;
+  }
+
+  @media (max-width: 640px) {
+    .tcard.is-left,
+    .tcard.is-right { opacity: 0.28; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tcard { transition: none; }
+  }
+</style>
+
 <script>
   const AUTOPLAY_MS = 6000;
   const SWIPE_THRESHOLD = 40;
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
   function initCarousel(root: HTMLElement) {
-    const track = root.querySelector<HTMLElement>("[data-track]");
     const viewport = root.querySelector<HTMLElement>("[data-viewport]");
     const slides = Array.from(root.querySelectorAll<HTMLElement>("[data-slide]"));
     const dots = Array.from(root.querySelectorAll<HTMLElement>("[data-dot]"));
     const counter = root.querySelector<HTMLElement>("[data-counter]");
     const prevBtn = root.querySelector<HTMLElement>("[data-prev]");
     const nextBtn = root.querySelector<HTMLElement>("[data-next]");
-    if (!track || !viewport || slides.length < 2) return;
+    if (!viewport || slides.length < 2) return;
 
     const total = slides.length;
+    const half = Math.floor(total / 2);
     const pad = (n: number) => String(n).padStart(2, "0");
     let index = 0;
     let timer: number | undefined;
@@ -156,14 +262,34 @@ const pad = (n: number) => String(n).padStart(2, "0");
     const idleDot = "w-1.5 bg-[var(--color-border-strong)] hover:bg-[var(--color-fg-subtle)]";
     dots.forEach((d) => (d.className += " " + idleDot));
 
+    // Fix the stage to the tallest quote so nothing clips or jumps.
+    function sizeViewport() {
+      let max = 0;
+      for (const s of slides) max = Math.max(max, s.offsetHeight);
+      if (max) viewport!.style.minHeight = max + "px";
+    }
+
+    function offsetFor(i: number) {
+      let d = i - index;
+      if (d > half) d -= total;
+      if (d < -half) d += total;
+      return d;
+    }
+
     function render() {
-      track!.style.transform = `translateX(-${index * 100}%)`;
-      slides.forEach((s, i) => s.setAttribute("aria-hidden", i === index ? "false" : "true"));
-      dots.forEach((d, i) => {
+      slides.forEach((s, i) => {
+        const d = offsetFor(i);
+        s.classList.remove("is-center", "is-left", "is-right", "is-far-left", "is-far-right");
+        s.classList.add(
+          d === 0 ? "is-center" : d === -1 ? "is-left" : d === 1 ? "is-right" : d < 0 ? "is-far-left" : "is-far-right",
+        );
+        s.setAttribute("aria-hidden", d === 0 ? "false" : "true");
+      });
+      dots.forEach((dot, i) => {
         const on = i === index;
-        d.className = d.className.replace(activeDot, "").replace(idleDot, "").trim();
-        d.className += " " + (on ? activeDot : idleDot);
-        d.setAttribute("aria-selected", on ? "true" : "false");
+        dot.className = dot.className.replace(activeDot, "").replace(idleDot, "").trim();
+        dot.className += " " + (on ? activeDot : idleDot);
+        dot.setAttribute("aria-selected", on ? "true" : "false");
       });
       if (counter) counter.textContent = `${pad(index + 1)} / ${pad(total)}`;
     }
@@ -175,7 +301,6 @@ const pad = (n: number) => String(n).padStart(2, "0");
     const next = () => goTo(index + 1);
     const prev = () => goTo(index - 1);
 
-    // Autoplay — paused on hover/focus, tab-hidden, and reduced-motion.
     function stop() {
       if (timer) window.clearInterval(timer);
       timer = undefined;
@@ -193,6 +318,10 @@ const pad = (n: number) => String(n).padStart(2, "0");
     nextBtn?.addEventListener("click", () => { next(); restart(); });
     prevBtn?.addEventListener("click", () => { prev(); restart(); });
     dots.forEach((d, i) => d.addEventListener("click", () => { goTo(i); restart(); }));
+    // Click a side card to bring it into focus.
+    slides.forEach((s, i) => s.addEventListener("click", () => {
+      if (offsetFor(i) !== 0) { goTo(i); restart(); }
+    }));
 
     root.addEventListener("keydown", (e) => {
       if (e.key === "ArrowRight") { e.preventDefault(); next(); restart(); }
@@ -206,7 +335,7 @@ const pad = (n: number) => String(n).padStart(2, "0");
     document.addEventListener("visibilitychange", () => (document.hidden ? stop() : start()));
     reduceMotion.addEventListener("change", restart);
 
-    // Swipe (touch / pointer).
+    // Swipe.
     let downX: number | null = null;
     viewport.addEventListener("pointerdown", (e) => { downX = e.clientX; stop(); });
     viewport.addEventListener("pointerup", (e) => {
@@ -218,6 +347,14 @@ const pad = (n: number) => String(n).padStart(2, "0");
     });
     viewport.addEventListener("pointercancel", () => { downX = null; start(); });
 
+    let resizeTimer: number | undefined;
+    window.addEventListener("resize", () => {
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(sizeViewport, 150);
+    });
+    if ((document as any).fonts?.ready) (document as any).fonts.ready.then(sizeViewport);
+
+    sizeViewport();
     render();
     start();
   }

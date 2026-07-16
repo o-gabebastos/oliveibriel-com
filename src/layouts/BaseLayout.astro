@@ -17,11 +17,15 @@ interface Props {
   type?: "website" | "article";
 }
 
+import { getLocale } from "../i18n/config";
+
 const props = Astro.props;
+const locale = getLocale(Astro.currentLocale);
+const htmlLang = locale === "pt" ? "pt-BR" : "en";
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={htmlLang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />

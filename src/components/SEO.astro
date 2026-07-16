@@ -1,4 +1,7 @@
 ---
+import { getLocale, barePath, localePath } from "../i18n/config";
+import { useCopy } from "../i18n/copy";
+
 interface Props {
   title?: string;
   description?: string;
@@ -6,30 +9,44 @@ interface Props {
   type?: "website" | "article";
 }
 
+const locale = getLocale(Astro.currentLocale);
+const t = useCopy(locale);
+
 const {
-  title = "Gabriel Oliveira · Senior Product Designer | Industrial SaaS, Design Systems & AI",
-  description = "Senior product designer with 7+ years shipping industrial SaaS, design systems, and AI-native tools. I work at Techco.lab, NETZSCH's innovation hub, where I design platforms like IRIS end to end, and I build AI-native SaaS solo on the side. Based in Curitiba, Brazil.",
+  title = t.seo.homeTitle,
+  description = t.seo.homeDescription,
   image = "/gabriel-oliveira.jpg",
   type = "website",
 } = Astro.props;
 
 const siteUrl = "https://oliveibriel.com";
-const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? siteUrl).toString();
-const ogImage = new URL(image, Astro.site ?? siteUrl).toString();
+const base = Astro.site ?? siteUrl;
+const canonicalURL = new URL(Astro.url.pathname, base).toString();
+const ogImage = new URL(image, base).toString();
+
+// hreflang alternates: same content path in each locale.
+const bare = barePath(Astro.url.pathname);
+const enURL = new URL(bare, base).toString();
+const ptURL = new URL(localePath("pt", bare), base).toString();
+const ogLocale = locale === "pt" ? "pt_BR" : "en_US";
+const ogLocaleAlt = locale === "pt" ? "en_US" : "pt_BR";
+
+const jsonLdDescription =
+  locale === "pt"
+    ? "Product designer sênior especializado em SaaS industrial, design systems e ferramentas com IA. 7+ anos de experiência."
+    : "Senior Product Designer specializing in industrial SaaS, design systems, and AI-native tools. 7+ years of experience.";
+const jobTitle = locale === "pt" ? "Product Designer Sênior" : "Senior Product Designer";
 
 const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Gabriel Oliveira",
-  jobTitle: "Senior Product Designer",
-  description:
-    "Senior Product Designer specializing in industrial SaaS, design systems, and AI-native tools. 7+ years of experience.",
+  jobTitle,
+  description: jsonLdDescription,
   url: siteUrl,
   email: "mailto:gabriel@oliveibriel.com",
   image: `${siteUrl}/gabriel-oliveira.jpg`,
-  sameAs: [
-    "https://www.linkedin.com/in/oliveibriel",
-  ],
+  sameAs: ["https://www.linkedin.com/in/oliveibriel"],
   worksFor: [
     {
       "@type": "Organization",
@@ -61,12 +78,18 @@ const personJsonLd = {
 <meta name="author" content="Gabriel Oliveira" />
 <link rel="canonical" href={canonicalURL} />
 
+<link rel="alternate" hreflang="en" href={enURL} />
+<link rel="alternate" hreflang="pt-BR" href={ptURL} />
+<link rel="alternate" hreflang="x-default" href={enURL} />
+
 <meta property="og:type" content={type} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={ogImage} />
 <meta property="og:url" content={canonicalURL} />
 <meta property="og:site_name" content="Gabriel Oliveira" />
+<meta property="og:locale" content={ogLocale} />
+<meta property="og:locale:alternate" content={ogLocaleAlt} />
 {type === "article" && (
   <meta property="article:author" content="Gabriel Oliveira" />
 )}

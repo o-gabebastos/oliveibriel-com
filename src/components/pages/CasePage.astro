@@ -1,0 +1,713 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Typewriter from "../Typewriter.tsx";
+import { getLocale, localePath } from "../../i18n/config";
+import { useCopy } from "../../i18n/copy";
+import { getProjects, getCase } from "../../i18n/content";
+
+interface Props {
+  slug: string;
+}
+const { slug } = Astro.props;
+
+const locale = getLocale(Astro.currentLocale);
+const t = useCopy(locale).caseTpl;
+
+const projects = getProjects(locale);
+const project = projects.find((p) => p.slug === slug)!;
+const study = getCase(locale, slug);
+
+// Find adjacent project for "next" nav
+const sortedFeatured = projects.filter((p) => p.featured);
+const sortedRest = projects.filter((p) => !p.featured);
+const ordered = [...sortedFeatured, ...sortedRest];
+const idx = ordered.findIndex((p) => p.slug === slug);
+const next = ordered[(idx + 1) % ordered.length];
+
+// Helpers
+const paragraphs = (text: string) =>
+  text.split("\n\n").map((p) => p.trim()).filter(Boolean);
+
+// Renders **bold** spans as <strong>; everything else stays plain text.
+type InlineSeg = { bold: boolean; text: string };
+const inlineSegments = (text: string): InlineSeg[] =>
+  text
+    .split(/(\*\*[^*]+\*\*)/g)
+    .filter(Boolean)
+    .map((part) =>
+      part.startsWith("**") && part.endsWith("**")
+        ? { bold: true, text: part.slice(2, -2) }
+        : { bold: false, text: part },
+    );
+
+const slugify = (s: string) =>
+  s
+    .toLowerCase()
+    .replace(/[^\w\s-]+/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+// Short label for TOC chips: drop anything after an em-dash or hyphen separator
+const shortLabel = (s: string) => s.split("—")[0].split(" - ")[0].trim();
+
+// Build TOC for the case study
+const toc = study
+  ? [
+      { id: "challenge", label: t.challenge },
+      { id: "approach", label: t.approach },
+      { id: "outcome", label: t.outcome },
+      ...(study.sections ?? []).map((sec) => ({
+        id: slugify(sec.heading),
+        label: shortLabel(sec.heading),
+      })),
+      ...(study.videos && study.videos.length > 0
+        ? [{ id: "video", label: t.video }]
+        : []),
+      ...(study.gallery && study.gallery.length > 0
+        ? [{ id: "selected-screens", label: t.screens }]
+        : []),
+      ...(study.reflection ? [{ id: "reflection", label: t.reflection }] : []),
+    ]
+  : [];
+---
+
+<BaseLayout
+  title={`${project.title} · Gabriel Oliveira`}
+  description={project.summary}
+  type="article"
+>
+  <article>
+    <!-- Hero -->
+    <section class="max-w-[var(--container-wide)] mx-auto px-6 md:px-10 pt-12 md:pt-20 pb-10 md:pb-14">
+      <a
+        href={localePath(locale, "/work")}
+        class="inline-flex items-center gap-1.5 text-sm text-[var(--color-fg-muted)] hover:text-[var(--color-fg)] transition-colors mb-10"
+      >
+        <span class="font-mono">←</span> {t.allWork}
+      </a>
+
+      <div class="grid lg:grid-cols-[1fr_18rem] gap-10 lg:gap-16 items-start">
+        <div data-reveal>
+          <div class="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[10px] uppercase tracking-wider text-[var(--color-fg-subtle)] mb-5">
+            <span>{project.number}</span>
+            <span>·</span>
+            <span class="text-[var(--color-fg-muted)]">{project.client}</span>
+            <span>·</span>
+            <span>{project.year}</span>
+            <span>·</span>
+            <span>{project.type}</span>
+            {project.ai && (
+              <>
+                <span>·</span>
+                <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[9px] font-mono uppercase tracking-wider bg-[var(--color-accent)]/10 text-[var(--color-accent)] border border-[var(--color-accent)]/20">AI</span>
+              </>
+            )}
+          </div>
+
+          <h1
+            class="display text-[clamp(2.25rem,5.5vw,4.5rem)] leading-[1] mb-6"
+            style="letter-spacing:-0.045em;"
+          >
+            {project.title}
+          </h1>
+
+          <p class="text-lg md:text-xl text-[var(--color-fg-muted)] leading-relaxed max-w-2xl">
+            {study?.contextOneLiner ?? project.summary}
+          </p>
+
+          {study?.typewriter && (
+            <Typewriter
+              client:load
+              prefix={study.typewriter.prefix}
+              words={study.typewriter.words}
+            />
+          )}
+        </div>
+
+        {study && (
+          <aside class="lg:sticky lg:top-24" data-reveal data-reveal-delay="2">
+            <dl class="grid grid-cols-2 lg:grid-cols-1 gap-5 lg:gap-4 p-5 lg:p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-elevated)]">
+              {study.role && (
+                <div>
+                  <dt class="font-mono text-[10px] uppercase tracking-wider text-[var(--color-fg-subtle)] mb-1">{t.role}</dt>
+                  <dd class="text-sm text-[var(--color-fg)] leading-snug">{study.role}</dd>
+                </div>
+              )}
+              {study.team && (
+                <div>
+                  <dt class="font-mono text-[10px] uppercase tracking-wider text-[var(--color-fg-subtle)] mb-1">{t.team}</dt>
+                  <dd class="text-sm text-[var(--color-fg)] leading-snug">{study.team}</dd>
+                </div>
+              )}
+              {study.duration && (
+                <div>
+                  <dt class="font-mono text-[10px] uppercase tracking-wider text-[var(--color-fg-subtle)] mb-1">{t.duration}</dt>
+                  <dd class="text-sm text-[var(--color-fg)] leading-snug">{study.duration}</dd>
+                </div>
+              )}
+              {study.yearRange && (
+                <div>
+                  <dt class="font-mono text-[10px] uppercase tracking-wider text-[var(--color-fg-subtle)] mb-1">{t.year}</dt>
+                  <dd class="text-sm text-[var(--color-fg)] leading-snug tabular">{study.yearRange}</dd>
+                </div>
+              )}
+              {study.stack && study.stack.length > 0 && (
+                <div class="col-span-2 lg:col-span-1">
+                  <dt class="font-mono text-[10px] uppercase tracking-wider text-[var(--color-fg-subtle)] mb-2">{t.stack}</dt>
+                  <dd class="flex flex-wrap gap-1.5">
+                    {study.stack.map((s) => (
+                      <span class="font-mono text-[10px] uppercase tracking-wider px-2 py-1 rounded border border-[var(--color-border)] bg-[var(--color-bg)] text-[var(--color-fg-muted)]">
+                        {s}
+                      </span>
+                    ))}
+                  </dd>
+                </div>
+              )}
+              {study.links && study.links.length > 0 && (
+                <div class="col-span-2 lg:col-span-1">
+                  <dt class="font-mono text-[10px] uppercase tracking-wider text-[var(--color-fg-subtle)] mb-2">{t.links}</dt>
+                  <dd class="flex flex-col gap-1.5">
+                    {study.links.map((link) => (
+                      <a
+                        href={link.href}
+                        target={link.external ? "_blank" : undefined}
+                        rel={link.external ? "noopener noreferrer" : undefined}
+                        class="text-sm text-[var(--color-fg)] hover:text-[var(--color-accent)] inline-flex items-center gap-1 link-underline"
+                      >
+                        {link.label}
+                        {link.external && <span class="text-xs">↗</span>}
+                      </a>
+                    ))}
+                  </dd>
+                </div>
+              )}
+            </dl>
+          </aside>
+        )}
+      </div>
+    </section>
+
+    <!-- Cover image -->
+    {project.image && (
+      <section class="max-w-[var(--container-wide)] mx-auto px-6 md:px-10 pb-14 md:pb-20" data-reveal>
+        <div class="aspect-[16/9] rounded-2xl overflow-hidden border border-[var(--color-border)] bg-[var(--color-bg-elevated)]">
+          <img
+            src={project.image}
+            alt={`${project.title} ${t.coverSuffix}`}
+            class="w-full h-full object-cover"
+            loading="eager"
+          />
+        </div>
+      </section>
+    )}
+
+    {project.gradient && !project.image && (
+      <section class="max-w-[var(--container-wide)] mx-auto px-6 md:px-10 pb-14 md:pb-20">
+        <div
+          class="aspect-[16/9] rounded-2xl overflow-hidden border border-[var(--color-border)]"
+          style={`background: ${project.gradient}`}
+        ></div>
+      </section>
+    )}
+
+    {study ? (
+      <>
+        <!-- Highlights row -->
+        {study.highlights && study.highlights.length > 0 && (
+          <section class="max-w-[var(--container-wide)] mx-auto px-6 md:px-10 pb-12 md:pb-16" data-reveal>
+            <dl class="grid grid-cols-1 sm:grid-cols-3 gap-y-8 sm:gap-x-10 max-w-4xl">
+              {study.highlights.map((h, i) => (
+                <div class="flex flex-col gap-1.5">
+                  <dd class={`text-3xl md:text-4xl font-extrabold tabular tracking-tight leading-none ${i === 0 ? "text-[var(--color-accent)]" : ""}`}>
+                    {h.value}
+                  </dd>
+                  <dt class="font-mono text-[10px] uppercase tracking-wider text-[var(--color-fg-subtle)] mt-1">
+                    {h.label}
+                  </dt>
+                </div>
+              ))}
+            </dl>
+          </section>
+        )}
+
+        {toc.length > 0 && (
+          <!-- TOC: quick links to each section -->
+          <section class="max-w-[var(--container-wide)] mx-auto px-6 md:px-10 pb-12 md:pb-16" data-reveal>
+            <div class="flex flex-wrap items-center gap-3 mb-4">
+              <span class="font-mono text-[10px] uppercase tracking-wider text-[var(--color-fg-subtle)]">{t.jumpTo}</span>
+              <span class="size-1 rounded-full bg-[var(--color-fg-faint)]"></span>
+              <span class="font-mono text-[10px] uppercase tracking-wider text-[var(--color-fg-subtle)]">{toc.length} {t.sections}</span>
+            </div>
+            <nav class="flex flex-wrap gap-2" aria-label="Case sections">
+              {toc.map((item, i) => (
+                <a href={`#${item.id}`} class="toc-chip">
+                  <span class="font-mono text-[10px] tabular opacity-50 mr-1">{String(i + 1).padStart(2, "0")}</span>
+                  <span>{item.label}</span>
+                </a>
+              ))}
+            </nav>
+          </section>
+        )}
+
+        <!-- Challenge -->
+        <section id="challenge" class="max-w-[var(--container-wide)] mx-auto px-6 md:px-10 py-12 md:py-16 border-t border-[var(--color-border)]">
+          <div class="grid md:grid-cols-[14rem_1fr] gap-6 md:gap-12" data-reveal>
+            <div>
+              <span class="font-mono text-[10px] uppercase tracking-wider text-[var(--color-fg-subtle)]">01</span>
+              <h2 class="mt-2 text-2xl md:text-3xl font-extrabold display" style="letter-spacing:-0.035em;">
+                {t.challenge}
+              </h2>
+            </div>
+            <div class="prose-content text-[var(--color-fg)] text-base md:text-lg leading-relaxed max-w-prose flex flex-col gap-4">
+              {paragraphs(study.challenge).map((p) => (
+                <p>{inlineSegments(p).map((s) => s.bold ? <strong>{s.text}</strong> : s.text)}</p>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <!-- Approach -->
+        <section id="approach" class="max-w-[var(--container-wide)] mx-auto px-6 md:px-10 py-12 md:py-16 border-t border-[var(--color-border)]">
+          <div class="grid md:grid-cols-[14rem_1fr] gap-6 md:gap-12" data-reveal>
+            <div>
+              <span class="font-mono text-[10px] uppercase tracking-wider text-[var(--color-fg-subtle)]">02</span>
+              <h2 class="mt-2 text-2xl md:text-3xl font-extrabold display" style="letter-spacing:-0.035em;">
+                {t.approach}
+              </h2>
+            </div>
+            <div class="prose-content text-[var(--color-fg)] text-base md:text-lg leading-relaxed max-w-prose flex flex-col gap-4">
+              {paragraphs(study.approach).map((p) => (
+                <p>{inlineSegments(p).map((s) => s.bold ? <strong>{s.text}</strong> : s.text)}</p>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <!-- Outcome -->
+        <section id="outcome" class="max-w-[var(--container-wide)] mx-auto px-6 md:px-10 py-12 md:py-16 border-t border-[var(--color-border)]">
+          <div class="grid md:grid-cols-[14rem_1fr] gap-6 md:gap-12" data-reveal>
+            <div>
+              <span class="font-mono text-[10px] uppercase tracking-wider text-[var(--color-fg-subtle)]">03</span>
+              <h2 class="mt-2 text-2xl md:text-3xl font-extrabold display" style="letter-spacing:-0.035em;">
+                {t.outcome}
+              </h2>
+            </div>
+            <div class="prose-content text-[var(--color-fg)] text-base md:text-lg leading-relaxed max-w-prose flex flex-col gap-4">
+              {paragraphs(study.outcome).map((p) => (
+                <p>{inlineSegments(p).map((s) => s.bold ? <strong>{s.text}</strong> : s.text)}</p>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <!-- Optional extra sections -->
+        {study.sections && study.sections.length > 0 && study.sections.map((sec, i) => {
+          const img = sec.image;
+          const showImgPlaceholder = img && !img.src && img.placeholder;
+          const aspectClass = !img
+            ? ""
+            : img.aspect === "tall"
+            ? "aspect-[3/4]"
+            : img.aspect === "square"
+            ? "aspect-square"
+            : "aspect-[16/9]";
+          const defaultGradient =
+            "linear-gradient(135deg, #1e293b 0%, #1e3a8a 55%, #1d4ed8 100%)";
+          const isSplit = sec.layout === "split" && img;
+          const imageOnLeft = isSplit && sec.imageSide === "left";
+          const renderFigure = (extraClass = "") => img ? (
+            <figure class={extraClass}>
+              <button
+                type="button"
+                class={`group relative w-full overflow-hidden rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-elevated)] ${isSplit ? "" : aspectClass} ${img.src ? "cursor-zoom-in" : ""} block`}
+                style={showImgPlaceholder ? `background: ${img.placeholder!.gradient || defaultGradient};` : undefined}
+                data-lightbox-trigger={img.src ? "true" : undefined}
+                data-lightbox-src={img.src}
+                data-lightbox-alt={img.alt}
+                data-lightbox-caption={img.caption}
+                aria-label={img.src ? `${t.expand} ${img.alt}` : img.alt}
+                disabled={!img.src}
+              >
+                {img.src && (
+                  <img
+                    src={img.src}
+                    alt={img.alt}
+                    class={
+                      isSplit
+                        ? "block w-full h-auto transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+                        : `w-full h-full ${img.fit === "contain" ? "object-contain p-3 md:p-4" : "object-cover"} transition-transform duration-500 ease-out group-hover:scale-[1.02]`
+                    }
+                    loading="lazy"
+                  />
+                )}
+                {img.src && (
+                  <span class="absolute top-3 right-3 inline-flex items-center gap-1 px-2 py-1 rounded-md bg-black/60 backdrop-blur text-white font-mono text-[10px] uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                    <svg class="size-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 21l-4.35-4.35"/><circle cx="11" cy="11" r="8"/><path d="M11 8v6M8 11h6"/></svg>
+                    {t.expand}
+                  </span>
+                )}
+                {showImgPlaceholder && (
+                  <div class="absolute inset-0 flex flex-col items-start justify-end p-6 md:p-8 gap-3 text-white">
+                    <span class="font-mono text-[10px] uppercase tracking-[0.16em] opacity-75 inline-flex items-center gap-2">
+                      <span class="size-1.5 rounded-full bg-[var(--color-accent-tint)] animate-pulse"></span>
+                      {t.placeholderPending}
+                    </span>
+                    <span class="text-2xl md:text-3xl font-extrabold tracking-tight leading-tight" style="letter-spacing:-0.025em;">
+                      {img.placeholder!.label}
+                    </span>
+                    {img.placeholder!.sublabel && (
+                      <span class="font-mono text-[11px] uppercase tracking-wider opacity-80">
+                        {img.placeholder!.sublabel}
+                      </span>
+                    )}
+                  </div>
+                )}
+              </button>
+              {img.caption && (
+                <figcaption class="mt-3 font-mono text-[11px] uppercase tracking-wider text-[var(--color-fg-subtle)]">
+                  {img.caption}
+                </figcaption>
+              )}
+            </figure>
+          ) : null;
+
+          return (
+            <section id={slugify(sec.heading)} class="max-w-[var(--container-wide)] mx-auto px-6 md:px-10 py-12 md:py-16 border-t border-[var(--color-border)]">
+              <div class="grid md:grid-cols-[14rem_1fr] gap-6 md:gap-12" data-reveal>
+                <div>
+                  <span class="font-mono text-[10px] uppercase tracking-wider text-[var(--color-fg-subtle)]">{String(i + 4).padStart(2, "0")}</span>
+                  <h2 class="mt-2 text-2xl md:text-3xl font-extrabold display" style="letter-spacing:-0.035em;">
+                    {sec.heading}
+                  </h2>
+                </div>
+                {isSplit ? (
+                  <div class="prose-content text-[var(--color-fg)] text-base md:text-lg leading-relaxed">
+                    {renderFigure(`mb-5 lg:mb-2 lg:w-[52%] ${imageOnLeft ? "lg:float-left lg:mr-7" : "lg:float-right lg:ml-7"}`)}
+                    <div class="space-y-4">
+                      {paragraphs(sec.body).map((p) => (
+                        <p>{inlineSegments(p).map((s) => s.bold ? <strong>{s.text}</strong> : s.text)}</p>
+                      ))}
+                    </div>
+                    <div class="clear-both"></div>
+                  </div>
+                ) : (
+                  <div class="flex flex-col gap-8">
+                    <div class="prose-content text-[var(--color-fg)] text-base md:text-lg leading-relaxed max-w-prose flex flex-col gap-4">
+                      {paragraphs(sec.body).map((p) => (
+                        <p>{inlineSegments(p).map((s) => s.bold ? <strong>{s.text}</strong> : s.text)}</p>
+                      ))}
+                    </div>
+                    {renderFigure("mt-2")}
+                  </div>
+                )}
+              </div>
+            </section>
+          );
+        })}
+
+        <!-- Video section -->
+        {study.videos && study.videos.length > 0 && (
+          <section id="video" class="max-w-[var(--container-wide)] mx-auto px-6 md:px-10 py-12 md:py-16 border-t border-[var(--color-border)]">
+            <h2 class="font-mono text-[10px] uppercase tracking-wider text-[var(--color-fg-subtle)] mb-6">{t.video}</h2>
+            <div class={`grid gap-5 md:gap-6 ${study.videos.length > 1 ? "md:grid-cols-2" : "max-w-3xl"}`}>
+              {study.videos.map((v) => (
+                <figure data-reveal>
+                  <div class="relative overflow-hidden rounded-xl border border-[var(--color-border)] bg-black aspect-video">
+                    <video
+                      class="w-full h-full object-contain bg-black"
+                      controls
+                      preload="none"
+                      playsinline
+                      poster={v.poster}
+                    >
+                      <source src={v.src} type="video/mp4" />
+                    </video>
+                    {v.label && (
+                      <span class="absolute top-3 left-3 inline-flex items-center px-2 py-1 rounded-md bg-black/60 backdrop-blur text-white font-mono text-[10px] uppercase tracking-wider pointer-events-none">
+                        {v.label}
+                      </span>
+                    )}
+                  </div>
+                  {v.caption && (
+                    <figcaption class="mt-3 font-mono text-[11px] uppercase tracking-wider text-[var(--color-fg-subtle)]">
+                      {v.caption}
+                    </figcaption>
+                  )}
+                </figure>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <!-- Gallery: horizontal scroll-snap -->
+        {study.gallery && study.gallery.length > 0 && (
+          <section id="selected-screens" class="py-12 md:py-16 border-t border-[var(--color-border)]">
+            <div class="max-w-[var(--container-wide)] mx-auto px-6 md:px-10 flex items-baseline justify-between mb-6">
+              <h2 class="font-mono text-[10px] uppercase tracking-wider text-[var(--color-fg-subtle)]">{t.selectedScreens}</h2>
+              <div class="flex items-center gap-3 font-mono text-[10px] uppercase tracking-wider text-[var(--color-fg-subtle)]">
+                <span><span data-gallery-current>1</span> / {study.gallery.length}</span>
+                <span class="hidden sm:inline">·</span>
+                <span class="hidden sm:inline">{t.dragScroll}</span>
+              </div>
+            </div>
+
+            <div
+              class="gallery-scroller"
+              data-gallery
+              role="region"
+              aria-label="Project screen gallery"
+            >
+              <div class="gallery-edge gallery-edge--start" aria-hidden="true"></div>
+              {study.gallery.map((img, gi) => {
+                const showPlaceholder = !img.src && img.placeholder;
+                const defaultGradient =
+                  "linear-gradient(135deg, #1e293b 0%, #1e3a8a 55%, #1d4ed8 100%)";
+                return (
+                  <figure
+                    class="gallery-item"
+                    data-gallery-item
+                    data-index={gi}
+                  >
+                    <button
+                      type="button"
+                      class={`group relative w-full overflow-hidden rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-elevated)] aspect-[16/9] ${img.src ? "cursor-zoom-in" : ""} block text-left`}
+                      style={showPlaceholder ? `background: ${img.placeholder!.gradient || defaultGradient};` : undefined}
+                      data-lightbox-trigger={img.src ? "true" : undefined}
+                      data-lightbox-src={img.src}
+                      data-lightbox-alt={img.alt}
+                      data-lightbox-caption={img.caption}
+                      aria-label={img.src ? `${t.expand} ${img.alt}` : img.alt}
+                      disabled={!img.src}
+                    >
+                      {img.src && (
+                        <img
+                          src={img.src}
+                          alt={img.alt}
+                          class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      )}
+                      {img.src && (
+                        <span class="absolute top-3 right-3 inline-flex items-center gap-1 px-2 py-1 rounded-md bg-black/60 backdrop-blur text-white font-mono text-[10px] uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                          <svg class="size-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 21l-4.35-4.35"/><circle cx="11" cy="11" r="8"/><path d="M11 8v6M8 11h6"/></svg>
+                          {t.expand}
+                        </span>
+                      )}
+                      {showPlaceholder && (
+                        <div class="absolute inset-0 flex flex-col items-start justify-end p-6 md:p-8 gap-3 text-white">
+                          <span class="font-mono text-[10px] uppercase tracking-[0.16em] opacity-75 inline-flex items-center gap-2">
+                            <span class="size-1.5 rounded-full bg-[var(--color-accent-tint)] animate-pulse"></span>
+                            {t.placeholderPending}
+                          </span>
+                          <span class="text-2xl md:text-3xl font-extrabold tracking-tight leading-tight" style="letter-spacing:-0.025em;">
+                            {img.placeholder!.label}
+                          </span>
+                          {img.placeholder!.sublabel && (
+                            <span class="font-mono text-[11px] uppercase tracking-wider opacity-80">
+                              {img.placeholder!.sublabel}
+                            </span>
+                          )}
+                        </div>
+                      )}
+                    </button>
+                    {img.caption && (
+                      <figcaption class="mt-3 font-mono text-[11px] uppercase tracking-wider text-[var(--color-fg-subtle)]">
+                        <span class="opacity-50 mr-2">{String(gi + 1).padStart(2, "0")}</span>
+                        {img.caption}
+                      </figcaption>
+                    )}
+                  </figure>
+                );
+              })}
+              <div class="gallery-edge gallery-edge--end" aria-hidden="true"></div>
+            </div>
+
+            <div class="max-w-[var(--container-wide)] mx-auto px-6 md:px-10 mt-4">
+              <div class="gallery-progress" aria-hidden="true">
+                <span class="gallery-progress__bar" data-gallery-bar></span>
+              </div>
+            </div>
+          </section>
+        )}
+
+        <!-- Reflection (pull quote style) -->
+        {study.reflection && (
+          <section id="reflection" class="max-w-[var(--container-wide)] mx-auto px-6 md:px-10 py-16 md:py-20 border-t border-[var(--color-border)]">
+            <div class="max-w-3xl" data-reveal>
+              <span class="font-mono text-[10px] uppercase tracking-wider text-[var(--color-fg-subtle)]">{t.reflection}</span>
+              <blockquote class="mt-4 text-2xl md:text-3xl font-medium leading-snug tracking-tight text-[var(--color-fg)]" style="letter-spacing:-0.025em;">
+                <span class="text-[var(--color-fg-faint)] font-serif">"</span>
+                {study.reflection}
+                <span class="text-[var(--color-fg-faint)] font-serif">"</span>
+              </blockquote>
+            </div>
+          </section>
+        )}
+      </>
+    ) : (
+      <section class="max-w-[var(--container-prose)] mx-auto px-6 md:px-10 py-16 border-t border-[var(--color-border)]">
+        <p class="font-mono text-sm text-[var(--color-fg-subtle)]">
+          Full case study being migrated. Reach out if you'd like to see the work in detail.
+        </p>
+      </section>
+    )}
+
+    <!-- Lightbox overlay -->
+    <div
+      id="lightbox"
+      class="lightbox fixed inset-0 z-[100] pointer-events-none opacity-0 transition-opacity duration-300 flex items-center justify-center p-4 md:p-10"
+      role="dialog"
+      aria-modal="true"
+      aria-hidden="true"
+      aria-label="Image preview"
+    >
+      <div class="absolute inset-0 bg-black/85 backdrop-blur-md" data-lightbox-close></div>
+      <button
+        type="button"
+        class="absolute top-4 right-4 md:top-6 md:right-6 inline-flex items-center justify-center size-10 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur text-white transition-colors z-10"
+        aria-label="Close preview"
+        data-lightbox-close
+      >
+        <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+      <figure class="relative z-10 max-w-[min(90vw,1400px)] max-h-[90vh] flex flex-col items-center gap-4">
+        <img
+          id="lightbox-img"
+          src=""
+          alt=""
+          class="max-w-full max-h-[80vh] w-auto h-auto object-contain rounded-lg shadow-2xl"
+        />
+        <figcaption
+          id="lightbox-caption"
+          class="font-mono text-[11px] uppercase tracking-wider text-white/80 text-center"
+        ></figcaption>
+      </figure>
+    </div>
+
+    <!-- Next project -->
+    {next && (
+      <section class="border-t border-[var(--color-border)] mt-8">
+        <a
+          href={localePath(locale, `/work/${next.slug}`)}
+          class="block max-w-[var(--container-wide)] mx-auto px-6 md:px-10 py-16 md:py-24 group"
+        >
+          <div class="flex items-baseline justify-between gap-6 mb-4">
+            <span class="font-mono text-[10px] uppercase tracking-wider text-[var(--color-fg-subtle)]">{t.nextProject}</span>
+            <span class="font-mono text-[10px] uppercase tracking-wider text-[var(--color-fg-subtle)]">{next.number} · {next.year}</span>
+          </div>
+          <div class="flex items-center justify-between gap-6">
+            <h3 class="text-3xl md:text-5xl lg:text-6xl font-extrabold display group-hover:text-[var(--color-accent)] transition-colors" style="letter-spacing:-0.045em;">
+              {next.title}
+            </h3>
+            <span class="text-3xl md:text-5xl text-[var(--color-fg-faint)] group-hover:text-[var(--color-accent)] group-hover:translate-x-2 transition-all">→</span>
+          </div>
+          <p class="mt-3 text-[var(--color-fg-muted)] max-w-2xl">{next.summary}</p>
+        </a>
+      </section>
+    )}
+  </article>
+</BaseLayout>
+
+<script is:inline>
+  (() => {
+    const setupGallery = () => {
+      const scroller = document.querySelector("[data-gallery]");
+      if (!scroller) return;
+      const items = scroller.querySelectorAll("[data-gallery-item]");
+      const counter = document.querySelector("[data-gallery-current]");
+      const bar = document.querySelector("[data-gallery-bar]");
+      if (!items.length) return;
+
+      const total = items.length;
+
+      const update = () => {
+        const max = scroller.scrollWidth - scroller.clientWidth;
+        const ratio = max > 0 ? Math.min(1, Math.max(0, scroller.scrollLeft / max)) : 0;
+        if (bar) bar.style.width = `${Math.max(10, ratio * 100)}%`;
+
+        const sLeft = scroller.scrollLeft;
+        let closestIndex = 0;
+        let closestDist = Infinity;
+        items.forEach((el, i) => {
+          const dist = Math.abs(el.offsetLeft - sLeft - 24);
+          if (dist < closestDist) {
+            closestDist = dist;
+            closestIndex = i;
+          }
+        });
+        if (counter) counter.textContent = String(closestIndex + 1);
+      };
+
+      let raf = 0;
+      scroller.addEventListener("scroll", () => {
+        if (raf) return;
+        raf = requestAnimationFrame(() => {
+          update();
+          raf = 0;
+        });
+      }, { passive: true });
+      window.addEventListener("resize", update, { passive: true });
+      update();
+    };
+    setupGallery();
+    document.addEventListener("astro:page-load", setupGallery);
+
+    const setupLightbox = () => {
+      const overlay = document.getElementById("lightbox");
+      const imgEl = document.getElementById("lightbox-img");
+      const captionEl = document.getElementById("lightbox-caption");
+      if (!overlay || !imgEl || !captionEl) return;
+
+      const triggers = document.querySelectorAll("[data-lightbox-trigger]");
+      if (!triggers.length) return;
+
+      const open = (src, alt, caption) => {
+        imgEl.src = src;
+        imgEl.alt = alt || "";
+        captionEl.textContent = caption || "";
+        captionEl.style.display = caption ? "" : "none";
+        overlay.classList.add("is-open");
+        overlay.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+      };
+
+      const close = () => {
+        overlay.classList.remove("is-open");
+        overlay.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+        setTimeout(() => {
+          if (!overlay.classList.contains("is-open")) imgEl.src = "";
+        }, 350);
+      };
+
+      triggers.forEach((btn) => {
+        if (btn.dataset.lightboxBound) return;
+        btn.dataset.lightboxBound = "true";
+        btn.addEventListener("click", (e) => {
+          e.preventDefault();
+          const src = btn.dataset.lightboxSrc;
+          const alt = btn.dataset.lightboxAlt;
+          const caption = btn.dataset.lightboxCaption;
+          if (src) open(src, alt, caption);
+        });
+      });
+
+      overlay.querySelectorAll("[data-lightbox-close]").forEach((el) => {
+        if (el.dataset.lightboxBound) return;
+        el.dataset.lightboxBound = "true";
+        el.addEventListener("click", close);
+      });
+
+      if (!document.body.dataset.lightboxKeyBound) {
+        document.body.dataset.lightboxKeyBound = "true";
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && overlay.classList.contains("is-open")) close();
+        });
+      }
+    };
+    setupLightbox();
+    document.addEventListener("astro:page-load", setupLightbox);
+  })();
+</script>

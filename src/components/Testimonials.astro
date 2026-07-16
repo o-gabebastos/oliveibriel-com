@@ -1,5 +1,10 @@
 ---
-import { testimonials as all } from "../data/testimonials";
+import { getLocale } from "../i18n/config";
+import { useCopy } from "../i18n/copy";
+import { getTestimonials } from "../i18n/content";
+
+const locale = getLocale(Astro.currentLocale);
+const tc = useCopy(locale).testimonials;
 
 interface Props {
   limit?: number;
@@ -9,10 +14,11 @@ interface Props {
 
 const {
   limit,
-  heading = "In their words.",
-  blurb = "Recommendations from LinkedIn: designers, engineers, and clients I've worked with.",
+  heading = tc.heading,
+  blurb = tc.blurb,
 } = Astro.props;
 
+const all = getTestimonials(locale);
 const items = typeof limit === "number" ? all.slice(0, limit) : all;
 const total = items.length;
 const pad = (n: number) => String(n).padStart(2, "0");
@@ -36,7 +42,7 @@ const initClass = (i: number) => {
   <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10 md:mb-12" data-reveal>
     <div>
       <span class="font-mono text-[10px] uppercase tracking-wider text-[var(--color-accent)]">
-        Testimonials
+        {tc.eyebrow}
       </span>
       <h2 class="mt-2 text-2xl md:text-4xl font-extrabold display" style="letter-spacing:-0.035em;">
         {heading}
@@ -94,7 +100,7 @@ const initClass = (i: number) => {
               </div>
               {t.translated && (
                 <div class="font-mono text-[10px] text-[var(--color-fg-subtle)] opacity-70 mt-1.5">
-                  Translated from Portuguese
+                  {tc.translatedFrom}
                 </div>
               )}
             </figcaption>

@@ -1,12 +1,23 @@
 ---
+import { getLocale, localePath, switchLocalePath } from "../i18n/config";
+import { useCopy } from "../i18n/copy";
+
+const locale = getLocale(Astro.currentLocale);
+const t = useCopy(locale);
 const path = Astro.url.pathname;
+
+const home = localePath(locale, "/");
 const isActive = (href: string) =>
-  href === "/" ? path === "/" : path.startsWith(href);
+  href === home ? path === href : path.startsWith(href);
 
 const navLinks = [
-  { href: "/work", label: "Work" },
-  { href: "/about", label: "About" },
+  { href: localePath(locale, "/work"), label: t.nav.work },
+  { href: localePath(locale, "/about"), label: t.nav.about },
 ];
+
+const otherLocale = locale === "en" ? "pt" : "en";
+const switchHref = switchLocalePath(path, otherLocale);
+const switchLabel = otherLocale.toUpperCase();
 ---
 
 <header
@@ -15,7 +26,7 @@ const navLinks = [
   <nav
     class="max-w-[var(--container-wide)] mx-auto px-6 md:px-10 h-14 flex items-center justify-between"
   >
-    <a href="/" class="brand group inline-flex items-center gap-2.5">
+    <a href={home} class="brand group inline-flex items-center gap-2.5">
       <span class="relative flex size-2 shrink-0">
         <span class="absolute inset-0 rounded-full bg-[var(--color-success)] animate-ping opacity-60"></span>
         <span class="relative size-2 rounded-full bg-[var(--color-success)]"></span>
@@ -25,7 +36,7 @@ const navLinks = [
         <span class="font-light text-[var(--color-fg-muted)] group-hover:text-[var(--color-fg)] transition-colors">Oliveira</span>
       </span>
       <span class="hidden lg:inline-flex font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--color-fg-subtle)] ml-1 pl-3 border-l border-[var(--color-border)] py-0.5">
-        Designer · Curitiba
+        {t.nav.tagline}
       </span>
     </a>
 
@@ -43,10 +54,19 @@ const navLinks = [
         ))}
       </div>
 
+      <a
+        href={switchHref}
+        aria-label={t.nav.switchTo}
+        hreflang={otherLocale}
+        class="ml-2 inline-flex items-center px-2.5 py-1.5 rounded-md border border-[var(--color-border)] text-[var(--color-fg-muted)] hover:text-[var(--color-fg)] hover:border-[var(--color-border-strong)] transition-colors text-xs font-mono uppercase tracking-wider"
+      >
+        {switchLabel}
+      </a>
+
       <button
         id="cmdk-trigger"
         type="button"
-        aria-label="Open command palette"
+        aria-label={t.nav.openPalette}
         class="ml-2 hidden sm:inline-flex items-center gap-2 px-2.5 py-1.5 rounded-md border border-[var(--color-border)] text-[var(--color-fg-muted)] hover:text-[var(--color-fg)] hover:border-[var(--color-border-strong)] transition-colors text-xs font-mono"
       >
         <svg class="size-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
@@ -57,7 +77,7 @@ const navLinks = [
         href="mailto:gabriel@oliveibriel.com"
         class="ml-2 px-3 py-1.5 rounded-md bg-[var(--color-fg)] hover:bg-[var(--color-accent)] text-white text-sm font-medium transition-colors"
       >
-        Get in touch
+        {t.nav.getInTouch}
       </a>
     </div>
   </nav>

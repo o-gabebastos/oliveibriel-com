@@ -1,8 +1,14 @@
 ---
+import { getLocale } from "../i18n/config";
+import { useCopy } from "../i18n/copy";
+
 // Replace FORMSPREE_ID with your real Formspree form ID once set up.
 // Free plan: https://formspree.io
 const FORMSPREE_ID = "YOUR_FORMSPREE_ID";
 const ACTION = `https://formspree.io/f/${FORMSPREE_ID}`;
+
+const locale = getLocale(Astro.currentLocale);
+const t = useCopy(locale).form;
 ---
 
 <form
@@ -13,52 +19,52 @@ const ACTION = `https://formspree.io/f/${FORMSPREE_ID}`;
   data-reveal
   data-reveal-delay="3"
 >
-  <input type="hidden" name="_subject" value="New message from oliveibriel.com" />
+  <input type="hidden" name="_subject" value={t.subject} />
   <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hidden" />
 
   <div class="grid sm:grid-cols-2 gap-4">
     <label class="flex flex-col gap-2">
-      <span class="font-mono text-[10px] uppercase tracking-wider text-[var(--color-fg-subtle)]">Name</span>
+      <span class="font-mono text-[10px] uppercase tracking-wider text-[var(--color-fg-subtle)]">{t.name}</span>
       <input
         type="text"
         name="name"
         required
         autocomplete="name"
-        placeholder="Your name"
+        placeholder={t.phName}
         class="form-input"
       />
     </label>
     <label class="flex flex-col gap-2">
-      <span class="font-mono text-[10px] uppercase tracking-wider text-[var(--color-fg-subtle)]">Email</span>
+      <span class="font-mono text-[10px] uppercase tracking-wider text-[var(--color-fg-subtle)]">{t.email}</span>
       <input
         type="email"
         name="email"
         required
         autocomplete="email"
-        placeholder="you@company.com"
+        placeholder={t.phEmail}
         class="form-input"
       />
     </label>
   </div>
 
   <label class="flex flex-col gap-2">
-    <span class="font-mono text-[10px] uppercase tracking-wider text-[var(--color-fg-subtle)]">Company <span class="opacity-60 normal-case tracking-normal">(optional)</span></span>
+    <span class="font-mono text-[10px] uppercase tracking-wider text-[var(--color-fg-subtle)]">{t.company} <span class="opacity-60 normal-case tracking-normal">{t.optional}</span></span>
     <input
       type="text"
       name="company"
       autocomplete="organization"
-      placeholder="Where you work"
+      placeholder={t.phCompany}
       class="form-input"
     />
   </label>
 
   <label class="flex flex-col gap-2">
-    <span class="font-mono text-[10px] uppercase tracking-wider text-[var(--color-fg-subtle)]">What's the problem?</span>
+    <span class="font-mono text-[10px] uppercase tracking-wider text-[var(--color-fg-subtle)]">{t.problem}</span>
     <textarea
       name="message"
       required
       rows="5"
-      placeholder="A few lines about the product, the constraint, and the timeline."
+      placeholder={t.phMessage}
       class="form-input resize-y min-h-[140px]"
     ></textarea>
   </label>
@@ -69,23 +75,23 @@ const ACTION = `https://formspree.io/f/${FORMSPREE_ID}`;
       class="magnetic group inline-flex items-center gap-2 px-5 py-3 rounded-md bg-[var(--color-fg)] hover:bg-[var(--color-accent)] disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-medium transition-colors"
       data-magnetic-strength="10"
     >
-      <span data-label-idle>Send message</span>
-      <span data-label-sending class="hidden">Sending…</span>
+      <span data-label-idle>{t.send}</span>
+      <span data-label-sending class="hidden">{t.sending}</span>
       <svg class="size-4 transition-transform duration-200 group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M5 12h14M12 5l7 7-7 7"/>
       </svg>
     </button>
     <span class="font-mono text-[10px] uppercase tracking-wider text-[var(--color-fg-subtle)]">
-      or
+      {t.or}
       <a href="mailto:gabriel@oliveibriel.com" class="link-underline ml-1 normal-case tracking-normal text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]">gabriel@oliveibriel.com</a>
     </span>
   </div>
 
   <p data-form-status data-state="success" class="hidden text-sm font-medium text-[var(--color-success)] mt-1">
-    Sent. I'll reply within a few days.
+    {t.success}
   </p>
   <p data-form-status data-state="error" class="hidden text-sm font-medium text-red-600 mt-1">
-    Something went wrong. Try again or email me directly.
+    {t.error}
   </p>
 </form>
 

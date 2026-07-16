@@ -1,0 +1,84 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ContactForm from "../ContactForm.astro";
+import { getLocale } from "../../i18n/config";
+import { useCopy } from "../../i18n/copy";
+
+const locale = getLocale(Astro.currentLocale);
+const c = useCopy(locale);
+const t = c.contact;
+
+const channels = [
+  { label: "Email", value: "gabriel@oliveibriel.com", href: "mailto:gabriel@oliveibriel.com", note: t.noteEmail },
+  { label: "WhatsApp", value: "+55 41 98454 1993", href: "https://wa.me/5541984541993", note: t.noteWhatsapp, external: true },
+  { label: "LinkedIn", value: "/in/oliveibriel", href: "https://www.linkedin.com/in/oliveibriel", note: t.noteLinkedin, external: true },
+  { label: "Instagram", value: "@o.gabebastos", href: "https://instagram.com/o.gabebastos", note: t.noteInstagram, external: true },
+];
+---
+
+<BaseLayout title={c.seo.contactTitle} description={c.seo.contactDescription}>
+  <!-- Hero -->
+  <section class="max-w-[var(--container-wide)] mx-auto px-6 md:px-10 pt-14 md:pt-20 pb-10">
+    <span class="font-mono text-[11px] uppercase tracking-wider text-[var(--color-fg-subtle)]">
+      {t.eyebrow}
+    </span>
+    <h1
+      class="mt-3 text-4xl md:text-6xl font-extrabold display"
+      style="letter-spacing:-0.045em;"
+    >
+      {t.h1a}
+      <span class="block text-[var(--color-fg-muted)] display-italic mt-2">{t.h1b}</span>
+    </h1>
+    <p class="mt-5 text-lg text-[var(--color-fg-muted)] max-w-2xl leading-relaxed">
+      {t.intro}
+    </p>
+  </section>
+
+  <!-- Channel cards -->
+  <section class="max-w-[var(--container-wide)] mx-auto px-6 md:px-10 pb-12">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {channels.map((ch, i) => (
+        <a
+          href={ch.href}
+          target={ch.external ? "_blank" : undefined}
+          rel={ch.external ? "noopener noreferrer" : undefined}
+          class="group flex flex-col gap-3 p-5 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-elevated)] hover:border-[var(--color-fg)] hover:shadow-[0_8px_24px_-12px_rgba(0,0,0,0.12)] transition-all"
+          data-reveal
+          data-reveal-delay={i + 1}
+        >
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-[10px] uppercase tracking-wider text-[var(--color-fg-subtle)]">{ch.label}</span>
+            <span class="text-[var(--color-fg-faint)] group-hover:text-[var(--color-accent)] group-hover:translate-x-0.5 transition-all">↗</span>
+          </div>
+          <span class="text-base font-medium text-[var(--color-fg)] break-all">{ch.value}</span>
+          <span class="text-xs text-[var(--color-fg-muted)] mt-auto">{ch.note}</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- Form -->
+  <section class="max-w-[var(--container-wide)] mx-auto px-6 md:px-10 py-16 md:py-20 border-t border-[var(--color-border)]">
+    <div class="grid lg:grid-cols-[1fr_1.1fr] gap-12 lg:gap-20">
+      <div data-reveal>
+        <span class="font-mono text-[10px] uppercase tracking-wider text-[var(--color-fg-subtle)]">{t.formEyebrow}</span>
+        <h2 class="mt-2 text-3xl md:text-4xl font-extrabold display" style="letter-spacing:-0.035em;">
+          {t.formTitle}
+        </h2>
+        <p class="mt-4 text-[var(--color-fg-muted)] max-w-md leading-relaxed">
+          {t.formPara}
+        </p>
+        <ul class="mt-8 flex flex-col gap-3 font-mono text-[11px] uppercase tracking-wider text-[var(--color-fg-muted)]">
+          {t.formList.map((item) => (
+            <li class="flex items-center gap-3">
+              <span class="size-1.5 rounded-full bg-[var(--color-accent)]"></span>
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <ContactForm />
+    </div>
+  </section>
+</BaseLayout>

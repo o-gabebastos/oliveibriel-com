@@ -1,5 +1,11 @@
 ---
-import { projects } from "../data/projects";
+import { getLocale, localePath } from "../i18n/config";
+import { useCopy } from "../i18n/copy";
+import { getProjects } from "../i18n/content";
+
+const locale = getLocale(Astro.currentLocale);
+const t = useCopy(locale).cmdk;
+const projects = getProjects(locale);
 ---
 
 <div class="cmdk-overlay" id="cmdk" role="dialog" aria-modal="true" aria-label="Command palette">
@@ -7,21 +13,21 @@ import { projects } from "../data/projects";
     <input
       class="cmdk-input"
       id="cmdk-input"
-      placeholder="Search projects, pages, or actions…"
+      placeholder={t.placeholder}
       autocomplete="off"
       spellcheck="false"
     />
     <div class="cmdk-list" id="cmdk-list">
-      <div class="cmdk-group-label">Pages</div>
-      <a href="/" class="cmdk-item" data-keywords="home start"><span>↗</span> Home <span class="meta">G H</span></a>
-      <a href="/work" class="cmdk-item" data-keywords="projects portfolio"><span>↗</span> Work <span class="meta">G W</span></a>
-      <a href="/about" class="cmdk-item" data-keywords="about bio"><span>↗</span> About <span class="meta">G A</span></a>
-      <a href="/contact" class="cmdk-item" data-keywords="email reach"><span>↗</span> Contact <span class="meta">G C</span></a>
+      <div class="cmdk-group-label">{t.pages}</div>
+      <a href={localePath(locale, "/")} class="cmdk-item" data-keywords="home start inicio"><span>↗</span> {t.home} <span class="meta">G H</span></a>
+      <a href={localePath(locale, "/work")} class="cmdk-item" data-keywords="projects portfolio projetos"><span>↗</span> {t.work} <span class="meta">G W</span></a>
+      <a href={localePath(locale, "/about")} class="cmdk-item" data-keywords="about bio sobre"><span>↗</span> {t.about} <span class="meta">G A</span></a>
+      <a href={localePath(locale, "/contact")} class="cmdk-item" data-keywords="email reach contato"><span>↗</span> {t.contact} <span class="meta">G C</span></a>
 
-      <div class="cmdk-group-label">Projects</div>
+      <div class="cmdk-group-label">{t.projects}</div>
       {projects.map((p) => (
         <a
-          href={`/work/${p.slug}`}
+          href={localePath(locale, `/work/${p.slug}`)}
           class="cmdk-item"
           data-keywords={`${p.title} ${p.client} ${p.type}`}
         >
@@ -31,12 +37,12 @@ import { projects } from "../data/projects";
         </a>
       ))}
 
-      <div class="cmdk-group-label">Actions</div>
-      <button class="cmdk-item" data-action="theme" data-keywords="dark light theme toggle">
-        <span>◐</span> Toggle theme <span class="meta">⌘ J</span>
+      <div class="cmdk-group-label">{t.actions}</div>
+      <button class="cmdk-item" data-action="theme" data-keywords="dark light theme toggle tema">
+        <span>◐</span> {t.toggleTheme} <span class="meta">⌘ J</span>
       </button>
       <a href="mailto:gabriel@oliveibriel.com" class="cmdk-item" data-keywords="email">
-        <span>✉</span> Send email <span class="meta">⌘ M</span>
+        <span>✉</span> {t.sendEmail} <span class="meta">⌘ M</span>
       </a>
       <a href="https://www.linkedin.com/in/oliveibriel" target="_blank" rel="noopener noreferrer" class="cmdk-item" data-keywords="linkedin">
         <span>↗</span> LinkedIn

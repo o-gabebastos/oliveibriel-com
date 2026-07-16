@@ -1,5 +1,6 @@
 ---
 import type { Project } from "../data/projects";
+import { getLocale, localePath } from "../i18n/config";
 
 interface Props {
   project: Project;
@@ -8,6 +9,8 @@ interface Props {
 }
 
 const { project, size = project.size ?? "normal", index = 0 } = Astro.props;
+const locale = getLocale(Astro.currentLocale);
+const readLabel = locale === "pt" ? "Ler" : "Read";
 
 const aspect =
   size === "wide" ? "aspect-[16/9]" :
@@ -17,7 +20,7 @@ const aspect =
 ---
 
 <a
-  href={`/work/${project.slug}`}
+  href={localePath(locale, `/work/${project.slug}`)}
   data-reveal
   data-reveal-delay={Math.min(index, 5)}
   class="project-card group block rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg-elevated)] overflow-hidden h-full"
@@ -71,7 +74,7 @@ const aspect =
         {project.metric ? `${project.metric.value} ${project.metric.label.toLowerCase()}` : project.type}
       </span>
       <span class="ml-auto inline-flex shrink-0 items-center gap-1 text-[var(--color-fg-subtle)] group-hover:text-[var(--color-accent)] group-hover:translate-x-0.5 transition-all">
-        Read <span aria-hidden="true">→</span>
+        {readLabel} <span aria-hidden="true">→</span>
       </span>
     </div>
   </div>

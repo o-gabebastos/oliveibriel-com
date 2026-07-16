@@ -1,4 +1,9 @@
 ---
+import { getLocale, localePath } from "../i18n/config";
+import { useCopy } from "../i18n/copy";
+
+const locale = getLocale(Astro.currentLocale);
+const t = useCopy(locale);
 const year = new Date().getFullYear();
 ---
 
@@ -7,9 +12,7 @@ const year = new Date().getFullYear();
     <div class="grid md:grid-cols-[1fr_auto] gap-10 mb-12">
       <div class="max-w-md">
         <p class="text-[var(--color-fg-muted)] text-sm leading-relaxed">
-          I design and build industrial SaaS and design systems at
-          Techco.lab, NETZSCH's innovation hub, and I ship AI-native
-          products solo on the side. Inbox is open.
+          {t.footer.tagline}
         </p>
         <a
           href="mailto:gabriel@oliveibriel.com"
@@ -24,13 +27,13 @@ const year = new Date().getFullYear();
 
       <div class="grid grid-cols-2 gap-8 text-sm">
         <div class="flex flex-col gap-2">
-          <span class="font-mono text-[10px] uppercase tracking-wider text-[var(--color-fg-subtle)]">Site</span>
-          <a href="/work" class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)] transition-colors">Work</a>
-          <a href="/about" class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)] transition-colors">About</a>
-          <a href="/contact" class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)] transition-colors">Contact</a>
+          <span class="font-mono text-[10px] uppercase tracking-wider text-[var(--color-fg-subtle)]">{t.footer.site}</span>
+          <a href={localePath(locale, "/work")} class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)] transition-colors">{t.footer.work}</a>
+          <a href={localePath(locale, "/about")} class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)] transition-colors">{t.footer.about}</a>
+          <a href={localePath(locale, "/contact")} class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)] transition-colors">{t.footer.contact}</a>
         </div>
         <div class="flex flex-col gap-2">
-          <span class="font-mono text-[10px] uppercase tracking-wider text-[var(--color-fg-subtle)]">Connect</span>
+          <span class="font-mono text-[10px] uppercase tracking-wider text-[var(--color-fg-subtle)]">{t.footer.connect}</span>
           <a href="https://www.linkedin.com/in/oliveibriel" target="_blank" rel="noopener noreferrer" class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)] transition-colors">LinkedIn ↗</a>
           <a href="https://wa.me/5541984541993" target="_blank" rel="noopener noreferrer" class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)] transition-colors">WhatsApp ↗</a>
           <a href="https://instagram.com/o.gabebastos" target="_blank" rel="noopener noreferrer" class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)] transition-colors">Instagram ↗</a>
@@ -43,13 +46,13 @@ const year = new Date().getFullYear();
       <div class="flex items-center gap-3">
         <span>© {year} Gabriel Oliveira</span>
         <span>·</span>
-        <span>Curitiba, BR</span>
+        <span>{t.footer.location}</span>
       </div>
       <button
         type="button"
         onclick="document.getElementById('cmdk-trigger')?.click()"
         class="hover:text-[var(--color-fg)] transition-colors text-left"
-      >Press ⌘K to search</button>
+      >{t.footer.pressK}</button>
     </div>
   </div>
 </footer>

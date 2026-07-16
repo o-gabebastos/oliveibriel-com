@@ -1,0 +1,217 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProjectCard from "../ProjectCard.astro";
+import ContactForm from "../ContactForm.astro";
+import Testimonials from "../Testimonials.astro";
+import HeroVideoScroll from "../HeroVideoScroll.tsx";
+import { getLocale, localePath } from "../../i18n/config";
+import { useCopy } from "../../i18n/copy";
+import { getFeatured, getPersonal, getProjects } from "../../i18n/content";
+
+const locale = getLocale(Astro.currentLocale);
+const c = useCopy(locale);
+const t = c.home;
+
+const projects = getProjects(locale);
+const featured = getFeatured(locale);
+const personal = getPersonal(locale);
+
+const clients = [
+  "NETZSCH",
+  "Connecticut.gov",
+  "Dell",
+  "Santander",
+  "TechCo.lab",
+];
+
+const fullName = "Gabriel Oliveira";
+const workHref = localePath(locale, "/work");
+---
+
+<BaseLayout title={c.seo.homeTitle} description={c.seo.homeDescription}>
+  <!-- Hero -->
+  <section class="relative">
+    <div class="max-w-[var(--container-wide)] mx-auto px-6 md:px-10 pt-6 md:pt-10 pb-8 md:pb-14">
+      <div class="grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] gap-10 lg:gap-16 items-center">
+      <div class="flex flex-col gap-7 md:gap-9">
+        <span class="font-mono text-[11px] md:text-xs uppercase tracking-[0.18em] text-[var(--color-fg-subtle)] inline-flex items-center gap-2.5" data-reveal data-reveal-delay="1">
+          <span class="size-1.5 rounded-full bg-[var(--color-accent)]"></span>
+          {t.heroEyebrow}
+        </span>
+
+        <h1
+          class="display text-[clamp(2rem,5.2vw,4.75rem)] leading-[0.95] whitespace-nowrap"
+        >
+          {fullName}
+        </h1>
+
+        <p class="text-xl md:text-2xl text-[var(--color-fg-muted)] leading-snug max-w-[60ch]" data-reveal data-reveal-delay="3" set:html={t.heroHtml}></p>
+
+        <div class="flex flex-wrap items-center gap-3 mt-2" data-reveal data-reveal-delay="4">
+          <a
+            href={workHref}
+            class="magnetic group inline-flex items-center gap-2 px-5 py-3 rounded-md bg-[var(--color-fg)] hover:bg-[var(--color-accent)] text-white text-sm font-medium transition-colors"
+            data-magnetic-strength="10"
+          >
+            {t.viewWork}
+            <svg class="size-4 transition-transform duration-200 group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+          <a
+            href="mailto:gabriel@oliveibriel.com"
+            class="inline-flex items-center gap-2 px-5 py-3 rounded-md border border-[var(--color-border-strong)] hover:border-[var(--color-fg)] hover:bg-[var(--color-bg-soft)] text-[var(--color-fg)] text-sm font-medium transition-colors"
+          >
+            {t.getInTouch}
+            <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+
+      </div>
+
+      <div
+        class="relative hidden lg:block aspect-[9/16] max-h-[760px] mx-auto w-full"
+        data-reveal
+        data-reveal-delay="3"
+      >
+        <HeroVideoScroll
+          client:load
+          srcWebm="/hero-creating.webm"
+          src="/hero-creating.mp4"
+          poster="/hero-creating-poster.png"
+          posterAlt="Designer creating something"
+          fallbackImage="/hero-creating-poster.png"
+        />
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trusted by -->
+  <section class="border-y border-[var(--color-border)] py-7 overflow-hidden bg-[var(--color-bg-soft)]">
+    <div class="max-w-[var(--container-wide)] mx-auto px-6 md:px-10">
+      <div class="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--color-fg-subtle)] mb-4">
+        {t.trustedBy}
+      </div>
+      <div class="flex marquee whitespace-nowrap gap-x-14 font-mono text-sm uppercase tracking-[0.16em] text-[var(--color-fg)] font-medium">
+        {[...Array(3)].flatMap(() =>
+          clients.map((client) => (
+            <span class="inline-flex items-center gap-x-14">
+              {client}
+              <span class="size-1.5 rounded-full bg-[var(--color-accent)]"></span>
+            </span>
+          ))
+        )}
+      </div>
+    </div>
+  </section>
+
+  <!-- Selected work -->
+  <section class="max-w-[var(--container-wide)] mx-auto px-6 md:px-10 py-20 md:py-28">
+    <div class="flex items-end justify-between mb-12" data-reveal>
+      <div>
+        <span class="font-mono text-[10px] uppercase tracking-wider text-[var(--color-fg-subtle)]">{t.selectedWork}</span>
+        <h2 class="mt-2 text-3xl md:text-5xl font-extrabold display">
+          {t.recentProjects}
+        </h2>
+      </div>
+      <a
+        href={workHref}
+        class="link-underline text-sm text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]"
+      >
+        {t.allPrefix} {projects.length} {t.allSuffix}
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+      {featured.map((project, i) => <ProjectCard project={project} index={i} size="normal" />)}
+    </div>
+  </section>
+
+  {personal.length > 0 && (
+    <section class="max-w-[var(--container-wide)] mx-auto px-6 md:px-10 pb-20 md:pb-28">
+      <div class="flex items-end justify-between mb-10 gap-6 flex-wrap" data-reveal>
+        <div>
+          <span class="font-mono text-[10px] uppercase tracking-wider text-[var(--color-fg-subtle)]">{t.personalEyebrow}</span>
+          <h2 class="mt-2 text-3xl md:text-5xl font-extrabold display">{t.personalTitle}</h2>
+        </div>
+        <p class="text-[var(--color-fg-muted)] leading-relaxed text-sm md:text-base max-w-md">
+          {t.personalBlurb}
+        </p>
+      </div>
+      <div class={`grid gap-6 md:gap-8 ${personal.length === 1 ? "grid-cols-1 max-w-md" : "grid-cols-1 md:grid-cols-2"}`}>
+        {personal.map((project, i) => <ProjectCard project={project} index={i} size="normal" />)}
+      </div>
+    </section>
+  )}
+
+  <!-- How I work -->
+  <section class="max-w-[var(--container-wide)] mx-auto px-6 md:px-10 py-20 md:py-28 border-t border-[var(--color-border)]">
+    <div class="flex items-end justify-between mb-10 md:mb-14 gap-6 flex-wrap" data-reveal>
+      <div>
+        <span class="font-mono text-[10px] uppercase tracking-wider text-[var(--color-fg-subtle)]">{t.approachEyebrow}</span>
+        <h2 class="mt-2 text-3xl md:text-5xl font-extrabold display">
+          {t.approachTitle}
+        </h2>
+      </div>
+      <p class="text-[var(--color-fg-muted)] leading-relaxed text-sm md:text-base max-w-md">
+        {t.approachIntro}
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      {t.cards.map((step, i) => (
+        <article
+          class="howiwork-card group bg-[var(--color-bg-elevated)] border border-[var(--color-border)] rounded-xl p-6 flex flex-col gap-4 transition-all"
+          data-reveal
+          data-reveal-delay={i + 1}
+        >
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-[11px] uppercase tracking-wider text-[var(--color-fg-subtle)]">{String(i + 1).padStart(2, "0")}</span>
+            <span class="size-1.5 rounded-full bg-[var(--color-border-strong)] group-hover:bg-[var(--color-accent)] transition-colors"></span>
+          </div>
+          <h3 class="text-lg md:text-xl font-bold tracking-tight leading-snug" style="letter-spacing:-0.025em;">
+            {step.t}
+          </h3>
+          <p class="text-sm text-[var(--color-fg-muted)] leading-relaxed flex-1">
+            {step.d}
+          </p>
+          <div class="pt-3 border-t border-[var(--color-border)] inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-wider text-[var(--color-accent)]">
+            <span class="size-1 rounded-full bg-[var(--color-accent)]"></span>
+            {step.tag}
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <Testimonials />
+
+  <!-- Get in touch -->
+  <section id="contact" class="max-w-[var(--container-wide)] mx-auto px-6 md:px-10 py-20 md:py-28 border-t border-[var(--color-border)]">
+    <div class="grid lg:grid-cols-[1fr_1.1fr] gap-12 lg:gap-20">
+      <div class="flex flex-col items-start gap-6" data-reveal>
+        <span class="font-mono text-[10px] uppercase tracking-wider text-[var(--color-fg-subtle)]">{t.contactEyebrow}</span>
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-extrabold display">
+          {t.contactTitle}
+        </h2>
+        <p class="text-base md:text-lg text-[var(--color-fg-muted)] max-w-md">
+          {t.contactPara}
+        </p>
+        <ul class="mt-2 flex flex-col gap-3 font-mono text-[11px] uppercase tracking-wider text-[var(--color-fg-muted)]">
+          {t.contactList.map((item) => (
+            <li class="flex items-center gap-3">
+              <span class="size-1.5 rounded-full bg-[var(--color-accent)]"></span>
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <ContactForm />
+    </div>
+  </section>
+</BaseLayout>

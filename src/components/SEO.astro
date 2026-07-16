@@ -8,7 +8,7 @@ interface Props {
 
 const {
   title = "Gabriel Oliveira — Senior Product Designer | Industrial SaaS, Design Systems & AI",
-  description = "Senior Product Designer with 7+ years shipping industrial SaaS, design systems, and AI-native tools. Currently designing and building IRIS at NETZSCH and shipping solo SaaS products on the side. Based in Curitiba, Brazil.",
+  description = "Senior Product Designer with 7+ years shipping industrial SaaS, design systems, and AI-native tools. Product designer at Techco.lab, NETZSCH's innovation hub — designing platforms like IRIS end-to-end — and building AI-native SaaS solo on the side. Based in Curitiba, Brazil.",
   image = "/gabriel-oliveira.jpg",
   type = "website",
 } = Astro.props;
@@ -31,7 +31,12 @@ const personJsonLd = {
     "https://www.linkedin.com/in/oliveibriel",
   ],
   worksFor: [
-    { "@type": "Organization", name: "NETZSCH" },
+    {
+      "@type": "Organization",
+      name: "Techco.lab",
+      description: "NETZSCH's innovation hub",
+      parentOrganization: { "@type": "Organization", name: "NETZSCH" },
+    },
   ],
   address: {
     "@type": "PostalAddress",

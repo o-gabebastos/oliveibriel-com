@@ -43,7 +43,7 @@ export const projects: Project[] = [
     year: "2023",
     type: "Design System",
     summary:
-      "Built and governed DASDS — the design system for NETZSCH's Digital and Automation Systems. Figma + React/Storybook, adopted across squads.",
+      "Built and governed DASDS, the design system for NETZSCH's Digital and Automation Systems. Figma and React/Storybook, used across teams.",
     image: "/projects/dasds/00__dasds-cover.png",
     featured: true,
     metric: { label: "Product teams", value: "8+" },
@@ -190,7 +190,7 @@ export const projects: Project[] = [
     client: "Santander",
     year: "2021",
     type: "Mobile Banking · Pix",
-    summary: "Pix MVP for Santander's digital account — pay, receive, and manage keys. Fintech serving millions across Latin America.",
+    summary: "Pix MVP for Santander's digital account: pay, receive, and manage keys. Fintech serving millions across Latin America.",
     image: `${CDN}/SuperDigital/super_thumb.png`,
     featured: false,
   },

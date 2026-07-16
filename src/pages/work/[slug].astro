@@ -45,7 +45,7 @@ const slugify = (s: string) =>
     .replace(/-+/g, "-")
     .replace(/^-+|-+$/g, "");
 
-// Short label for TOC chips — drop anything after an em-dash
+// Short label for TOC chips: drop anything after an em-dash or hyphen separator
 const shortLabel = (s: string) => s.split("—")[0].split(" - ")[0].trim();
 
 // Build TOC for the case study
@@ -70,7 +70,7 @@ const toc = study
 ---
 
 <BaseLayout
-  title={`${project.title} — Gabriel Oliveira`}
+  title={`${project.title} · Gabriel Oliveira`}
   description={project.summary}
   type="article"
 >
@@ -229,7 +229,7 @@ const toc = study
         )}
 
         {toc.length > 0 && (
-          <!-- TOC — quick links to each section -->
+          <!-- TOC: quick links to each section -->
           <section class="max-w-[var(--container-wide)] mx-auto px-6 md:px-10 pb-12 md:pb-16" data-reveal>
             <div class="flex flex-wrap items-center gap-3 mb-4">
               <span class="font-mono text-[10px] uppercase tracking-wider text-[var(--color-fg-subtle)]">Jump to</span>
@@ -437,7 +437,7 @@ const toc = study
           </section>
         )}
 
-        <!-- Gallery — horizontal scroll-snap -->
+        <!-- Gallery: horizontal scroll-snap -->
         {study.gallery && study.gallery.length > 0 && (
           <section id="selected-screens" class="py-12 md:py-16 border-t border-[var(--color-border)]">
             <div class="max-w-[var(--container-wide)] mx-auto px-6 md:px-10 flex items-baseline justify-between mb-6">

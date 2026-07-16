@@ -5,13 +5,13 @@ import { projects } from "../data/projects";
 
 const bySlug = (slug: string) => projects.find((p) => p.slug === slug);
 
-// Grouped by HOW I work, not just when — tells the positioning story.
+// Grouped by HOW I work, not just when, tells the positioning story.
 const groups = [
   {
     eyebrow: "Industrial SaaS · Design systems",
     title: "Where I go deep.",
     blurb:
-      "Inside NETZSCH's product lines — on-machine HMIs, B2B portals, and the design systems that hold them together.",
+      "Inside NETZSCH's product lines: the on-machine HMIs, the B2B portals, and the design systems that hold them together.",
     slugs: [
       "iris-v3",
       "netzsch-design-system",
@@ -25,14 +25,14 @@ const groups = [
     eyebrow: "AI-native · Solo builds",
     title: "Where I move fast.",
     blurb:
-      "Products I design and build end-to-end, an LLM as build partner — shipped because I wanted them to exist.",
+      "Products I design and build end to end, with AI as my build partner, shipped because I wanted them to exist.",
     slugs: ["nerida", "techcolab", "garmin-coach", "mosey"],
   },
   {
     eyebrow: "Foundations",
     title: "Where I came from.",
     blurb:
-      "Public-sector, fintech, and enterprise work — plus the indie games I started with.",
+      "Public sector, fintech, and enterprise work, plus the indie games I started with.",
     slugs: [
       "myct-connecticut",
       "superdigital",
@@ -47,7 +47,7 @@ const yearSpan = `${Math.min(...projects.map((p) => parseInt(p.year)))} → ${Ma
 ---
 
 <BaseLayout
-  title="Work — Gabriel Oliveira"
+  title="Work · Gabriel Oliveira"
   description="Case studies across industrial SaaS, design systems, AI-native tools, fintech, and public-sector platforms."
 >
   <!-- Page hero -->
@@ -63,7 +63,7 @@ const yearSpan = `${Math.min(...projects.map((p) => parseInt(p.year)))} → ${Ma
     </h1>
     <p class="mt-5 text-lg text-[var(--color-fg-muted)] max-w-2xl leading-relaxed">
       Every project across industrial SaaS, design systems, and AI-native
-      tools — grouped by how I work, not just when.
+      tools, grouped by how I work, not just by when.
     </p>
   </section>
 

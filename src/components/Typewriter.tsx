@@ -8,7 +8,7 @@ type Props = {
   holdMs?: number;
 };
 
-// Typewriter line — echoes the rotating hero on ntechcolab.com.
+// Typewriter line: echoes the rotating hero on ntechcolab.com.
 export default function Typewriter({
   prefix,
   words,

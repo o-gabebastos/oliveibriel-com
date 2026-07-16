@@ -19,11 +19,11 @@ const fullName = "Gabriel Oliveira";
 ---
 
 <BaseLayout>
-  <!-- Hero — recruiter-friendly, compact, motion-rich -->
+  <!-- Hero - recruiter-friendly, compact, motion-rich -->
   <section class="relative">
     <div class="max-w-[var(--container-wide)] mx-auto px-6 md:px-10 pt-6 md:pt-10 pb-8 md:pb-14">
       <div class="grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] gap-10 lg:gap-16 items-center">
-      <!-- Hero — text-led -->
+      <!-- Hero - text-led -->
       <div class="flex flex-col gap-7 md:gap-9">
         <span class="font-mono text-[11px] md:text-xs uppercase tracking-[0.18em] text-[var(--color-fg-subtle)] inline-flex items-center gap-2.5" data-reveal data-reveal-delay="1">
           <span class="size-1.5 rounded-full bg-[var(--color-accent)]"></span>
@@ -41,11 +41,11 @@ const fullName = "Gabriel Oliveira";
           <span class="kw">industrial SaaS</span>,
           <span class="kw">design systems</span>, and
           <span class="kw">AI-native tools</span>.
-          Product designer at
+          I'm a product designer at
           <span class="font-medium text-[var(--color-fg)]">Techco.lab</span>,
-          <span class="font-medium text-[var(--color-fg)]">NETZSCH</span>'s innovation hub —
-          designing platforms like <span class="font-medium text-[var(--color-fg)]">IRIS</span> end-to-end —
-          while building AI-native SaaS <span class="font-medium text-[var(--color-fg)]">solo</span> on the side.
+          <span class="font-medium text-[var(--color-fg)]">NETZSCH</span>'s innovation hub,
+          where I design platforms like <span class="font-medium text-[var(--color-fg)]">IRIS</span> end to end.
+          On the side I build AI-native SaaS <span class="font-medium text-[var(--color-fg)]">solo</span>.
         </p>
 
         <div class="flex flex-wrap items-center gap-3 mt-2" data-reveal data-reveal-delay="4">
@@ -72,7 +72,7 @@ const fullName = "Gabriel Oliveira";
 
       </div>
 
-      <!-- Hero video — scroll-controlled, no autoplay, alpha WebM -->
+      <!-- Hero video - scroll-controlled, no autoplay, alpha WebM -->
       <div
         class="relative hidden lg:block aspect-[9/16] max-h-[760px] mx-auto w-full"
         data-reveal
@@ -91,7 +91,7 @@ const fullName = "Gabriel Oliveira";
     </div>
   </section>
 
-  <!-- Trusted by — readable, framed -->
+  <!-- Trusted by - readable, framed -->
   <section class="border-y border-[var(--color-border)] py-7 overflow-hidden bg-[var(--color-bg-soft)]">
     <div class="max-w-[var(--container-wide)] mx-auto px-6 md:px-10">
       <div class="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--color-fg-subtle)] mb-4">
@@ -110,7 +110,7 @@ const fullName = "Gabriel Oliveira";
     </div>
   </section>
 
-  <!-- Selected work — clean 2-col grid -->
+  <!-- Selected work - clean 2-col grid -->
   <section class="max-w-[var(--container-wide)] mx-auto px-6 md:px-10 py-20 md:py-28">
     <div class="flex items-end justify-between mb-12" data-reveal>
       <div>
@@ -133,7 +133,7 @@ const fullName = "Gabriel Oliveira";
   </section>
 
   {personal.length > 0 && (
-    <!-- Personal projects — side bets, OSS, vibe-coded experiments -->
+    <!-- Personal projects - side bets, OSS, vibe-coded experiments -->
     <section class="max-w-[var(--container-wide)] mx-auto px-6 md:px-10 pb-20 md:pb-28">
       <div class="flex items-end justify-between mb-10 gap-6 flex-wrap" data-reveal>
         <div>
@@ -143,7 +143,7 @@ const fullName = "Gabriel Oliveira";
           </h2>
         </div>
         <p class="text-[var(--color-fg-muted)] leading-relaxed text-sm md:text-base max-w-md">
-          Things I built for myself — open source, AI-native, shipped because I wanted them to exist.
+          Things I built for myself: open source, AI-native, shipped because I wanted them to exist.
         </p>
       </div>
       <div class={`grid gap-6 md:gap-8 ${personal.length === 1 ? "grid-cols-1 max-w-md" : "grid-cols-1 md:grid-cols-2"}`}>
@@ -152,7 +152,7 @@ const fullName = "Gabriel Oliveira";
     </section>
   )}
 
-  <!-- How I work — 4 horizontal cards -->
+  <!-- How I work - 4 horizontal cards -->
   <section class="max-w-[var(--container-wide)] mx-auto px-6 md:px-10 py-20 md:py-28 border-t border-[var(--color-border)]">
     <div class="flex items-end justify-between mb-10 md:mb-14 gap-6 flex-wrap" data-reveal>
       <div>
@@ -171,25 +171,25 @@ const fullName = "Gabriel Oliveira";
         {
           n: "01",
           t: "Ship before you generalize",
-          d: "Build the messy v1 with real users, then extract patterns. IRIS V3's DS started as five operator screens — not a token table.",
+          d: "Build the messy v1 with real users, then pull the patterns out of it. IRIS V3's design system started as five operator screens, not a table of tokens.",
           tag: "IRIS V3",
         },
         {
           n: "02",
           t: "Design for the operator",
-          d: "Industrial software lives under PPE and time pressure. Color, hierarchy, and feedback are tuned for worst lighting — not the marketing shot.",
+          d: "Industrial software gets used under gloves, glare, and time pressure. I tune color, hierarchy, and feedback for the worst lighting on the floor, not the marketing shot.",
           tag: "NETZSCH HMIs",
         },
         {
           n: "03",
           t: "Own the full stack",
-          d: "I move from design to React to deploy when it's faster. Nerida shipped solo, end-to-end, with Claude Code as build partner.",
+          d: "When it's faster, I go from design to React to deploy myself. Nerida shipped solo, start to finish, with Claude Code as my build partner.",
           tag: "Nerida",
         },
         {
           n: "04",
           t: "AI for the boring parts",
-          d: "LLMs handle scaffolding, schema mapping, copy drafts, and scripts. Taste, decisions, and the system itself stay mine.",
+          d: "I let the AI handle the tedious parts: boilerplate, wiring data together, first-draft copy, throwaway scripts. Taste, the decisions, and the system itself stay mine.",
           tag: "Solo builds",
         },
       ].map((step, i) => (
@@ -220,7 +220,7 @@ const fullName = "Gabriel Oliveira";
   <!-- Testimonials -->
   <Testimonials />
 
-  <!-- Get in touch — form -->
+  <!-- Get in touch - form -->
   <section id="contact" class="max-w-[var(--container-wide)] mx-auto px-6 md:px-10 py-20 md:py-28 border-t border-[var(--color-border)]">
     <div class="grid lg:grid-cols-[1fr_1.1fr] gap-12 lg:gap-20">
       <div class="flex flex-col items-start gap-6" data-reveal>
@@ -229,7 +229,7 @@ const fullName = "Gabriel Oliveira";
           Currently open to new work.
         </h2>
         <p class="text-base md:text-lg text-[var(--color-fg-muted)] max-w-md">
-          Product design and AI-native build engagements — full-time, contract, or advisory. I reply within a few days.
+          Product design and AI-native build work, whether full-time, contract, or advisory. I usually reply within a few days.
         </p>
         <ul class="mt-2 flex flex-col gap-3 font-mono text-[11px] uppercase tracking-wider text-[var(--color-fg-muted)]">
           <li class="flex items-center gap-3">

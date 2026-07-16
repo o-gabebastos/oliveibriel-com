@@ -10,7 +10,7 @@ interface Props {
 const {
   limit,
   heading = "In their words.",
-  blurb = "Recommendations from LinkedIn — designers, engineers, and clients I've worked with.",
+  blurb = "Recommendations from LinkedIn: designers, engineers, and clients I've worked with.",
 } = Astro.props;
 
 const items = typeof limit === "number" ? all.slice(0, limit) : all;

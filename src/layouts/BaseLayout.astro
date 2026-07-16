@@ -41,7 +41,7 @@ const props = Astro.props;
       if ("scrollRestoration" in history) {
         history.scrollRestoration = "manual";
       }
-      // Astro's ClientRouter dispatches astro:page-load on navigation —
+      // Astro's ClientRouter dispatches astro:page-load on navigation,
       // reset scroll there too so SPA-style nav matches refresh behavior.
       document.addEventListener("astro:page-load", () => {
         // Skip if URL has a hash anchor (TOC chips, deep links) so users

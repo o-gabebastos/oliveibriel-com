@@ -5,10 +5,10 @@ export type StatHighlight = { label: string; value: string };
 
 export type CaseSection = {
   heading: string;
-  body: string; // plain paragraph(s) — split on \n\n for multi-paragraph
+  body: string; // plain paragraph(s), split on \n\n for multi-paragraph
   image?: GalleryItem; // optional inline image rendered after the body
   layout?: "stack" | "split"; // stack = image below body (default); split = image alongside body
-  imageSide?: "left" | "right"; // for split only — defaults to right
+  imageSide?: "left" | "right"; // for split only, defaults to right
 };
 
 export type GalleryItem = {
@@ -111,7 +111,7 @@ export const cases: Record<string, CaseStudy> = {
       {
         heading: "What didn't go well",
         body:
-          "The 15\" to 12.1\" adaptation was harder than I expected. Information density that felt right on the widescreen Confectionery panel cramped on the smaller one. Several modules had to be recomposed from primitives instead of adapted, and that cost more time than the original design did.\n\nAdoption was also a sales job, not a design job. I assumed solid components plus clear documentation would be enough. They weren't. Patterns that felt too generic on first review got pushed back, and I had to re-pitch them with operator-context evidence — recordings of the floor, lighting tests, glove interactions. Every component in the system earned its place, but earning that place was an ongoing conversation, not a one-time approval.",
+          "The 15\" to 12.1\" adaptation was harder than I expected. Information density that felt right on the widescreen Confectionery panel cramped on the smaller one. Several modules had to be rebuilt from scratch instead of adapted, and that cost more time than the original design did.\n\nAdoption was also a sales job, not a design job. I figured solid components plus clear docs would be enough. They weren't. Patterns that felt too generic on first review got pushed back, and I had to re-pitch them with evidence from the floor: recordings of operators at the panel, lighting tests, glove interactions. Every component earned its place, but earning it was an ongoing conversation, not a one-time approval.",
       },
     ],
     reflection:
@@ -125,7 +125,7 @@ export const cases: Record<string, CaseStudy> = {
       },
       {
         src: "/projects/iris-v3/02__recipe-edit.png",
-        alt: "Recipe management — circulation parameters and recipe metadata",
+        alt: "Recipe management, circulation parameters and recipe metadata",
         caption: "InView · Recipes · Circulation mode",
       },
       {
@@ -151,7 +151,7 @@ export const cases: Record<string, CaseStudy> = {
       },
       {
         src: "/projects/iris-v3/07__inside-dashboard.png",
-        alt: "Inside dashboard — simplified product, same DS",
+        alt: "Inside dashboard, simplified product, same DS",
         caption: "Inside · Dashboard · 12.1\"",
       },
       {
@@ -161,13 +161,13 @@ export const cases: Record<string, CaseStudy> = {
       },
       {
         src: "/projects/iris-v3/09__plants-ds-overview.png",
-        alt: "Plants design system — selected components and tokens",
+        alt: "Plants design system, selected components and tokens",
         caption: "Plants DS · Component library",
         aspect: "wide",
       },
       {
         src: "/projects/iris-v3/10__start-stop-sequence.png",
-        alt: "Start and stop sequence — process logic visualization",
+        alt: "Start and stop sequence, process logic visualization",
         caption: "InView V3.2 · Start/stop sequence",
       },
     ],
@@ -192,7 +192,7 @@ export const cases: Record<string, CaseStudy> = {
     approach:
       "Tokens first. Variables in Figma map one-to-one to CSS custom properties via Style Dictionary, so a change in color or spacing flows from design to production with no manual translation. Components are owned in code, documented in Storybook, and demoed in Figma alongside the production build.\n\nGovernance is intentionally light. Any team can propose a new component via PR. The platform team reviews for consistency. Contributors keep authorship credit. Adoption per squad is the metric, not component count.",
     outcome:
-      "Eight product squads consume the DS in production. New cross-team features ship without the old design-versus-engineering token negotiation. Accessibility reviews compressed from days to hours because the foundation is already AA.\n\nThe DS now seeds new lines (IRIS V3, the Customer Portal, internal tools) instead of each one rebuilding the same primitives.",
+      "Eight product squads use the DS in production. New cross-team features ship without the old back-and-forth between design and engineering over which token wins. Accessibility reviews dropped from days to hours because the foundation is already AA.\n\nThe DS now seeds new lines (IRIS V3, the Customer Portal, internal tools) instead of each one rebuilding the same basic parts from scratch.",
     sections: [
       {
         heading: "Who I designed for",
@@ -202,7 +202,7 @@ export const cases: Record<string, CaseStudy> = {
         imageSide: "right",
         image: {
           src: "/projects/dasds/03__dasds-buttons.png",
-          alt: "DASDS button components — primary, secondary, destructive, disabled",
+          alt: "DASDS button components, primary, secondary, destructive, disabled",
           caption: "Buttons · the components squads actually consume",
         },
       },
@@ -214,7 +214,7 @@ export const cases: Record<string, CaseStudy> = {
         imageSide: "left",
         image: {
           src: "/projects/dasds/01__dasds-foundations.png",
-          alt: "DASDS foundations — color tokens and typography",
+          alt: "DASDS foundations, color tokens and typography",
           caption: "Foundations · tokens map 1:1 from Figma to code",
         },
       },
@@ -226,7 +226,7 @@ export const cases: Record<string, CaseStudy> = {
         imageSide: "right",
         image: {
           src: "/projects/dasds/06__dasds-status-widgets.png",
-          alt: "DASDS status widgets — machine state components",
+          alt: "DASDS status widgets, machine state components",
           caption: "Status widgets · shared across product lines",
         },
       },
@@ -246,12 +246,12 @@ export const cases: Record<string, CaseStudy> = {
       },
       {
         src: "/projects/dasds/05__dasds-alerts.png",
-        alt: "DASDS inline alert components — success, info, warning, error",
+        alt: "DASDS inline alert components, success, info, warning, error",
         caption: "Alerts · inline feedback",
       },
       {
         src: "/projects/dasds/07__dasds-forms.png",
-        alt: "DASDS form controls — text fields, checkboxes, radios, toggles",
+        alt: "DASDS form controls, text fields, checkboxes, radios, toggles",
         caption: "Forms · inputs & controls",
       },
       {
@@ -270,7 +270,7 @@ export const cases: Record<string, CaseStudy> = {
     yearRange: "2022",
     stack: ["Figma", "Plain language guidelines", "WCAG 2.1 AA", "USWDS-aligned"],
     contextOneLiner:
-      "MyCT is the citizen-facing portal for the State of Connecticut — DMV, taxes, benefits, licenses. The redesign had to work for a 17-year-old on a phone in a parking lot and an 80-year-old at a library kiosk.",
+      "MyCT is the citizen-facing portal for the State of Connecticut: DMV, taxes, benefits, licenses. The redesign had to work for a 17-year-old on a phone in a parking lot and an 80-year-old at a library kiosk.",
     highlights: [
       { label: "Accessibility target", value: "WCAG 2.1 AA" },
       { label: "Mobile-first traffic share", value: "63%" },
@@ -291,7 +291,7 @@ export const cases: Record<string, CaseStudy> = {
         imageSide: "right",
         image: {
           src: "/projects/myct-connecticut/20__myct-desktop-screener-intro.png",
-          alt: "MyCT eligibility screener intro — plain-language welcome, 'Am I eligible for benefits?', under 10 minutes",
+          alt: "MyCT eligibility screener intro, plain-language welcome, 'Am I eligible for benefits?', under 10 minutes",
           caption: "Screener intro · plain language, one clear action",
         },
       },
@@ -303,14 +303,14 @@ export const cases: Record<string, CaseStudy> = {
         imageSide: "left",
         image: {
           src: "/projects/myct-connecticut/24__myct-desktop-programs.png",
-          alt: "MyCT benefit programs organized by citizen task — Food & Nutrition, Health, Income, Utilities, Children",
+          alt: "MyCT benefit programs organized by citizen task, Food & Nutrition, Health, Income, Utilities, Children",
           caption: "Benefit Programs · organized by task, not by agency",
         },
       },
       {
         heading: "What didn't go well",
         body:
-          "Validation with older adults was harder than I planned for. The remote panels we set up worked fine for younger users but kept breaking for the 70+ cohort — Zoom failures, screen-share issues, microphone permissions. We pivoted to in-person sessions at libraries and senior centers, which got better data but cost weeks I didn't have in the budget.\n\nThe other miss was scope creep on copy. Plain language is a discipline, and rewriting hundreds of pages to a Grade 6 reading level surfaced legal language that agency lawyers wouldn't sign off on. Several flows ended up shipping with a plain-language summary on top and the legal language preserved below — a compromise that works but isn't as clean as I wanted.",
+          "Testing with older adults was harder than I planned for. The remote sessions we set up worked fine for younger users but kept breaking for the 70+ group: Zoom failures, screen-share issues, microphone permissions. We switched to in-person sessions at libraries and senior centers, which got better data but cost weeks I didn't have in the budget.\n\nThe other miss was scope creep on copy. Plain language is a discipline, and rewriting hundreds of pages to a Grade 6 reading level surfaced legal wording the agency lawyers wouldn't sign off on. Several flows ended up shipping with a plain-language summary on top and the legal wording kept below. It's a compromise that works, but it isn't as clean as I wanted.",
       },
     ],
     reflection:
@@ -318,37 +318,37 @@ export const cases: Record<string, CaseStudy> = {
     gallery: [
       {
         src: "/projects/myct-connecticut/21__myct-desktop-screener-step1.png",
-        alt: "MyCT eligibility screener — Step 1 of 5, plain-language questions about the applicant",
+        alt: "MyCT eligibility screener, Step 1 of 5, plain-language questions about the applicant",
         caption: "Screener · Step 1 of 5 · one question set at a time",
         aspect: "wide",
       },
       {
         src: "/projects/myct-connecticut/22__myct-desktop-results.png",
-        alt: "MyCT benefit prescreener results — programs the citizen may be eligible for",
+        alt: "MyCT benefit prescreener results, programs the citizen may be eligible for",
         caption: "Prescreener results · what you may qualify for",
         aspect: "wide",
       },
       {
         src: "/projects/myct-connecticut/23__myct-desktop-dashboard.png",
-        alt: "MyCT dashboard — link benefits, prescreener results, manage everything in one place",
+        alt: "MyCT dashboard, link benefits, prescreener results, manage everything in one place",
         caption: "Dashboard · the citizen's home base",
         aspect: "wide",
       },
       {
         src: "/projects/myct-connecticut/10__myct-mobile-flow.png",
-        alt: "MyCT mobile — eligibility intro and the first two steps of the screener",
+        alt: "MyCT mobile, eligibility intro and the first two steps of the screener",
         caption: "Mobile-first · the eligibility flow on a phone",
         aspect: "wide",
       },
       {
         src: "/projects/myct-connecticut/11__myct-mobile-results-dashboard.png",
-        alt: "MyCT mobile — prescreener results and the personal dashboard",
+        alt: "MyCT mobile, prescreener results and the personal dashboard",
         caption: "Mobile · results and dashboard",
         aspect: "wide",
       },
       {
         src: "/projects/myct-connecticut/12__myct-mobile-manage-browse.png",
-        alt: "MyCT mobile — managing linked benefits and browsing programs by task",
+        alt: "MyCT mobile, managing linked benefits and browsing programs by task",
         caption: "Mobile · manage benefits, browse programs",
         aspect: "wide",
       },
@@ -370,11 +370,11 @@ export const cases: Record<string, CaseStudy> = {
       { label: "Database migrations", value: "51+" },
     ],
     challenge:
-      "Brazilian psychologists running solo practices have a few software options, and they all stop at the same place: CRUD over patients and payments. Tools like PsicoManager and Psicoplanner manage the appointment book, but they don't help with the things that actually keep solo psychologists awake: irregular income, the social weight of asking patients to pay, and the tax mess of Receita Saúde and Carnê Leão.\n\nThe pattern came up over and over in conversations with psychologists in my circle: people pay late and asking for it feels uncomfortable; income swings make planning impossible; tax season is a frantic Excel reconstruction. Existing tools were built for the appointment side. The financial side was a gap.",
+      "Psychologists who run their own practice in Brazil have a handful of software options, and they all stop in the same spot: they store patients, they log payments, and that's about it. Tools like PsicoManager and Psicoplanner keep the appointment book, but they don't touch the things that actually keep people up at night. The money is irregular, asking a patient to pay feels awkward, and tax season with Receita Saúde and Carnê Leão is a mess.\n\nThe same pattern came up over and over in conversations with psychologists I know: people pay late and asking for it feels uncomfortable, income swings make planning impossible, and tax season turns into a frantic Excel rebuild. The existing tools were built for the appointment side. The money side was the gap.",
     approach:
-      "I forked an internal multi-tenant clinical tool I'd been building and rebranded it for the solo market: single persona, no team views, no multi-clinic switcher. From fork to live product took twelve days.\n\nThe working rhythm: sprints of one to three days with Claude Code as build partner. I owned product direction, design, copy, and security calls; Claude handled scaffolding, schema migrations, and integration code (Asaas webhooks, Pix, email templates, cron jobs). I wrote a brief, reviewed every diff, shipped, repeated.\n\nA month after launch the product became a platform: a per-clinic module system with row-level security, so the same core serves psychologists in production and nutritionists in beta with different navigation, records, and tools.",
+      "I already had an internal clinical tool I'd been building for clinics with teams, so I forked it and stripped it down for one person: no team views, no clinic switcher, no roles. Fork to live took twelve days.\n\nThe rhythm was short sprints, one to three days each, with Claude Code as my build partner. I owned the product direction, the design, the copy, and every security call. Claude did the heavy typing: the plumbing, the database changes, the payment and email integrations. I wrote a brief, reviewed every change, shipped, repeated.\n\nA month after launch it became a platform. Each profession gets its own module and every account's data is walled off from the others, so the same core serves psychologists in production and nutritionists in beta, each with its own navigation, records, and tools.",
     outcome:
-      "Nerida runs in production with real paying users: over a hundred active clients. Two plans (R$49 and R$89 monthly, less on annual), 7-day trial, Pix through Asaas.\n\nLive today for psychologists: agenda with reminders, structured records (anamnese, session evolutions, contracts), patient management with CSV import, and the financial module running five tabs: overview, payments, humanized two-step collections, subscriptions, and a fiscal tab that exports Carnê Leão CSV in the exact Receita Federal format. For nutritionists, in beta: anthropometry, meal plan builder with a public real-time patient link, and a 24-hour recall.\n\nThe public landing at nerida.com.br ships separately as a static LP with custom motion and a full SEO/AEO setup, and now tells the multi-profession story: psychology and nutrition available, more areas prioritized by demand. Fifty-one migrations in, the schema has survived a launch, a pivot to multi-profession, and a second vertical.",
+      "Nerida runs in production with real paying users: over a hundred active clients. Two plans (R$49 and R$89 a month, less on the annual), a 7-day trial, and Pix through Asaas.\n\nLive today for psychologists: an agenda with reminders, structured records (anamnese, session notes, contracts), patient management with CSV import, and the financial module across five tabs: overview, payments, a gentle two-step way to chase what's owed, subscriptions, and a fiscal tab that exports the Carnê Leão CSV in the exact Receita Federal format. For nutritionists, in beta: anthropometry, a meal-plan builder with a public patient link that updates in real time, and a 24-hour recall.\n\nThe public landing at nerida.com.br ships separately as a static page with custom motion and a full SEO setup, and it now tells the multi-profession story: psychology and nutrition are live, and more areas get added as demand shows up. Fifty-one database migrations in, the whole thing has survived a launch, a pivot to serving more than one profession, and a second one going live.",
     sections: [
       {
         heading: "Who I designed for",
@@ -415,7 +415,7 @@ export const cases: Record<string, CaseStudy> = {
     gallery: [
       {
         src: "/projects/nerida/00__lp-hero.png",
-        alt: "Nerida public landing hero — 'Você atende. A Nerida cuida do resto.' over a pastel glass-sphere field with floating product cards (agenda, Receita Saúde, financial chart)",
+        alt: "Nerida public landing hero, 'Você atende. A Nerida cuida do resto.' over a pastel glass-sphere field with floating product cards (agenda, Receita Saúde, financial chart)",
         caption: "Public landing · nerida.com.br",
         aspect: "wide",
       },
@@ -427,25 +427,25 @@ export const cases: Record<string, CaseStudy> = {
       },
       {
         src: "/projects/nerida/01__nerida-dashboard.png",
-        alt: "Dashboard — today's sessions, active patients, monthly revenue, receivables",
+        alt: "Dashboard, today's sessions, active patients, monthly revenue, receivables",
         caption: "Dashboard · the day at a glance",
         aspect: "wide",
       },
       {
         src: "/projects/nerida/02__nerida-agenda.png",
-        alt: "Agenda — monthly calendar with sessions",
+        alt: "Agenda, monthly calendar with sessions",
         caption: "Agenda · calendar, upcoming, history",
         aspect: "wide",
       },
       {
         src: "/projects/nerida/04__nerida-fiscal.png",
-        alt: "Fiscal tab — Carnê Leão CSV export, deductible expenses, IRPF estimate",
+        alt: "Fiscal tab, Carnê Leão CSV export, deductible expenses, IRPF estimate",
         caption: "Fiscal · Carnê Leão in the Receita format",
         aspect: "wide",
       },
       {
         src: "/projects/nerida/05__nerida-pacientes.png",
-        alt: "Patients listing — names, contact, status, CSV import",
+        alt: "Patients listing, names, contact, status, CSV import",
         caption: "Pacientes · registry with CSV import",
         aspect: "wide",
       },
@@ -471,7 +471,7 @@ export const cases: Record<string, CaseStudy> = {
     challenge:
       "I plan my running weeks with Claude in a separate chat. The output is plain text, and the path from there to my Garmin was manual: read the prose, open the app, tap through every interval by hand. I did it often enough that it stopped being a quirk and started being annoying.\n\nThe data shape isn't hard: Garmin's internal API exposes a workout format. The gap was that nobody built the bridge, and getting an LLM to fill that JSON without inventing field names meant the schema itself had to be the first thing I got right.",
     approach:
-      "I started with the JSON contract: warmup, interval, recovery, cooldown, repeat, each with a typed duration and target. Strict, but short enough to paste into the prompt. Once the schema was stable the CLI followed — it parses the JSON with Pydantic and calls the API. The web app came next, mobile-first on FastAPI, so I can push a plan from my phone.\n\nThe last real piece was token refresh. Garmin's OAuth tokens expire in minutes, so I keep one row in Supabase that refreshes itself. The app just works when I pick up my phone mid-run-prep.",
+      "I started with the JSON contract: warmup, interval, recovery, cooldown, repeat, each with a typed duration and target. Strict, but short enough to paste into the prompt. Once the schema was stable the CLI followed. It reads the JSON, checks it with Pydantic, and calls the API. The web app came next, mobile-first on FastAPI, so I can push a plan from my phone.\n\nThe last real piece was keeping the login alive. Garmin's tokens expire in minutes, so I keep one row in Supabase that refreshes itself. The app just works when I pick up my phone mid-run-prep.",
     outcome:
       "Live as a Vercel-hosted web app, with the CLI running locally. The whole pipeline (plan in Claude, JSON out, push to a Forerunner 165) is about 2k lines. I'm not training as much as I was in early 2026, but the infrastructure is stable and I reach for it whenever I'm back to structured runs.",
     sections: [
@@ -479,7 +479,7 @@ export const cases: Record<string, CaseStudy> = {
         heading: "Who I designed for",
         body:
           "Myself, and no one else. I run with a Garmin, I plan with Claude, and I didn't want to re-enter intervals by hand.\n\nBuilding a tool you're the only user of is a different discipline. No research phase, no personas, and the feedback loop is ten minutes long. If the schema is annoying to prompt against, I feel it right away. That compression is the whole point of a side project.",
-        image: { src: "/projects/garmin/01__garmin-send.png", alt: "Garmin Coach web app — paste JSON, send to Garmin", caption: "Send · paste the JSON, push, it lands on the watch", aspect: "wide" },
+        image: { src: "/projects/garmin/01__garmin-send.png", alt: "Garmin Coach web app, paste JSON, send to Garmin", caption: "Send · paste the JSON, push, it lands on the watch", aspect: "wide" },
         layout: "split",
         imageSide: "right",
       },
@@ -487,7 +487,7 @@ export const cases: Record<string, CaseStudy> = {
         heading: "The key decision: schema first",
         body:
           "The temptation was to start with the API or the UI. I started with the JSON schema, and that was the right call.\n\nAn LLM has to fill the schema without a field-by-field explanation every time, so the shape had to be obvious: predictable keys, typed targets, no ambiguous nesting. I iterated it in a single markdown file, pasting it into Claude and refining until the output came back valid with no correction needed. After that the rest was plumbing. The parser is just Pydantic validation, and swapping the model is a config change.",
-        image: { src: "/projects/garmin/02__garmin-schema.png", alt: "The workout JSON schema — steps, repeats, typed targets", caption: "The JSON contract · steps, repeats, typed targets", aspect: "wide" },
+        image: { src: "/projects/garmin/02__garmin-schema.png", alt: "The workout JSON schema, steps, repeats, typed targets", caption: "The JSON contract · steps, repeats, typed targets", aspect: "wide" },
         layout: "split",
         imageSide: "left",
       },
@@ -500,7 +500,7 @@ export const cases: Record<string, CaseStudy> = {
     reflection:
       "Side projects let you ship the API you want to consume, not the one that survived a committee. The schema is exactly the shape I needed, the auth is exactly the amount I was willing to maintain, and the UI is as minimal as a tool I use alone can be.",
     gallery: [
-      { src: "/projects/garmin/03__garmin-cli.png", alt: "Garmin Coach CLI — push_workout output with created workout", caption: "CLI · Pydantic validation → Garmin Connect", aspect: "wide" },
+      { src: "/projects/garmin/03__garmin-cli.png", alt: "Garmin Coach CLI, push_workout output with created workout", caption: "CLI · Pydantic validation → Garmin Connect", aspect: "wide" },
     ],
   },
 
@@ -549,8 +549,8 @@ export const cases: Record<string, CaseStudy> = {
       "AI-assisted tooling lets a designer take a project from sketch to ship without a hand-off cliff. The job shifts from \"document what to build\" to \"build it, and use the document for review.\"",
     links: [{ label: "Live · ntechcolab.com", href: "https://ntechcolab.com", external: true }],
     gallery: [
-      { src: "/projects/techcolab/01__tcl-hero.png", alt: "TechCo.lab hero — We build intelligent technologies", caption: "Hero · the typewriter line", aspect: "wide" },
-      { src: "/projects/techcolab/02__tcl-capabilities.png", alt: "TechCo.lab capabilities — industrial AI, connected platforms, digital interfaces", caption: "Capabilities", aspect: "wide" },
+      { src: "/projects/techcolab/01__tcl-hero.png", alt: "TechCo.lab hero, We build intelligent technologies", caption: "Hero · the typewriter line", aspect: "wide" },
+      { src: "/projects/techcolab/02__tcl-capabilities.png", alt: "TechCo.lab capabilities, industrial AI, connected platforms, digital interfaces", caption: "Capabilities", aspect: "wide" },
       { src: "/projects/techcolab/03__tcl-lab.png", alt: "TechCo.lab space and impact numbers", caption: "The lab · 500+ users · 35+ countries · 80+ projects", aspect: "wide" },
     ],
   },
@@ -572,7 +572,7 @@ export const cases: Record<string, CaseStudy> = {
     challenge:
       "The product worked, but the UX had grown module by module with no common language. The Registry (the core batch table) was still lowfi. The dashboard's daily timeline used the design system's pastel status tokens, and the client rejected it outright: on a factory wall you can't tell an alarm from a maintenance stop in washed-out color. Settings ran seven tabs across seventeen frames with no consistent chrome.\n\nThere was also a physical constraint nobody had designed for: stakeholders validate this product on a 50-inch control-room monitor, where a 1280px-capped layout floats as a small strip in the middle of the screen.",
     approach:
-      "Two tracks. In Figma, I transplanted the design system chrome (header, sidebar, sub-header, tab rows) across all 36 lowfi frames with a script driven through the Figma MCP, preserving each frame's modal overlays by snapshotting children before swapping the chrome. For the timeline I dropped the pastel tokens and hardcoded saturated status colors until the DS grows proper ones, because the client was right.\n\nIn code, I rebuilt the product as a working prototype (React, TypeScript, Tailwind 4) under the working title Batch Book, with every piece of data behind a single swappable mock-service file. That prototype became the proving ground: availability planning with a heatmap calendar and a plain-language assistant, machine rankings, a batch editor with a floating section nav, PDF/CSV/XLSX export, and fluid scaling so the layout reads correctly from a laptop to the 50-inch wall monitor.",
+      "Two tracks. In Figma, I pushed the shared design-system shell (header, sidebar, sub-header, tab rows) across all 36 lowfi frames with a script run through the Figma plugin, saving each frame's pop-up overlays first so swapping the shell didn't wipe them. For the timeline I dropped the pastel colors and hardcoded saturated status colors until the design system grows proper ones, because the client was right.\n\nIn code, I rebuilt the product as a working prototype (React, TypeScript, Tailwind 4) under the working title Batch Book, with every piece of data behind a single file I could swap out. That prototype became the proving ground: availability planning with a heatmap calendar and a plain-language assistant, machine rankings, a batch editor with a floating section nav, PDF/CSV/XLSX export, and fluid scaling so the layout reads correctly from a laptop up to the 50-inch wall monitor.",
     outcome:
       "The prototype is live on Vercel and is how the squad now validates decisions: stakeholders click through real interactions instead of imagining them from static frames. The 36 hi-fi frames live in the production Figma file, and a WCAG audit turned contrast complaints into four specific token fixes, taking the projected score from 68 to 92.\n\nThe mock layer is one file away from the real API, which was the point: everything the prototype proves is directly buildable.",
     sections: [
@@ -582,7 +582,7 @@ export const cases: Record<string, CaseStudy> = {
           "Production coordinators in chemical, pharma, food, and mineral plants, reviewing batch logs to answer one question fast: did this batch run clean, and if not, where did the time go.\n\nTheir managers read the same data at wall distance. That's where the color decision came from: a daily timeline in the Evocon style, one row per day, hour-by-hour status blocks in saturated green, red, blue, and amber. The design system's pastel tokens are fine for badges at laptop distance and useless at five meters. I kept the pastels for chrome and hardcoded the saturated set for status, and flagged the gap as a DS token request.",
         layout: "split",
         imageSide: "right",
-        image: { src: "/projects/digital-reports/01__dr-operations.png", alt: "Dashboard operations — rankings and in-operation batch cards with saturated status colors", caption: "Operations · status that reads at wall distance", aspect: "wide" },
+        image: { src: "/projects/digital-reports/01__dr-operations.png", alt: "Dashboard operations, rankings and in-operation batch cards with saturated status colors", caption: "Operations · status that reads at wall distance", aspect: "wide" },
       },
       {
         heading: "The key decision: prototype in code, not slides",
@@ -590,7 +590,7 @@ export const cases: Record<string, CaseStudy> = {
           "The Figma frames answered what the screens look like. They couldn't answer whether the filters feel right, whether the planning calendar's heatmap reads at a glance, or what happens to the layout on the 50-inch monitor. So I rebuilt the product as running code and moved the open questions there.\n\nThe prototype outgrew its brief in a useful way. Availability planning (working schedules, holiday handling, a heatmap calendar, a rule-based plain-language assistant) shipped there first, validated with stakeholders, and now defines the spec instead of following one. Every interaction is persisted, every chart is real SVG against deterministic mock data, and swapping the mock service for the production API is a one-file change.",
         layout: "split",
         imageSide: "left",
-        image: { src: "/projects/digital-reports/02__dr-machine.png", alt: "Machine tab — availability cards, monthly performance chart, machine ranking", caption: "Machine · availability and ranking, prototype-first features", aspect: "wide" },
+        image: { src: "/projects/digital-reports/02__dr-machine.png", alt: "Machine tab, availability cards, monthly performance chart, machine ranking", caption: "Machine · availability and ranking, prototype-first features", aspect: "wide" },
       },
       {
         heading: "What didn't go well",
@@ -601,18 +601,18 @@ export const cases: Record<string, CaseStudy> = {
     reflection:
       "The WCAG audit made visible what design reviews kept missing: the primary teal fails contrast on white, and the fix is a token decision, not a cosmetic one. A 68/100 is a forcing function. Numbers are harder to postpone than design opinions.",
     gallery: [
-      { src: "/projects/digital-reports/05__dr-planning.png", alt: "Availability planning — working schedule applied over a period, heatmap calendar with holidays", caption: "Availability planning · heatmap calendar", aspect: "wide" },
-      { src: "/projects/digital-reports/07__dr-batch-remarks.png", alt: "Remarks tab — multi-sensor chart with numbered note markers and click-to-annotate", caption: "Remarks · click a chart point to annotate", aspect: "wide" },
-      { src: "/projects/digital-reports/06__dr-analysis.png", alt: "Analysis — ten-month production trend, output by recipe, specific energy by machine", caption: "Analysis · ten months of production", aspect: "wide" },
-      { src: "/projects/digital-reports/08__dr-inop-modal.png", alt: "Live batch detail modal — operator, mass, energy, recent events", caption: "Live batch · mid-run detail", aspect: "wide" },
-      { src: "/projects/digital-reports/04__dr-batch-resume.png", alt: "Batch Resume — status, details, machine info with floating section navigation", caption: "Batch Resume · floating section nav", aspect: "wide" },
-      { src: "/projects/digital-reports/03__dr-registry.png", alt: "Registry — searchable batch log with status badges", caption: "Registry · the core batch log", aspect: "wide" },
+      { src: "/projects/digital-reports/05__dr-planning.png", alt: "Availability planning, working schedule applied over a period, heatmap calendar with holidays", caption: "Availability planning · heatmap calendar", aspect: "wide" },
+      { src: "/projects/digital-reports/07__dr-batch-remarks.png", alt: "Remarks tab, multi-sensor chart with numbered note markers and click-to-annotate", caption: "Remarks · click a chart point to annotate", aspect: "wide" },
+      { src: "/projects/digital-reports/06__dr-analysis.png", alt: "Analysis, ten-month production trend, output by recipe, specific energy by machine", caption: "Analysis · ten months of production", aspect: "wide" },
+      { src: "/projects/digital-reports/08__dr-inop-modal.png", alt: "Live batch detail modal, operator, mass, energy, recent events", caption: "Live batch · mid-run detail", aspect: "wide" },
+      { src: "/projects/digital-reports/04__dr-batch-resume.png", alt: "Batch Resume, status, details, machine info with floating section navigation", caption: "Batch Resume · floating section nav", aspect: "wide" },
+      { src: "/projects/digital-reports/03__dr-registry.png", alt: "Registry, searchable batch log with status badges", caption: "Registry · the core batch log", aspect: "wide" },
     ],
   },
 
   "netzsch-customer-portal": {
     slug: "netzsch-customer-portal",
-    role: "Product designer — origin design, every flow",
+    role: "Product designer, origin design, every flow",
     team: "Solo on design; HTML implementation taken over by a colleague from April 2026",
     duration: "2025 → 2026",
     yearRange: "2025 → 2026",
@@ -635,7 +635,7 @@ export const cases: Record<string, CaseStudy> = {
         heading: "Who I designed for",
         body:
           "Marcus, the persona on every screen, manages procurement for a plant running five NETZSCH mills. His job is keeping machines grinding: reorder beads before they run out, get a bearing shaft quoted, check why an order slipped.\n\nAround him sit three other roles with different rights. The approver reviews what buyers put in the queue. The technician knows exactly which spare part the machine needs but isn't allowed to commit money. The admin manages who can do what. Designing for the four of them at once is what shaped the portal more than any visual decision.",
-        image: { src: "/projects/customer-portal/01__cp-machines.png", alt: "Machines page — installed base with hourmeters and service history", caption: "Machines · the customer's installed base", aspect: "wide" },
+        image: { src: "/projects/customer-portal/01__cp-machines.png", alt: "Machines page, installed base with hourmeters and service history", caption: "Machines · the customer's installed base", aspect: "wide" },
         layout: "split",
         imageSide: "right",
       },
@@ -643,7 +643,7 @@ export const cases: Record<string, CaseStudy> = {
         heading: "The key decision: roles as a design primitive",
         body:
           "The easy version of this portal would be one interface with an admin toggle. I designed the role model into every flow instead, and made it visible in an admin matrix where each role's permissions can be read per module.\n\nThe technician role is the clearest example. Same catalog, same machine pages, but no prices, no cart, and no checkout. Their flow ends in a request with its own number that lands on the approver's desk. That respects how these companies actually buy: the person with the technical knowledge and the person with the budget are different people, and pretending otherwise is how portals end up unused.",
-        image: { src: "/projects/customer-portal/02__cp-access-roles.png", alt: "Access & Roles admin — permission matrix across four roles", caption: "Access & Roles · permission matrix", aspect: "wide" },
+        image: { src: "/projects/customer-portal/02__cp-access-roles.png", alt: "Access & Roles admin, permission matrix across four roles", caption: "Access & Roles · permission matrix", aspect: "wide" },
         layout: "split",
         imageSide: "left",
       },
@@ -660,7 +660,7 @@ export const cases: Record<string, CaseStudy> = {
       "B2B design is mostly about respecting an org chart you didn't draw. The portal's best ideas aren't visual, they're the request numbers, approval queues, and price visibility rules that map to how an industrial customer already works.",
     gallery: [
       { src: "/projects/customer-portal/04__cp-landing.png", alt: "Public landing page of the customer portal", caption: "Public landing · pre-login", aspect: "wide" },
-      { src: "/projects/customer-portal/05__cp-product.png", alt: "Product detail — grinding media with volume pricing tiers", caption: "Product detail · volume pricing", aspect: "wide" },
+      { src: "/projects/customer-portal/05__cp-product.png", alt: "Product detail, grinding media with volume pricing tiers", caption: "Product detail · volume pricing", aspect: "wide" },
       { src: "/projects/customer-portal/06__cp-contract.png", alt: "Parts contract with negotiated price list", caption: "Parts contract · negotiated price list", aspect: "wide" },
       { src: "/projects/customer-portal/07__cp-orders.png", alt: "Orders page with status-tracked history", caption: "Orders · status-tracked history", aspect: "wide" },
       { src: "/projects/customer-portal/08__cp-login.png", alt: "Login screen with SSO", caption: "Login · SSO + email", aspect: "wide" },
@@ -686,13 +686,13 @@ export const cases: Record<string, CaseStudy> = {
     outcome:
       "All six IRIS V3 product lines ship from this library, and new HMI screens start from published components instead of copies of old screens. It's the quiet half of the IRIS V3 case: the platform redesign got the attention, the library is what made it repeatable.",
     gallery: [
-      { src: "/projects/iris-ds/01__irisds-foundations.png", alt: "IRIS DS foundations — color tokens and Segoe UI typography", caption: "Foundations · tokens from the library variables", aspect: "square" },
-      { src: "/projects/iris-ds/02__irisds-buttons.png", alt: "IRIS DS buttons — full state set for 12-inch panels", caption: "Buttons · the 12\" set", aspect: "square" },
-      { src: "/projects/iris-ds/03__irisds-forms.png", alt: "IRIS DS forms — text fields, checkboxes, radios, toggles", caption: "Forms", aspect: "square" },
-      { src: "/projects/iris-ds/04__irisds-feedback.png", alt: "IRIS DS feedback — snackbars, section messages, modals", caption: "Feedback", aspect: "square" },
-      { src: "/projects/iris-ds/05__irisds-process.png", alt: "IRIS DS process — progress bars, batch cards, recipe cards", caption: "Process & batch · the industrial part", aspect: "square" },
-      { src: "/projects/iris-ds/06__irisds-dashboard.png", alt: "IRIS DS dashboard — cards, controls, gauges", caption: "Dashboard components", aspect: "square" },
-      { src: "/projects/iris-ds/07__irisds-smallparts.png", alt: "IRIS DS small parts — chips, tags, badges, pagination, start/stop", caption: "Small parts", aspect: "square" },
+      { src: "/projects/iris-ds/01__irisds-foundations.png", alt: "IRIS DS foundations, color tokens and Segoe UI typography", caption: "Foundations · tokens from the library variables", aspect: "square" },
+      { src: "/projects/iris-ds/02__irisds-buttons.png", alt: "IRIS DS buttons, full state set for 12-inch panels", caption: "Buttons · the 12\" set", aspect: "square" },
+      { src: "/projects/iris-ds/03__irisds-forms.png", alt: "IRIS DS forms, text fields, checkboxes, radios, toggles", caption: "Forms", aspect: "square" },
+      { src: "/projects/iris-ds/04__irisds-feedback.png", alt: "IRIS DS feedback, snackbars, section messages, modals", caption: "Feedback", aspect: "square" },
+      { src: "/projects/iris-ds/05__irisds-process.png", alt: "IRIS DS process, progress bars, batch cards, recipe cards", caption: "Process & batch · the industrial part", aspect: "square" },
+      { src: "/projects/iris-ds/06__irisds-dashboard.png", alt: "IRIS DS dashboard, cards, controls, gauges", caption: "Dashboard components", aspect: "square" },
+      { src: "/projects/iris-ds/07__irisds-smallparts.png", alt: "IRIS DS small parts, chips, tags, badges, pagination, start/stop", caption: "Small parts", aspect: "square" },
     ],
   },
 
@@ -702,35 +702,35 @@ export const cases: Record<string, CaseStudy> = {
     yearRange: "2021",
     stack: ["Android", "Figma", "Pix (BR instant payments)"],
     contextOneLiner:
-      "SuperDigital was Santander's prepaid digital account for the underbanked in Latin America. I designed the Pix MVP — bringing Brazil's instant-payment rails into the app: registering keys, paying, and receiving money in seconds.",
+      "SuperDigital was Santander's prepaid digital account for the underbanked in Latin America. I designed the Pix MVP, bringing Brazil's instant-payment system into the app: registering keys, paying, and receiving money in seconds.",
     challenge:
-      "Pix was new, mandated, and about to become the default way Brazilians move money. For SuperDigital's audience — many of them new to formal banking — it had to feel obvious the first time: no jargon, no fear of sending to the wrong person, and clear confirmation at every step.",
+      "Pix was new, it was mandated, and it was about to become the default way Brazilians move money. For SuperDigital's audience, many of them new to formal banking, it had to feel obvious the first time: no jargon, no fear of sending to the wrong person, and a clear confirmation at every step.",
     approach:
-      "I designed the full Pix surface for Android around one hub: manage your keys (CPF, email, phone, random), pay by key, QR scan, or copy-and-paste, receive with a shareable static QR, schedule Pix for a future date, and track limits. Every transfer screen leads with who you're paying and how much — keypad-first, balance always in view so nobody overshoots — and the schedule history shows per-payment status (paid, scheduled, processing, failed) at a glance.",
+      "I designed the full Pix surface for Android around one hub: manage your keys (CPF, email, phone, random), pay by key, scan a QR, or copy-and-paste, receive with a shareable static QR, schedule a Pix for a future date, and track your limits. Every transfer screen leads with who you're paying and how much, keypad-first, with the balance always in view so nobody overshoots. The schedule history shows each payment's status (paid, scheduled, processing, failed) at a glance.",
     outcome:
-      "Shipped as SuperDigital's Pix MVP — key registration, pay, receive, and QR flows — inside an app already serving millions across the region.",
+      "Shipped as SuperDigital's Pix MVP (key registration, pay, receive, and QR flows) inside an app already serving millions across the region.",
     gallery: [
       {
         src: "/projects/superdigital/10__superdigital-home-keys.png",
-        alt: "SuperDigital Pix — account home with balance and Pix entry, and the Pix key manager",
+        alt: "SuperDigital Pix, account home with balance and Pix entry, and the Pix key manager",
         caption: "Home & keys · balance up front, Pix keys managed in one place",
         aspect: "wide",
       },
       {
         src: "/projects/superdigital/11__superdigital-pay-receive.png",
-        alt: "SuperDigital Pix — paying by key with amount and keypad, and receiving with a static QR code",
+        alt: "SuperDigital Pix, paying by key with amount and keypad, and receiving with a static QR code",
         caption: "Pay & receive · keypad-first payment, shareable QR to get paid",
         aspect: "wide",
       },
       {
         src: "/projects/superdigital/12__superdigital-hub-scan.png",
-        alt: "SuperDigital Pix — the Pix hub with every action, and the QR-code scanner to pay",
+        alt: "SuperDigital Pix, the Pix hub with every action, and the QR-code scanner to pay",
         caption: "Pix hub & scan · every action in one place, scan-to-pay",
         aspect: "wide",
       },
       {
         src: "/projects/superdigital/13__superdigital-schedule-history.png",
-        alt: "SuperDigital Pix — scheduling a Pix for a future date, and the schedule history with per-payment status",
+        alt: "SuperDigital Pix, scheduling a Pix for a future date, and the schedule history with per-payment status",
         caption: "Schedule & history · future-dated Pix, status at a glance",
         aspect: "wide",
       },
@@ -743,41 +743,41 @@ export const cases: Record<string, CaseStudy> = {
     yearRange: "2018",
     stack: ["Web · Responsive", "Figma", "Dell brand system"],
     contextOneLiner:
-      "Dell Expert Network (DEN) is Dell's program for independent IT consultants and managed-service providers. I designed the member-facing portal — the front door to account support, exclusive pricing, and rewards on the hardware they spec for their clients.",
+      "Dell Expert Network (DEN) is Dell's program for independent IT consultants and managed-service providers. I designed the member-facing portal, the front door to account support, exclusive pricing, and rewards on the hardware they spec for their clients.",
     challenge:
-      "Dell's core storefront is built for people buying for themselves. IT consultants buy on behalf of clients, repeatedly, and need a different relationship: a named contact, faster support, and a reason to keep routing purchases through Dell. DEN was that relationship — but it needed a home that explained the value fast and got members to the benefit without a sales call.",
+      "Dell's core storefront is built for people buying for themselves. IT consultants buy on behalf of clients, over and over, and they need a different relationship: a named contact, faster support, and a reason to keep routing purchases through Dell. DEN was that relationship, but it needed a home that explained the value fast and got members to the benefit without a sales call.",
     approach:
-      "I designed the portal around the member's actual loop: understand the benefits, join, make qualified purchases, collect the rewards. The home leads with who it's for — \"Empowering IT Consultants\" — and the concrete benefits: dedicated account team, service shortcuts, exclusive pricing. A plain \"How it works\" walks the six steps from becoming a member to redeeming rewards on Dell.com, with referral and a companion app as secondary paths. Responsive throughout, in Dell's brand system.",
+      "I designed the portal around the member's actual loop: understand the benefits, join, make qualified purchases, collect the rewards. The home leads with who it's for (\"Empowering IT Consultants\") and the concrete benefits: a dedicated account team, service shortcuts, exclusive pricing. A plain \"How it works\" walks the six steps from becoming a member to redeeming rewards on Dell.com, with referral and a companion app as secondary paths. Responsive throughout, in Dell's brand system.",
     outcome:
-      "Shipped as the UK front door for the Dell Expert Network — a benefit-first portal that turns a partner program into something a busy consultant can understand and act on in about a minute.",
+      "Shipped as the UK front door for the Dell Expert Network, a benefit-first portal that turns a partner program into something a busy consultant can understand and act on in about a minute.",
     gallery: [
       {
         src: "/projects/dell-expert-network/10__dell-hero.png",
-        alt: "Dell Expert Network portal home — who it's for and the core member benefits",
+        alt: "Dell Expert Network portal home, who it's for and the core member benefits",
         caption: "DEN home · benefit-first, who it's for up top",
         aspect: "wide",
       },
       {
         src: "/projects/dell-expert-network/13__dell-benefits.png",
-        alt: "Dell Expert Network — programme benefits: dedicated account team, online shopping experience, rewards",
+        alt: "Dell Expert Network, programme benefits: dedicated account team, online shopping experience, rewards",
         caption: "Programme benefits · the reasons to join, up front",
         aspect: "wide",
       },
       {
         src: "/projects/dell-expert-network/11__dell-how-it-works.png",
-        alt: "Dell Expert Network — six-step 'How it works' from becoming a member to redeeming rewards, plus referral",
+        alt: "Dell Expert Network, six-step 'How it works' from becoming a member to redeeming rewards, plus referral",
         caption: "How it works · six steps from member to reward",
         aspect: "wide",
       },
       {
         src: "/projects/dell-expert-network/14__dell-app.png",
-        alt: "Dell Expert Network — the companion app section with App Store and Google Play links",
+        alt: "Dell Expert Network, the companion app section with App Store and Google Play links",
         caption: "The companion app · score, releases, and offers on the go",
         aspect: "wide",
       },
       {
         src: "/projects/dell-expert-network/15__dell-highlights.png",
-        alt: "Dell Expert Network — highlights row of programme campaigns and content",
+        alt: "Dell Expert Network, highlights row of programme campaigns and content",
         caption: "Highlights · campaigns and content for members",
         aspect: "wide",
       },
@@ -792,7 +792,7 @@ export const cases: Record<string, CaseStudy> = {
     contextOneLiner:
       "Third-person narrative shooter built as part of a small indie team. Shipped as a student/portfolio piece.",
     challenge:
-      "Build a TPS where the narrative drove mechanics, not the other way around — without the team or budget of a real studio.",
+      "Build a third-person shooter where the story drove the mechanics, not the other way around, and pull it off without the team or budget of a real studio.",
     approach:
       "Tight scope: one mechanic per chapter, narrative beats baked into encounter design. Lots of cuts to keep the build shippable.",
     outcome:
@@ -814,19 +814,19 @@ export const cases: Record<string, CaseStudy> = {
     gallery: [
       {
         src: "/projects/eye/10__eye-character.png",
-        alt: "EYE — playable robot character, real-time 3D model",
+        alt: "EYE, playable robot character, real-time 3D model",
         caption: "Playable character · real-time 3D",
         aspect: "tall",
       },
       {
         src: "/projects/eye/11__eye-environment.png",
-        alt: "EYE — in-engine sci-fi environment built in Unity",
+        alt: "EYE, in-engine sci-fi environment built in Unity",
         caption: "In-engine environment · Unity",
         aspect: "wide",
       },
       {
         src: "/projects/eye/12__eye-storyboard.png",
-        alt: "EYE — storyboard for a narrative-led encounter",
+        alt: "EYE, storyboard for a narrative-led encounter",
         caption: "Storyboard · narrative-led encounters",
         aspect: "wide",
       },
@@ -863,7 +863,7 @@ export const cases: Record<string, CaseStudy> = {
     gallery: [
       {
         src: "/projects/gan-dath/10__gan-dath-key-art.png",
-        alt: "Gan Dath — title key art, a 3D game about collecting colors to bring life back to a dying universe",
+        alt: "Gan Dath, title key art, a 3D game about collecting colors to bring life back to a dying universe",
         caption: "Gan Dath · collect all colors to bring back life",
         aspect: "wide",
       },
@@ -887,17 +887,17 @@ export const cases: Record<string, CaseStudy> = {
     challenge:
       "Two tenants (Pomerwasser and Capixaba Energia) ran on twelve divergent screens, each solving the same thing a different way. Pressure, tank level, and alarm severity showed up in different places with incompatible patterns. There was no design system and nothing reusable. The starting point was raw Thingsboard: functionally correct, visually dated, and short on the accessibility and consistency an industrial environment needs.\n\nThe client needed an interface a field operator could use on a tablet over weak 4G, with no per-tenant retraining.",
     approach:
-      "I started with a structured discovery: inventoried all twelve screens by hand, catalogued 42 atomic components already in the UI, and documented 15 heuristic violations by priority. That fed the decisions: collapse twelve screens into six templates, use Atomic Design, and handle multi-tenant through tokens and feature flags instead of duplicating screen by screen.\n\nInstead of only drawing in Figma, I built the design system in code at the same time. Storybook with React and Tailwind 4, a story per component, MDX docs with do/don't guidance. By the end of the design phase, 30 components had real implementations, 155 stories, and 115 passing tests. I also built a separate navigable prototype so the client could click through the flow before a line of production code.",
+      "I started with a structured discovery: I inventoried all twelve screens by hand, catalogued 42 small components already in the UI, and wrote up 15 usability problems ranked by priority. That fed the decisions: collapse twelve screens into six templates, use Atomic Design to build everything up from small reusable parts, and serve both tenants from one shared set of tokens and simple on/off switches instead of duplicating screen by screen.\n\nInstead of only drawing in Figma, I built the design system in code at the same time. Storybook with React and Tailwind 4, a story per component, and docs with do and don't guidance. By the end of the design phase, 30 components had real implementations, 155 stories, and 115 passing tests. I also built a separate clickable prototype so the client could walk the flow before a line of production code.",
     outcome:
       "The client has a working design system with a hosted Storybook, 51 Figma pages mirroring the components, and a navigable prototype that grew into a small product: dashboard with live reservoir sparklines, full equipment map with status-filtered device panel, per-reactor ETA screens with realtime charts, a device inventory, alarm queues, and an event register that audit-logs every operator action. All of it in English, ready for client validation.\n\nThree principles run through all of it: alarm severity reads by shape and color, not color alone; time-series charts use straight segments, not smoothed curves; destructive actions like stopping a pump require a typed reason.",
     sections: [
       {
         heading: "Who I designed for",
         body:
-          "Three people with different relationships to the same data.\n\nThe field operator works from a tablet, sometimes on weak 4G, and needs to confirm whether a pump is running or which alarm fired. No time to explore, so the answer has to be visible.\n\nThe operations supervisor reads the whole site through the map before drilling into one point. The maintenance engineer needs hour-meters, start history, and threshold config for diagnosis, a depth that shouldn't sit in the operator's way.\n\nMulti-tenant complicates it: Pomerwasser monitors reservoirs and water chemistry, Capixaba monitors pump pressure and power. Different data, shared interface.",
+          "Three people with different relationships to the same data.\n\nThe field operator works from a tablet, sometimes on weak 4G, and needs to confirm whether a pump is running or which alarm fired. No time to explore, so the answer has to be visible.\n\nThe operations supervisor reads the whole site through the map before drilling into one point. The maintenance engineer needs hour-meters, start history, and threshold config for diagnosis, a depth that shouldn't sit in the operator's way.\n\nThe two tenants complicate it: Pomerwasser monitors reservoirs and water chemistry, Capixaba monitors pump pressure and power. Different data, shared interface.",
         layout: "split",
         imageSide: "right",
-        image: { src: "/projects/norius/05__norius-devices.png", alt: "Norius Devices screen — field device inventory with status filter: gateways, PLCs, flow meters, level sensors, analyzers", caption: "Devices · the maintenance engineer's view", aspect: "wide" },
+        image: { src: "/projects/norius/05__norius-devices.png", alt: "Norius Devices screen, field device inventory with status filter: gateways, PLCs, flow meters, level sensors, analyzers", caption: "Devices · the maintenance engineer's view", aspect: "wide" },
       },
       {
         heading: "The key decision: one system, not two products",
@@ -913,7 +913,7 @@ export const cases: Record<string, CaseStudy> = {
           "Norius's design system isn't a Figma library with good intentions about implementation. It's a running Storybook: 33 component families, 179 documented stories, every story with controls, accessibility checks, and MDX docs that say when to use the component and when not to.\n\nThe showcase piece is the RealtimeAreaChart, the dual-axis chart behind the ETA screens: level and pressure on opposite axes, threshold markers, a range navigator, eleven configurable props. It exists identically in Figma (as a component the client reviews) and in code (as the thing the dev ships). The domain components carry the industrial weight: tank cards with ten documented states, gauge rows for pressure and flow, alarm cards in seven severity-and-state variants.",
         layout: "split",
         imageSide: "right",
-        image: { src: "/projects/norius/07__norius-sb-chart.png", alt: "Storybook story of RealtimeAreaChart — dual-axis realtime chart with controls panel and accessibility checks", caption: "Storybook · RealtimeAreaChart, 11 controls, a11y checks", aspect: "wide" },
+        image: { src: "/projects/norius/07__norius-sb-chart.png", alt: "Storybook story of RealtimeAreaChart, dual-axis realtime chart with controls panel and accessibility checks", caption: "Storybook · RealtimeAreaChart, 11 controls, a11y checks", aspect: "wide" },
       },
       {
         heading: "What didn't go well",
@@ -924,12 +924,12 @@ export const cases: Record<string, CaseStudy> = {
     reflection:
       "Building the design system in code alongside Figma is the decision I'd make again without hesitating. Writing the MDX docs forced answers to questions Figma never asks, like when a component should not be used, or what its error behavior is. Those answers are exactly what the dev handoff needs.",
     gallery: [
-      { src: "/projects/norius/01__norius-dashboard.png", alt: "Norius dashboard — reservoir sparklines, active alarm strip, device status cards, equipment map", caption: "Dashboard · Pomerwasser", aspect: "wide" },
-      { src: "/projects/norius/02__norius-fullmap.png", alt: "Norius equipment map — 28 devices with status-filtered side panel", caption: "Equipment Map · status-filtered panel", aspect: "wide" },
-      { src: "/projects/norius/03__norius-eta.png", alt: "Norius ETA Pomerode — tanks, gauges and realtime charts per reactor", caption: "ETA · tanks, gauges, realtime charts", aspect: "wide" },
-      { src: "/projects/norius/04__norius-alarms.png", alt: "Norius alarms & alerts — client-level alert queue", caption: "Alarms & Alerts", aspect: "wide" },
-      { src: "/projects/norius/06__norius-events.png", alt: "Norius event register — audit log of operator actions, alarms, and system events", caption: "Event Register · operator audit log", aspect: "wide" },
-      { src: "/projects/norius/08__norius-sb-gauges.png", alt: "Storybook gauge components — pressure, flow, power, torque dashboard row", caption: "Storybook · gauge family", aspect: "wide" },
+      { src: "/projects/norius/01__norius-dashboard.png", alt: "Norius dashboard, reservoir sparklines, active alarm strip, device status cards, equipment map", caption: "Dashboard · Pomerwasser", aspect: "wide" },
+      { src: "/projects/norius/02__norius-fullmap.png", alt: "Norius equipment map, 28 devices with status-filtered side panel", caption: "Equipment Map · status-filtered panel", aspect: "wide" },
+      { src: "/projects/norius/03__norius-eta.png", alt: "Norius ETA Pomerode, tanks, gauges and realtime charts per reactor", caption: "ETA · tanks, gauges, realtime charts", aspect: "wide" },
+      { src: "/projects/norius/04__norius-alarms.png", alt: "Norius alarms & alerts, client-level alert queue", caption: "Alarms & Alerts", aspect: "wide" },
+      { src: "/projects/norius/06__norius-events.png", alt: "Norius event register, audit log of operator actions, alarms, and system events", caption: "Event Register · operator audit log", aspect: "wide" },
+      { src: "/projects/norius/08__norius-sb-gauges.png", alt: "Storybook gauge components, pressure, flow, power, torque dashboard row", caption: "Storybook · gauge family", aspect: "wide" },
       { src: "/projects/norius/09__norius-sb-tanks.png", alt: "Storybook TankCard four-tank variant", caption: "Storybook · TankCard, 10 documented states", aspect: "wide" },
     ],
   },
@@ -974,10 +974,10 @@ export const cases: Record<string, CaseStudy> = {
     reflection:
       "Building an app for a specific trip you're about to take is a strange kind of pressure: a hard deadline, a real user, and the stakes are exactly one vacation. The things I skipped (social, purchases, multi-trip) stay skipped, because there's no version of this where I regret them.",
     gallery: [
-      { src: "/projects/mosey/01__mosey-today.png", alt: "Mosey Today screen — contextual suggestions", caption: "Today · what do you feel like doing?", aspect: "wide" },
+      { src: "/projects/mosey/01__mosey-today.png", alt: "Mosey Today screen, contextual suggestions", caption: "Today · what do you feel like doing?", aspect: "wide" },
       { src: "/projects/mosey/02__mosey-weather.png", alt: "Mosey weather-aware suggestions", caption: "Weather-aware · reads the sky", aspect: "wide" },
-      { src: "/projects/mosey/03__mosey-concierge.png", alt: "Mosey Concierge — on-device AI chat", caption: "Concierge · on-device AI", aspect: "wide" },
-      { src: "/projects/mosey/04__mosey-journal.png", alt: "Mosey Journal — trip day by day", caption: "Journal · your trip, day by day", aspect: "wide" },
+      { src: "/projects/mosey/03__mosey-concierge.png", alt: "Mosey Concierge, on-device AI chat", caption: "Concierge · on-device AI", aspect: "wide" },
+      { src: "/projects/mosey/04__mosey-journal.png", alt: "Mosey Journal, trip day by day", caption: "Journal · your trip, day by day", aspect: "wide" },
       { src: "/projects/mosey/05__mosey-saved.png", alt: "Mosey Saved places", caption: "Saved · places worth returning to", aspect: "wide" },
     ],
   },

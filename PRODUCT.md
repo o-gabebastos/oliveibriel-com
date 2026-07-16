@@ -63,6 +63,7 @@ Three words: **technical · grounded · contemporary**.
 - Accent color: `#1d4ed8` (electric blue). Single accent — no secondary palette.
 - Photos: real, not stock. Grayscale-shift on hover OK; no heavy filters.
 - Status indicators: pulsing green dot only when truthful ("Currently shipping IRIS V3" is fact).
-- Em-dashes (`—`) over hyphens for clauses.
+- No em-dashes (`—`) or en-dashes (`–`) as punctuation, anywhere in copy. Use commas, colons, semicolons, periods, or parentheses instead. (Reversed 2026-07-16: the copy is written to sound like Gabriel actually wrote it, first-person and plain-spoken, and em-dashes read as AI-authored.)
+- Voice: first person, natural, conversational. Contractions welcome. Cut heavy technical jargon from prose (CRUD, multi-tenant, RLS, cron, webhooks, scaffolding, etc.); the `stack` lists carry the tech. Keep it specific and honest, never inflated.
 - Spelling: US English in copy; PT-BR planned later via i18n.
 - Never reference "available for new projects" if not currently true.
